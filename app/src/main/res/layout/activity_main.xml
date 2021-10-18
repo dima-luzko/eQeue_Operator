@@ -8,20 +8,332 @@
 
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_55mdp"
+        android:layout_height="@dimen/_56mdp"
         android:background="@drawable/bg_gradient"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+
+    <ImageView
+        android:id="@+id/user_img"
+        android:layout_width="@dimen/_36mdp"
+        android:layout_height="@dimen/_36mdp"
+        android:layout_marginStart="@dimen/_10mdp"
+        android:layout_marginTop="@dimen/_10mdp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_settings"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/workspace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_6mdp"
+        android:layout_marginTop="@dimen/_8mdp"
+        android:text="@string/workspace"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14font_mdp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/user_img"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/workspace_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_6mdp"
+        android:layout_marginTop="@dimen/_8mdp"
+        android:text="2"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14font_mdp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/workspace"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/operator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_6mdp"
+        android:text="@string/operator"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14font_mdp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toEndOf="@+id/user_img"
+        app:layout_constraintTop_toBottomOf="@id/workspace" />
+
+    <TextView
+        android:id="@+id/operator_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_6mdp"
+        android:text="Пользователь"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14font_mdp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toEndOf="@+id/operator"
+        app:layout_constraintTop_toTopOf="@+id/operator" />
+
+    <TextView
+        android:id="@+id/exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_10mdp"
+        android:text="@string/exit"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14font_mdp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/amount_of_clients_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_40font_mdp"
+        android:layout_marginTop="@dimen/_16font_mdp"
+        android:text="@string/amount_of_clients"
+        android:textColor="@color/text_light"
+        android:textSize="@dimen/_13font_mdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/amount_of_clients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8font_mdp"
+        android:layout_marginTop="@dimen/_16font_mdp"
+        android:text="22"
+        android:textColor="@color/text_light"
+        android:textSize="@dimen/_13font_mdp"
+        app:layout_constraintStart_toEndOf="@+id/amount_of_clients_text"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/status_of_client"
+        android:layout_width="@dimen/_240mdp"
+        android:layout_height="@dimen/_45mdp"
+        android:layout_marginTop="@dimen/_18mdp"
+        android:background="@drawable/client_is_not_called"
+        android:gravity="center"
+        android:text="@string/client_is_not_called"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16font_mdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/amount_of_clients_text" />
+
+    <TextView
+        android:id="@+id/next_client_number"
+        android:layout_width="@dimen/_69mdp"
+        android:layout_height="@dimen/_20mdp"
+        android:text="@string/next_client_number"
+        android:textColor="@color/gray_text"
+        android:textSize="@dimen/_16font_mdp"
+        android:layout_marginStart="@dimen/_38mdp"
+        android:layout_marginTop="@dimen/_22mdp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/status_of_client" />
+
+    <ImageView
+        android:id="@+id/next_client_arrow"
+        android:layout_width="@dimen/_69mdp"
+        android:layout_height="@dimen/_15mdp"
+        android:src="@drawable/ic_arrow_3"
+        android:layout_marginStart="@dimen/_38mdp"
+        android:layout_marginTop="@dimen/_1mdp"
+        android:padding="@dimen/_2mdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/next_client_number" />
+
+<!--    <TextView-->
+<!--    android:id="@+id/current_client_number"-->
+<!--        android:layout_width="@dimen/_144mdp"-->
+<!--        android:layout_height="@dimen/_20mdp"-->
+<!--        android:layout_marginTop="@dimen/_7mdp"-->
+
+<!--        android:text="@string/current_client_number"-->
+<!--        android:textColor="@color/text_light"-->
+<!--        android:textSize="@dimen/_16font_mdp"-->
+<!--        android:fontFamily="@font/roboto_medium"-->
+<!--        android:gravity="center"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/vertical_line"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/status_of_client" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/current_client_service"-->
+<!--        android:layout_width="@dimen/_144mdp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:maxHeight="@dimen/_50mdp"-->
+<!--        android:maxLines="3"-->
+<!--        android:maxLength="50"-->
+<!--        android:fontFamily="@font/roboto_medium"-->
+<!--        android:text="hhhfugaggfugfgugu "-->
+<!--        android:textColor="@color/text_light"-->
+<!--        android:textSize="@dimen/_12font_mdp"-->
+<!--        android:textAlignment="center"-->
+<!--        android:gravity="center"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/vertical_line"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/current_client_number" />-->
+
+    <View
+        android:id="@+id/vertical_line"
+        android:layout_width="@dimen/_33mdp"
+        android:layout_height="@dimen/_2mdp"
+        android:layout_marginTop="@dimen/_40mdp"
+      android:layout_marginStart="@dimen/_100mdp"
+        android:background="@color/gray_text"
+        android:rotation="90"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/status_of_client" />
+
+    <include
+        layout="@layout/layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/vertical_line"
+        app:layout_constraintTop_toBottomOf="@+id/status_of_client"
+        app:layout_constraintBottom_toTopOf="@+id/some_button"/>
+
+    <include
+        android:id="@+id/some_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/_80mdp"
+        tools:layout_editor_absoluteY="272dp"
+        layout="@layout/button"
+        app:layout_constraintTop_toBottomOf="@+id/status_of_client"/>
+
+    <!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/button_call_next_client"-->
+<!--        android:layout_width="@dimen/_240mdp"-->
+<!--        android:layout_height="@dimen/_28mdp"-->
+<!--        android:layout_marginTop="@dimen/_80mdp"-->
+<!--        android:background="@drawable/green_button"-->
+
+<!--        android:text="@string/to_call_next_client"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textColor="@color/white"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/status_of_client" />-->
+
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/button_list_postponed_clients"-->
+<!--        android:layout_width="@dimen/_240mdp"-->
+<!--        android:layout_height="@dimen/_28mdp"-->
+<!--        android:layout_marginTop="@dimen/_10mdp"-->
+<!--        android:background="@drawable/green_button"-->
+
+<!--        android:text="@string/to_list_postponed_client"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textColor="@color/white"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/button_call_next_client" />-->
+
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/button_no_client"-->
+<!--        android:layout_width="@dimen/_240mdp"-->
+<!--        android:layout_height="@dimen/_28mdp"-->
+<!--        android:layout_marginTop="@dimen/_10mdp"-->
+<!--        android:background="@drawable/disable_button"-->
+<!--        android:text="@string/to_no_client"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textColor="@color/gray_text"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/button_list_postponed_clients" />-->
+
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/button_start_work"-->
+<!--        android:layout_width="@dimen/_240mdp"-->
+<!--        android:layout_height="@dimen/_28mdp"-->
+<!--        android:layout_marginTop="@dimen/_10mdp"-->
+<!--        android:background="@drawable/disable_button"-->
+<!--        android:text="@string/to_start_work"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textColor="@color/gray_text"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/button_no_client" />-->
+
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/button_redirect"-->
+<!--        android:layout_width="@dimen/_240mdp"-->
+<!--        android:layout_height="@dimen/_28mdp"-->
+<!--        android:layout_marginTop="@dimen/_10mdp"-->
+<!--        android:background="@drawable/disable_button"-->
+<!--        android:text="@string/to_redirect_client"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textColor="@color/gray_text"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/button_start_work" />-->
+
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/button_postpone"-->
+<!--        android:layout_width="@dimen/_240mdp"-->
+<!--        android:layout_height="@dimen/_28mdp"-->
+<!--        android:layout_marginTop="@dimen/_10mdp"-->
+<!--        android:background="@drawable/disable_button"-->
+<!--        android:text="@string/to_postpone_client"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textColor="@color/gray_text"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/button_redirect" />-->
+
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/button_finish_work"-->
+<!--        android:layout_width="@dimen/_240mdp"-->
+<!--        android:layout_height="@dimen/_28mdp"-->
+<!--        android:layout_marginTop="@dimen/_10mdp"-->
+<!--        android:background="@drawable/disable_button"-->
+<!--        android:text="@string/to_finish_work"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textColor="@color/gray_text"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/button_postpone" />-->
+
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/button_call_next_client_one_mode"-->
+<!--        android:layout_width="@dimen/_240mdp"-->
+<!--        android:layout_height="@dimen/_56mdp"-->
+<!--        android:layout_marginTop="@dimen/_36mdp"-->
+<!--        android:background="@drawable/green_button"-->
+<!--        android:text="@string/to_call_next_client"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:visibility="gone"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/status_of_client" />-->
+
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/button_call_next_client_again_one_mode"-->
+<!--        android:layout_width="@dimen/_240mdp"-->
+<!--        android:layout_height="@dimen/_56mdp"-->
+<!--        android:layout_marginTop="@dimen/_20mdp"-->
+<!--        android:background="@drawable/green_button"-->
+<!--        android:text="@string/to_call_next_client_again"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:visibility="gone"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/button_call_next_client_one_mode" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -9,4 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gradient_start">#FEA4B4</color>
     <color name="gradient_finish">#98A4E3</color>
+    <color name="text_light">#A1A0A0</color>
+    <color name="green">#41D38D</color>
+    <color name="gray_background">#F3F3F3</color>
+    <color name="gray_text">#C6C6C6</color>
 </resources>

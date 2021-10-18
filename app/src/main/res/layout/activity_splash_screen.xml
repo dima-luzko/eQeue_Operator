@@ -36,10 +36,10 @@
         android:layout_width="@dimen/_100mdp"
         android:layout_height="@dimen/_14mdp"
         android:layout_marginBottom="@dimen/_20mdp"
-        android:src="@drawable/horizont"
         android:scaleType="fitXY"
+        android:src="@drawable/horizont"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="ContentDescription"/>
+        tools:ignore="ContentDescription" />
 </androidx.constraintlayout.widget.ConstraintLayout>

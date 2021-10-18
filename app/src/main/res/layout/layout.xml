@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/current_client_number"
+        android:layout_width="@dimen/_144mdp"
+        android:layout_height="@dimen/_20mdp"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:text="@string/current_client_number"
+        android:textColor="@color/text_light"
+        android:textSize="@dimen/_16font_mdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/current_client_service"
+        android:layout_width="@dimen/_144mdp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:maxHeight="@dimen/_50mdp"
+        android:maxLength="50"
+        android:maxLines="3"
+        android:text="hhhfugaggfugfgug dhslfhnlkjsdjkfh fjdsaklfjklsdh dslfjsdkljfk dsflhflkhsdlf "
+        android:textAlignment="center"
+        android:textColor="@color/text_light"
+        android:textSize="@dimen/_12font_mdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/current_client_number" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
