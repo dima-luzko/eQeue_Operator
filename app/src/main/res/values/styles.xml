@@ -30,6 +30,12 @@
         <item name="fontFamily">@font/roboto_regular</item>
     </style>
 
+    <style name="roboto_regular_10_green_buttons">
+        <item name="android:textSize">@dimen/_10font_mdp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/roboto_regular</item>
+    </style>
+
     <style name="roboto_bold_14">
         <item name="android:textSize">@dimen/_14mdp</item>
         <item name="android:textColor">@color/text_dark</item>

@@ -33,5 +33,11 @@
     <string name="minus">минут</string>
     <string name="only_for_me">Только для меня</string>
     <string name="check_connection">Проверка соединения с сервером</string>
+    <string name="enter_ip">Введите IP-адрес сервера</string>
+    <string name="check_connection_button">Проверить соединение</string>
+    <string name="error_ip">Проблемы с подключением к серверу</string>
+    <string name="try_again">Попробовать снова</string>
+    <string name="enter_new_ip">Ввести новый IP-адрес</string>
+
 
 </resources>
