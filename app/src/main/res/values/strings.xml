@@ -32,5 +32,6 @@
     <string name="to_postpone_a">Отложить на</string>
     <string name="minus">минут</string>
     <string name="only_for_me">Только для меня</string>
+    <string name="check_connection">Проверка соединения с сервером</string>
 
 </resources>
