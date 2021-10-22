@@ -1,21 +1,36 @@
 <resources>
     <string name="app_name">e_queue</string>
     <string name="splash_screen_text">from</string>
+    <string name="button_login">Войти</string>
     <string name="workspace">Окно:</string>
     <string name="operator">Оператор:</string>
     <string name="exit">Выход</string>
     <string name="amount_of_clients">Общее число клиентов в очереди:</string>
-    <string name="client_is_not_called">Клиент не вызван</string>
+    <string name="status_client_is_not_called">Клиент не вызван</string>
+    <string name="status_client_is_called">Приглашен клиент</string>
+    <string name="status_work_with_client">Работа с клиентом</string>
     <string name="to_call_next_client">Вызвать следующего</string>
     <string name="to_list_postponed_client">Просмотреть отложенных</string>
     <string name="to_no_client">Клиент не явился</string>
-    <string name="to_start_work">Начать работу с клиентом</string>
-    <string name="to_redirect_client">Перенаправить</string>
-    <string name="to_postpone_client">Отложить</string>
-    <string name="to_finish_work">Завершить работу</string>
+    <string name="to_start_work">Начать работу</string>
+    <string name="to_redirect">Перенаправить</string>
+    <string name="to_postpone">Отложить</string>
+    <string name="to_finish_work">Завершить работу с клиентом</string>
     <string name="to_call_next_client_again">Вызвать повторно</string>
     <string name="next_client_number">A11</string>
     <string name="current_client_number">A10</string>
     <string name="current_client_service">Название услуги</string>
+    <string name="settings">Настройки</string>
+    <string name="settings_hh">Операции для работы с клиентами</string>
+    <string name="one_button_mode">Режим одной кнопки</string>
+    <string name="one_button_mode_explanation">Упрощенный режим работы</string>
+    <string name="save">Сохранить</string>
+    <string name="redirection_of_client">Перенаправить клиента</string>
+    <string name="postponing_of_client">Отложить клиента</string>
+    <string name="with_return_of_client">С возвращением клиента</string>
+    <string name="cancel">Отмена</string>
+    <string name="to_postpone_a">Отложить на</string>
+    <string name="minus">минут</string>
+    <string name="only_for_me">Только для меня</string>
 
 </resources>

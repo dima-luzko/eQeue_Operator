@@ -10,7 +10,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_56mdp"
+        android:layout_height="@dimen/_50mdp"
         android:background="@drawable/bg_gradient"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,7 @@
         android:layout_width="@dimen/_36mdp"
         android:layout_height="@dimen/_36mdp"
         android:layout_marginStart="@dimen/_10mdp"
-        android:layout_marginTop="@dimen/_10mdp"
+        android:layout_marginTop="@dimen/_8mdp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         android:src="@drawable/ic_settings"
@@ -34,10 +34,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_6mdp"
-        android:layout_marginTop="@dimen/_8mdp"
+        android:layout_marginTop="@dimen/_10mdp"
         android:text="@string/workspace"
         android:textColor="@color/white"
-        android:textSize="@dimen/_14font_mdp"
+        android:textSize="@dimen/_12font_mdp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/user_img"
         app:layout_constraintTop_toTopOf="parent" />
@@ -47,10 +47,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_6mdp"
-        android:layout_marginTop="@dimen/_8mdp"
+        android:layout_marginTop="@dimen/_10mdp"
         android:text="2"
         android:textColor="@color/white"
-        android:textSize="@dimen/_14font_mdp"
+        android:textSize="@dimen/_12font_mdp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/workspace"
         app:layout_constraintTop_toTopOf="parent" />
@@ -62,7 +62,7 @@
         android:layout_marginStart="@dimen/_6mdp"
         android:text="@string/operator"
         android:textColor="@color/white"
-        android:textSize="@dimen/_14font_mdp"
+        android:textSize="@dimen/_12font_mdp"
         android:textStyle="normal"
         app:layout_constraintStart_toEndOf="@+id/user_img"
         app:layout_constraintTop_toBottomOf="@id/workspace" />
@@ -74,7 +74,7 @@
         android:layout_marginStart="@dimen/_6mdp"
         android:text="Пользователь"
         android:textColor="@color/white"
-        android:textSize="@dimen/_14font_mdp"
+        android:textSize="@dimen/_12font_mdp"
         android:textStyle="normal"
         app:layout_constraintStart_toEndOf="@+id/operator"
         app:layout_constraintTop_toTopOf="@+id/operator" />
@@ -86,7 +86,7 @@
         android:layout_marginEnd="@dimen/_10mdp"
         android:text="@string/exit"
         android:textColor="@color/white"
-        android:textSize="@dimen/_14font_mdp"
+        android:textSize="@dimen/_12font_mdp"
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="@+id/toolbar"
@@ -97,7 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_40font_mdp"
-        android:layout_marginTop="@dimen/_16font_mdp"
+        android:layout_marginTop="@dimen/_14mdp"
         android:text="@string/amount_of_clients"
         android:textColor="@color/text_light"
         android:textSize="@dimen/_13font_mdp"
@@ -109,7 +109,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8font_mdp"
-        android:layout_marginTop="@dimen/_16font_mdp"
+        android:layout_marginTop="@dimen/_14mdp"
         android:text="22"
         android:textColor="@color/text_light"
         android:textSize="@dimen/_13font_mdp"
@@ -120,10 +120,10 @@
         android:id="@+id/status_of_client"
         android:layout_width="@dimen/_240mdp"
         android:layout_height="@dimen/_45mdp"
-        android:layout_marginTop="@dimen/_18mdp"
-        android:background="@drawable/client_is_not_called"
+        android:layout_marginTop="@dimen/_14mdp"
+        android:background="@drawable/status_client_is_not_called"
         android:gravity="center"
-        android:text="@string/client_is_not_called"
+        android:text="@string/status_client_is_not_called"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="@dimen/_16font_mdp"
@@ -132,6 +132,7 @@
         app:layout_constraintTop_toBottomOf="@+id/amount_of_clients_text" />
 
     <TextView
+        android:visibility="visible"
         android:id="@+id/next_client_number"
         android:layout_width="@dimen/_69mdp"
         android:layout_height="@dimen/_20mdp"
@@ -145,6 +146,7 @@
         app:layout_constraintTop_toBottomOf="@+id/status_of_client" />
 
     <ImageView
+        android:visibility="visible"
         android:id="@+id/next_client_arrow"
         android:layout_width="@dimen/_69mdp"
         android:layout_height="@dimen/_15mdp"
@@ -197,14 +199,16 @@
         app:layout_constraintTop_toBottomOf="@+id/status_of_client" />
 
     <include
+        android:visibility="visible"
         layout="@layout/layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/vertical_line"
-        app:layout_constraintTop_toBottomOf="@+id/status_of_client"
-        app:layout_constraintBottom_toTopOf="@+id/some_button"/>
+        app:layout_constraintStart_toEndOf="@id/vertical_line"
+        app:layout_constraintTop_toBottomOf="@id/status_of_client"
+        app:layout_constraintBottom_toTopOf="@id/some_button"/>
 
     <include
+        android:visibility="visible"
         android:id="@+id/some_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -212,7 +216,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="@dimen/_80mdp"
         tools:layout_editor_absoluteY="272dp"
-        layout="@layout/button"
+        layout="@layout/buttons_activity_main"
         app:layout_constraintTop_toBottomOf="@+id/status_of_client"/>
 
     <!--    <androidx.appcompat.widget.AppCompatButton-->

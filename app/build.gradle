@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.e_queue"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 31
         versionCode 1
         versionName "1.0"
@@ -39,6 +39,8 @@ android {
 dependencies {
     //DynamicSizes
     implementation 'com.github.MrNouri:DynamicSizes:1.0'
+
+
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.6.0'

@@ -8,7 +8,7 @@
         android:id="@+id/current_client_number"
         android:layout_width="@dimen/_144mdp"
         android:layout_height="@dimen/_20mdp"
-        android:fontFamily="@font/roboto_medium"
+        android:fontFamily="@font/roboto_bold"
         android:gravity="center"
         android:text="@string/current_client_number"
         android:textColor="@color/text_light"
@@ -32,6 +32,6 @@
         android:textSize="@dimen/_12font_mdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/current_client_number" />
+        app:layout_constraintTop_toBottomOf="@id/current_client_number" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

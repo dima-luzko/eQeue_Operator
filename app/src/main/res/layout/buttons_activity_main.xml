@@ -9,7 +9,8 @@
         android:layout_width="@dimen/_240mdp"
         android:layout_height="@dimen/_28mdp"
         android:background="@drawable/green_button"
-
+        android:textSize="@dimen/_12font_mdp"
+        android:fontFamily="@font/roboto_regular"
         android:text="@string/to_call_next_client"
         android:textAllCaps="false"
         android:textColor="@color/white"
@@ -23,6 +24,8 @@
         android:layout_height="@dimen/_28mdp"
         android:layout_marginTop="@dimen/_10mdp"
         android:background="@drawable/green_button"
+        android:textSize="@dimen/_12font_mdp"
+        android:fontFamily="@font/roboto_regular"
 
         android:text="@string/to_list_postponed_client"
         android:textAllCaps="false"
@@ -40,6 +43,9 @@
         android:text="@string/to_no_client"
         android:textAllCaps="false"
         android:textColor="@color/gray_text"
+        android:textSize="@dimen/_12font_mdp"
+        android:fontFamily="@font/roboto_regular"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_list_postponed_clients" />
@@ -53,6 +59,9 @@
         android:text="@string/to_start_work"
         android:textAllCaps="false"
         android:textColor="@color/gray_text"
+        android:textSize="@dimen/_12font_mdp"
+        android:fontFamily="@font/roboto_regular"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_no_client" />
@@ -63,9 +72,12 @@
         android:layout_height="@dimen/_28mdp"
         android:layout_marginTop="@dimen/_10mdp"
         android:background="@drawable/disable_button"
-        android:text="@string/to_redirect_client"
+        android:text="@string/to_redirect"
         android:textAllCaps="false"
         android:textColor="@color/gray_text"
+        android:textSize="@dimen/_12font_mdp"
+        android:fontFamily="@font/roboto_regular"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_start_work" />
@@ -76,9 +88,12 @@
         android:layout_height="@dimen/_28mdp"
         android:layout_marginTop="@dimen/_10mdp"
         android:background="@drawable/disable_button"
-        android:text="@string/to_postpone_client"
+        android:text="@string/to_postpone"
         android:textAllCaps="false"
         android:textColor="@color/gray_text"
+        android:textSize="@dimen/_12font_mdp"
+        android:fontFamily="@font/roboto_regular"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_redirect" />
@@ -92,6 +107,9 @@
         android:text="@string/to_finish_work"
         android:textAllCaps="false"
         android:textColor="@color/gray_text"
+        android:textSize="@dimen/_12font_mdp"
+        android:fontFamily="@font/roboto_regular"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_postpone" />
@@ -108,7 +126,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/status_of_client" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_call_next_client_again_one_mode"

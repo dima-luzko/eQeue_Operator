@@ -10,7 +10,18 @@
     <color name="gradient_start">#FEA4B4</color>
     <color name="gradient_finish">#98A4E3</color>
     <color name="text_light">#A1A0A0</color>
+    <color name="text_dark">#797979</color>
     <color name="green">#41D38D</color>
     <color name="gray_background">#F3F3F3</color>
-    <color name="gray_text">#C6C6C6</color>
+    <color name="gray_background_light">#B3F3F3F3</color>
+    <color name="gray_text">#BABABA</color>
+    <color name="gradient_start_status_client_is_called">#BAE7FD</color>
+    <color name="gradient_finish_status_client_is_called">#6CCAFF</color>
+    <color name="gradient_start_status_work_with_client">#81FFB3</color>
+    <color name="gradient_finish_status_work_with_client">#78CEFF</color>
+    <color name="small_light_text">#BCBCBC</color>
+    <color name="button_gray">#C6C5C5</color>
+    <color name="yellow">#F8D477</color>
+    <color name="checkbox_gray">#BCB6B9</color>
+
 </resources>

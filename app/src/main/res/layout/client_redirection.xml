@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50mdp"
+        android:background="@drawable/bg_gradient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/user_img"
+        android:layout_width="@dimen/_36mdp"
+        android:layout_height="@dimen/_36mdp"
+        android:layout_marginStart="@dimen/_10mdp"
+        android:layout_marginTop="@dimen/_8mdp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:foregroundTintMode="add"
+        android:src="@drawable/ic_settings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/workspace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_6mdp"
+        android:layout_marginTop="@dimen/_10mdp"
+        android:text="@string/workspace"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12font_mdp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/user_img"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/workspace_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_6mdp"
+        android:layout_marginTop="@dimen/_10mdp"
+        android:text="2"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12font_mdp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/workspace"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/operator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_6mdp"
+        android:text="@string/operator"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12font_mdp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toEndOf="@id/user_img"
+        app:layout_constraintTop_toBottomOf="@id/workspace" />
+
+    <TextView
+        android:id="@+id/operator_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_6mdp"
+        android:text="Пользователь"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12font_mdp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toEndOf="@id/operator"
+        app:layout_constraintTop_toTopOf="@id/operator" />
+
+    <TextView
+        android:id="@+id/postpone_text_hh"
+        style="@style/roboto_regular_14"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_20mdp"
+        android:layout_marginTop="@dimen/_20mdp"
+        android:text="@string/redirection_of_client"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <TextView
+        android:id="@+id/number_of_client"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_20mdp"
+        android:text="A12"
+        style="@style/roboto_bold_14"
+        app:layout_constraintTop_toBottomOf="@id/postpone_text_hh"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <Spinner
+        android:id="@+id/input_login"
+        android:layout_width="@dimen/_200mdp"
+        android:layout_height="@dimen/_28mdp"
+        android:background="@drawable/input"
+        android:layout_marginTop="@dimen/_20mdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/number_of_client" />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Название услуги"
+    style="@style/roboto_regular_10_light"
+    app:layout_constraintStart_toStartOf="@id/input_login"
+    app:layout_constraintTop_toTopOf="@id/input_login"
+    app:layout_constraintBottom_toBottomOf="@id/input_login"
+    android:layout_marginStart="@dimen/_8mdp"/>
+
+    <ImageView
+        android:id="@+id/button_more"
+        android:layout_width="@dimen/_12mdp"
+        android:layout_height="@dimen/_12mdp"
+        android:src="@drawable/ic_more"
+        android:layout_marginEnd="@dimen/_7mdp"
+        android:layout_marginTop="@dimen/_1mdp"
+
+        android:tint="@color/checkbox_gray"
+        app:layout_constraintBottom_toBottomOf="@+id/input_login"
+        app:layout_constraintEnd_toEndOf="@id/input_login"
+        app:layout_constraintTop_toTopOf="@id/input_login" />
+
+    <EditText
+        android:id="@+id/input_postponing_comment"
+        android:layout_width="@dimen/_200mdp"
+        android:layout_height="@dimen/_70mdp"
+        android:background="@drawable/input"
+        android:layout_marginTop="@dimen/_10mdp"
+        android:text="Комментарий"
+        style="@style/roboto_regular_10_light"
+        android:gravity="left"
+        android:padding="@dimen/_8mdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_login" />
+
+
+    <TextView
+        android:id="@+id/only_for_me_client_view"
+        style="@style/roboto_regular_10"
+        android:layout_width="@dimen/_200mdp"
+        android:layout_height="@dimen/_28mdp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/input"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/_8mdp"
+        android:paddingEnd="@dimen/_7mdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_postponing_comment" />
+
+    <CheckBox
+        android:id="@+id/checkbox_with_return_client"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_20mdp"
+        android:text="@string/with_return_of_client"
+        android:buttonTint="@color/checkbox_gray"
+        android:paddingStart="@dimen/_3mdp"
+        android:checked="false"
+
+        style="@style/roboto_regular_10"
+        android:layout_marginEnd="@dimen/_8mdp"
+        android:layout_marginStart="@dimen/_4mdp"
+        app:layout_constraintBottom_toBottomOf="@id/only_for_me_client_view"
+        app:layout_constraintStart_toStartOf="@id/only_for_me_client_view"
+        app:layout_constraintTop_toTopOf="@id/only_for_me_client_view" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_redirection"
+        android:layout_width="@dimen/_200mdp"
+        android:layout_height="@dimen/_28mdp"
+        android:background="@drawable/green_button"
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/to_redirect"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12font_mdp"
+        android:layout_marginTop="@dimen/_20mdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/only_for_me_client_view" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_cancel"
+        style="@style/roboto_regular_14"
+        android:layout_width="@dimen/_200mdp"
+        android:layout_height="@dimen/_28mdp"
+        android:background="@drawable/button_login"
+
+        android:text="@string/cancel"
+        android:textAllCaps="false"
+        android:textColor="@color/gray_text"
+        android:textSize="@dimen/_12font_mdp"
+        android:layout_marginTop="@dimen/_10mdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_redirection" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
