@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -126,8 +127,7 @@
         android:src="@drawable/ic_more"
         android:layout_marginEnd="@dimen/_7mdp"
         android:layout_marginTop="@dimen/_1mdp"
-
-        android:tint="@color/checkbox_gray"
+        app:tint="@color/checkbox_gray"
         app:layout_constraintBottom_toBottomOf="@+id/input_login"
         app:layout_constraintEnd_toEndOf="@id/input_login"
         app:layout_constraintTop_toTopOf="@id/input_login" />
@@ -138,7 +138,7 @@
         android:layout_height="@dimen/_70mdp"
         android:background="@drawable/input"
         android:layout_marginTop="@dimen/_10mdp"
-        android:text="Комментарий"
+        android:text="Комментарий..."
         style="@style/roboto_regular_10_light"
         android:gravity="left"
         android:padding="@dimen/_8mdp"
@@ -167,13 +167,13 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_20mdp"
         android:text="@string/with_return_of_client"
-        android:buttonTint="@color/checkbox_gray"
+        android:buttonTint="@color/green"
         android:paddingStart="@dimen/_3mdp"
-        android:checked="false"
+        android:checked="true"
 
         style="@style/roboto_regular_10"
         android:layout_marginEnd="@dimen/_8mdp"
-        android:layout_marginStart="@dimen/_4mdp"
+        android:layout_marginStart="@dimen/_5mdp"
         app:layout_constraintBottom_toBottomOf="@id/only_for_me_client_view"
         app:layout_constraintStart_toStartOf="@id/only_for_me_client_view"
         app:layout_constraintTop_toTopOf="@id/only_for_me_client_view" />
