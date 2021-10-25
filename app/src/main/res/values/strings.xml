@@ -38,6 +38,12 @@
     <string name="error_ip">Проблемы с подключением к серверу</string>
     <string name="try_again">Попробовать снова</string>
     <string name="enter_new_ip">Ввести новый IP-адрес</string>
+    <string name="dot">.</string>
+    <string name="colon">:</string>
+    <string name="no_connection">Нет соединения с сервером</string>
+    <string name="ok">Ок</string>
+    <string name="success_connection">Соединение с сервером установлено</string>
+
 
 
 </resources>

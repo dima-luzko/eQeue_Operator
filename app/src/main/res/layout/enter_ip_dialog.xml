@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="@dimen/_180mdp">
+    android:layout_height="@dimen/_150mdp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_success"
+        android:id="@+id/card_no_connection"
         app:cardBackgroundColor="@color/white"
         android:layout_width="@dimen/_270mdp"
-        android:layout_height="@dimen/_180mdp"
+        android:layout_height="@dimen/_150mdp"
         app:cardCornerRadius="@dimen/_8mdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,19 +26,130 @@
                 android:textColor="@color/text_dark"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_20mdp"
-                android:layout_marginTop="@dimen/_30mdp"
+                android:layout_marginTop="@dimen/_20mdp"
                 android:text="@string/enter_ip"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <EditText
+                android:id="@+id/input_ip1"
+                android:layout_width="@dimen/_40mdp"
+                android:layout_height="@dimen/_30mdp"
+                android:background="@drawable/input"
+                android:ems="3"
+                android:inputType="number"
+                android:maxLength="3"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:layout_marginStart="@dimen/_14mdp"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/check_ip_text" />
+
+            <TextView
+                android:id="@+id/dot1"
+                style="@style/roboto_regular_16"
+                android:layout_width="@dimen/_8mdp"
+                android:layout_height="@dimen/_30mdp"
+                android:text="@string/dot"
+                android:textAlignment="center"
+                app:layout_constraintStart_toEndOf="@+id/input_ip1"
+                app:layout_constraintTop_toTopOf="@+id/input_ip1" />
+
+            <EditText
+                android:id="@+id/input_ip2"
+                android:layout_width="@dimen/_40mdp"
+                android:layout_height="@dimen/_30mdp"
+                android:background="@drawable/input"
+                android:ems="3"
+                android:inputType="number"
+                android:maxLength="3"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/dot1"
+                app:layout_constraintTop_toTopOf="@+id/input_ip1" />
+
+            <TextView
+                android:id="@+id/dot2"
+                style="@style/roboto_regular_16"
+                android:layout_width="@dimen/_8mdp"
+                android:layout_height="@dimen/_30mdp"
+                android:text="@string/dot"
+                android:textAlignment="center"
+                app:layout_constraintStart_toEndOf="@+id/input_ip2"
+                app:layout_constraintTop_toTopOf="@+id/input_ip1" />
+
+            <EditText
+                android:id="@+id/input_ip3"
+                android:layout_width="@dimen/_40mdp"
+                android:layout_height="@dimen/_30mdp"
+                android:background="@drawable/input"
+                android:ems="3"
+                android:inputType="number"
+                android:maxLength="3"
+                app:layout_constraintHorizontal_weight="1"
+
+                app:layout_constraintStart_toEndOf="@id/dot2"
+                app:layout_constraintTop_toTopOf="@+id/input_ip2" />
+
+            <TextView
+                android:id="@+id/dot3"
+                style="@style/roboto_regular_16"
+                android:layout_width="@dimen/_8mdp"
+                android:layout_height="@dimen/_30mdp"
+                android:text="@string/dot"
+                android:textAlignment="center"
+                app:layout_constraintStart_toEndOf="@+id/input_ip3"
+                app:layout_constraintTop_toTopOf="@+id/input_ip1" />
+
+            <EditText
+                android:id="@+id/input_ip4"
+                android:layout_width="@dimen/_40mdp"
+                android:layout_height="@dimen/_30mdp"
+                android:background="@drawable/input"
+                android:ems="3"
+                android:inputType="number"
+                android:maxLength="3"
+                app:layout_constraintHorizontal_weight="1"
+
+                app:layout_constraintStart_toEndOf="@id/dot3"
+                app:layout_constraintTop_toTopOf="@+id/input_ip3" />
+
+            <TextView
+                android:id="@+id/colon"
+                style="@style/roboto_regular_16"
+                android:layout_width="@dimen/_8mdp"
+                android:layout_height="@dimen/_30mdp"
+                android:text="@string/colon"
+                android:textAlignment="center"
+                app:layout_constraintStart_toEndOf="@id/input_ip4"
+                app:layout_constraintTop_toTopOf="@+id/input_ip1" />
+
+            <EditText
+                android:id="@+id/input_ip5"
+                android:layout_width="@dimen/_50mdp"
+                android:layout_height="@dimen/_30mdp"
+                android:background="@drawable/input"
+                android:ems="4"
+                android:inputType="number"
+                android:maxLength="4"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="@dimen/_14mdp"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/colon"
+                app:layout_constraintTop_toTopOf="@+id/input_ip4" />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/check_connection_button"
                 android:layout_width="@dimen/_200mdp"
                 android:layout_height="@dimen/_30mdp"
+                android:background="@drawable/pink_button"
+                android:text="@string/check_connection_button"
+                android:textAllCaps="false"
+                style="@style/roboto_regular_12_green_buttons"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/input_ip3" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

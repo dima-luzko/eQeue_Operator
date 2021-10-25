@@ -26,38 +26,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_20mdp"
                 android:layout_marginTop="@dimen/_30mdp"
-                android:text="@string/error_ip"
+                android:text="@string/no_connection"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatButton
-
-                android:id="@+id/try_again"
-                style="@style/roboto_regular_10_green_buttons"
-                android:layout_width="@dimen/_120mdp"
-                android:layout_height="@dimen/_30mdp"
-
-                android:background="@drawable/pink_button"
-                android:text="@string/try_again"
-                android:textAllCaps="false"
-                android:layout_marginStart="@dimen/_14mdp"
-                android:layout_marginTop="@dimen/_20mdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/check_ip_text" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/enter_new_ip"
-                style="@style/roboto_regular_10_green_buttons"
-                android:layout_width="@dimen/_120mdp"
+                android:id="@+id/check_connection_button"
+                style="@style/roboto_regular_12_green_buttons"
+                android:layout_width="@dimen/_200mdp"
                 android:layout_height="@dimen/_30mdp"
-                android:layout_marginEnd="@dimen/_14mdp"
                 android:background="@drawable/pink_button"
-                android:text="@string/enter_new_ip"
+                android:text="@string/check_connection_button"
                 android:textAllCaps="false"
                 android:layout_marginTop="@dimen/_20mdp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/check_ip_text" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
