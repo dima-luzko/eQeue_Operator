@@ -44,17 +44,17 @@
                 android:layout_marginStart="@dimen/_14mdp"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/check_ip_text" />
+                app:layout_constraintTop_toBottomOf="@id/check_ip_text" />
 
             <TextView
                 android:id="@+id/dot1"
-                style="@style/roboto_regular_16"
+                style="@style/roboto_regular_25"
                 android:layout_width="@dimen/_8mdp"
                 android:layout_height="@dimen/_30mdp"
                 android:text="@string/dot"
                 android:textAlignment="center"
                 app:layout_constraintStart_toEndOf="@+id/input_ip1"
-                app:layout_constraintTop_toTopOf="@+id/input_ip1" />
+                app:layout_constraintTop_toTopOf="@id/input_ip1" />
 
             <EditText
                 android:id="@+id/input_ip2"
@@ -66,17 +66,17 @@
                 android:maxLength="3"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@id/dot1"
-                app:layout_constraintTop_toTopOf="@+id/input_ip1" />
+                app:layout_constraintTop_toTopOf="@id/input_ip1" />
 
             <TextView
                 android:id="@+id/dot2"
-                style="@style/roboto_regular_16"
+                style="@style/roboto_regular_25"
                 android:layout_width="@dimen/_8mdp"
                 android:layout_height="@dimen/_30mdp"
                 android:text="@string/dot"
                 android:textAlignment="center"
                 app:layout_constraintStart_toEndOf="@+id/input_ip2"
-                app:layout_constraintTop_toTopOf="@+id/input_ip1" />
+                app:layout_constraintTop_toTopOf="@id/input_ip1" />
 
             <EditText
                 android:id="@+id/input_ip3"
@@ -89,17 +89,17 @@
                 app:layout_constraintHorizontal_weight="1"
 
                 app:layout_constraintStart_toEndOf="@id/dot2"
-                app:layout_constraintTop_toTopOf="@+id/input_ip2" />
+                app:layout_constraintTop_toTopOf="@id/input_ip2" />
 
             <TextView
                 android:id="@+id/dot3"
-                style="@style/roboto_regular_16"
+                style="@style/roboto_regular_25"
                 android:layout_width="@dimen/_8mdp"
                 android:layout_height="@dimen/_30mdp"
                 android:text="@string/dot"
                 android:textAlignment="center"
-                app:layout_constraintStart_toEndOf="@+id/input_ip3"
-                app:layout_constraintTop_toTopOf="@+id/input_ip1" />
+                app:layout_constraintStart_toEndOf="@id/input_ip3"
+                app:layout_constraintTop_toTopOf="@id/input_ip1" />
 
             <EditText
                 android:id="@+id/input_ip4"
@@ -112,17 +112,17 @@
                 app:layout_constraintHorizontal_weight="1"
 
                 app:layout_constraintStart_toEndOf="@id/dot3"
-                app:layout_constraintTop_toTopOf="@+id/input_ip3" />
+                app:layout_constraintTop_toTopOf="@id/input_ip3" />
 
             <TextView
                 android:id="@+id/colon"
-                style="@style/roboto_regular_16"
+                style="@style/roboto_regular_25"
                 android:layout_width="@dimen/_8mdp"
                 android:layout_height="@dimen/_30mdp"
                 android:text="@string/colon"
                 android:textAlignment="center"
                 app:layout_constraintStart_toEndOf="@id/input_ip4"
-                app:layout_constraintTop_toTopOf="@+id/input_ip1" />
+                app:layout_constraintTop_toTopOf="@id/input_ip1" />
 
             <EditText
                 android:id="@+id/input_ip5"
@@ -136,7 +136,7 @@
                 android:layout_marginEnd="@dimen/_14mdp"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@id/colon"
-                app:layout_constraintTop_toTopOf="@+id/input_ip4" />
+                app:layout_constraintTop_toTopOf="@id/input_ip4" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/check_connection_button"
@@ -149,7 +149,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/input_ip3" />
+                app:layout_constraintTop_toBottomOf="@id/input_ip3" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
