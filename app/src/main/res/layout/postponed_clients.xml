@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/_200mdp"
+    android:layout_height="@dimen/_48mdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<View
+    android:layout_width="@dimen/_200mdp"
+    android:layout_height="@dimen/_48mdp"
+    android:background="@drawable/green_button"
+    />
+
+    <TextView
+        android:id="@+id/comment"
+        style="@style/roboto_regular_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Комментарий lkbyysq длинный ghjhjjh оалалвыладвтосаотчмот"
+        android:textColor="#D6FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@id/area"
+        android:layout_marginBottom="@dimen/_3mdp"
+        android:paddingHorizontal="@dimen/_8mdp"
+/>
+
+    <LinearLayout
+        android:id="@+id/area"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+
+        <TextView
+            android:id="@+id/current_client_number"
+            style="@style/roboto_regular_12_green_buttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A4"
+            app:layout_constraintBottom_toBottomOf="@+id/dash" />
+
+        <TextView
+            android:id="@+id/dash"
+            style="@style/roboto_regular_12_green_buttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_3mdp"
+            android:text="-"
+            app:layout_constraintBottom_toBottomOf="@+id/current_client_service"
+            app:layout_constraintStart_toEndOf="@id/current_client_number" />
+
+        <TextView
+            android:id="@+id/current_client_service"
+            style="@style/roboto_regular_12_green_buttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_3mdp"
+            android:text="Услуга"
+            app:layout_constraintStart_toEndOf="@id/dash" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

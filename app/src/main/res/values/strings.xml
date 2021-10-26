@@ -43,7 +43,9 @@
     <string name="no_connection">Нет соединения с сервером</string>
     <string name="ok">Ок</string>
     <string name="success_connection">Соединение с сервером установлено</string>
-
+    <string name="amount_of_postponed_clients1">Общее число отложенных клиентов</string>
+    <string name="amount_of_postponed_clients2">в очереди:</string>
+    <string name="amount_of_postponed_clients2">в очереди:</string>
 
 
 </resources>

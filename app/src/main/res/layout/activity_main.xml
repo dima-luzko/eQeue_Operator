@@ -39,7 +39,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/_12font_mdp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/user_img"
+        app:layout_constraintStart_toEndOf="@id/user_img"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -52,7 +52,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/_12font_mdp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/workspace"
+        app:layout_constraintStart_toEndOf="@id/workspace"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -64,7 +64,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/_12font_mdp"
         android:textStyle="normal"
-        app:layout_constraintStart_toEndOf="@+id/user_img"
+        app:layout_constraintStart_toEndOf="@id/user_img"
         app:layout_constraintTop_toBottomOf="@id/workspace" />
 
     <TextView
@@ -88,256 +88,111 @@
         android:textColor="@color/white"
         android:textSize="@dimen/_12font_mdp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        app:layout_constraintEnd_toEndOf="@id/toolbar"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/amount_of_clients_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_40font_mdp"
-        android:layout_marginTop="@dimen/_14mdp"
-        android:text="@string/amount_of_clients"
-        android:textColor="@color/text_light"
-        android:textSize="@dimen/_13font_mdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <TextView
-        android:id="@+id/amount_of_clients"
+    <include
+        android:id="@+id/quantity"
+        layout="@layout/clients_quantity"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_8font_mdp"
-        android:layout_marginTop="@dimen/_14mdp"
-        android:text="22"
-        android:textColor="@color/text_light"
-        android:textSize="@dimen/_13font_mdp"
-        app:layout_constraintStart_toEndOf="@+id/amount_of_clients_text"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        android:layout_height="@dimen/_20mdp"
+        android:layout_marginVertical="@dimen/_10mdp"
+        app:layout_constraintBottom_toTopOf="@id/status_of_client"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+
+
 
     <TextView
         android:id="@+id/status_of_client"
         android:layout_width="@dimen/_240mdp"
         android:layout_height="@dimen/_45mdp"
-        android:layout_marginTop="@dimen/_14mdp"
         android:background="@drawable/status_client_is_not_called"
         android:gravity="center"
         android:text="@string/status_client_is_not_called"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="@dimen/_16font_mdp"
+
+        app:layout_constraintBottom_toTopOf="@id/vertical_line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/amount_of_clients_text" />
+        app:layout_constraintTop_toBottomOf="@id/quantity"
+        app:layout_constraintVertical_bias="0.066" />
 
     <TextView
-        android:visibility="visible"
         android:id="@+id/next_client_number"
         android:layout_width="@dimen/_69mdp"
         android:layout_height="@dimen/_20mdp"
-        android:text="@string/next_client_number"
+        android:layout_marginStart="@dimen/_38mdp"
+        android:gravity="center"
+        android:text="A112"
         android:textColor="@color/gray_text"
         android:textSize="@dimen/_16font_mdp"
-        android:layout_marginStart="@dimen/_38mdp"
-        android:layout_marginTop="@dimen/_22mdp"
-        android:gravity="center"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/status_of_client" />
+        app:layout_constraintTop_toTopOf="@+id/vertical_line" />
 
     <ImageView
-        android:visibility="visible"
         android:id="@+id/next_client_arrow"
         android:layout_width="@dimen/_69mdp"
         android:layout_height="@dimen/_15mdp"
-        android:src="@drawable/ic_arrow_3"
         android:layout_marginStart="@dimen/_38mdp"
         android:layout_marginTop="@dimen/_1mdp"
         android:padding="@dimen/_2mdp"
+        android:src="@drawable/ic_arrow_3"
+        android:visibility="visible"
+
+        app:layout_constraintBottom_toBottomOf="@+id/vertical_line"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/next_client_number" />
+        app:layout_constraintTop_toBottomOf="@id/next_client_number" />
 
-<!--    <TextView-->
-<!--    android:id="@+id/current_client_number"-->
-<!--        android:layout_width="@dimen/_144mdp"-->
-<!--        android:layout_height="@dimen/_20mdp"-->
-<!--        android:layout_marginTop="@dimen/_7mdp"-->
 
-<!--        android:text="@string/current_client_number"-->
-<!--        android:textColor="@color/text_light"-->
-<!--        android:textSize="@dimen/_16font_mdp"-->
-<!--        android:fontFamily="@font/roboto_medium"-->
-<!--        android:gravity="center"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/vertical_line"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/status_of_client" />-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/current_client_service"-->
-<!--        android:layout_width="@dimen/_144mdp"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:maxHeight="@dimen/_50mdp"-->
-<!--        android:maxLines="3"-->
-<!--        android:maxLength="50"-->
-<!--        android:fontFamily="@font/roboto_medium"-->
-<!--        android:text="hhhfugaggfugfgugu "-->
-<!--        android:textColor="@color/text_light"-->
-<!--        android:textSize="@dimen/_12font_mdp"-->
-<!--        android:textAlignment="center"-->
-<!--        android:gravity="center"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/vertical_line"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/current_client_number" />-->
-
-    <View
+    <ImageView
         android:id="@+id/vertical_line"
-        android:layout_width="@dimen/_33mdp"
-        android:layout_height="@dimen/_2mdp"
-        android:layout_marginTop="@dimen/_40mdp"
-      android:layout_marginStart="@dimen/_100mdp"
+        android:layout_width="@dimen/_2mdp"
+        android:layout_height="@dimen/_33mdp"
+        android:layout_marginStart="@dimen/_100mdp"
         android:background="@color/gray_text"
-        android:rotation="90"
+
+
+        app:layout_constraintBottom_toBottomOf="@+id/include"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/status_of_client" />
+        app:layout_constraintTop_toTopOf="@+id/include" />
+
 
     <include
-        android:visibility="visible"
+        android:id="@+id/include"
         layout="@layout/layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10mdp"
+        android:visibility="visible"
+        android:layout_marginEnd="@dimen/_17mdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.56"
         app:layout_constraintStart_toEndOf="@id/vertical_line"
         app:layout_constraintTop_toBottomOf="@id/status_of_client"
-        app:layout_constraintBottom_toTopOf="@id/some_button"/>
+        app:layout_constraintVertical_bias="0.041" />
+
 
     <include
-        android:visibility="visible"
         android:id="@+id/some_button"
+        layout="@layout/buttons_activity_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="@dimen/_80mdp"
-        tools:layout_editor_absoluteY="272dp"
-        layout="@layout/buttons_activity_main"
-        app:layout_constraintTop_toBottomOf="@+id/status_of_client"/>
+        app:layout_constraintTop_toBottomOf="@+id/include" />
 
-    <!--    <androidx.appcompat.widget.AppCompatButton-->
-<!--        android:id="@+id/button_call_next_client"-->
-<!--        android:layout_width="@dimen/_240mdp"-->
-<!--        android:layout_height="@dimen/_28mdp"-->
-<!--        android:layout_marginTop="@dimen/_80mdp"-->
-<!--        android:background="@drawable/green_button"-->
 
-<!--        android:text="@string/to_call_next_client"-->
-<!--        android:textAllCaps="false"-->
-<!--        android:textColor="@color/white"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/status_of_client" />-->
 
-<!--    <androidx.appcompat.widget.AppCompatButton-->
-<!--        android:id="@+id/button_list_postponed_clients"-->
-<!--        android:layout_width="@dimen/_240mdp"-->
-<!--        android:layout_height="@dimen/_28mdp"-->
-<!--        android:layout_marginTop="@dimen/_10mdp"-->
-<!--        android:background="@drawable/green_button"-->
-
-<!--        android:text="@string/to_list_postponed_client"-->
-<!--        android:textAllCaps="false"-->
-<!--        android:textColor="@color/white"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/button_call_next_client" />-->
-
-<!--    <androidx.appcompat.widget.AppCompatButton-->
-<!--        android:id="@+id/button_no_client"-->
-<!--        android:layout_width="@dimen/_240mdp"-->
-<!--        android:layout_height="@dimen/_28mdp"-->
-<!--        android:layout_marginTop="@dimen/_10mdp"-->
-<!--        android:background="@drawable/disable_button"-->
-<!--        android:text="@string/to_no_client"-->
-<!--        android:textAllCaps="false"-->
-<!--        android:textColor="@color/gray_text"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/button_list_postponed_clients" />-->
-
-<!--    <androidx.appcompat.widget.AppCompatButton-->
-<!--        android:id="@+id/button_start_work"-->
-<!--        android:layout_width="@dimen/_240mdp"-->
-<!--        android:layout_height="@dimen/_28mdp"-->
-<!--        android:layout_marginTop="@dimen/_10mdp"-->
-<!--        android:background="@drawable/disable_button"-->
-<!--        android:text="@string/to_start_work"-->
-<!--        android:textAllCaps="false"-->
-<!--        android:textColor="@color/gray_text"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/button_no_client" />-->
-
-<!--    <androidx.appcompat.widget.AppCompatButton-->
-<!--        android:id="@+id/button_redirect"-->
-<!--        android:layout_width="@dimen/_240mdp"-->
-<!--        android:layout_height="@dimen/_28mdp"-->
-<!--        android:layout_marginTop="@dimen/_10mdp"-->
-<!--        android:background="@drawable/disable_button"-->
-<!--        android:text="@string/to_redirect_client"-->
-<!--        android:textAllCaps="false"-->
-<!--        android:textColor="@color/gray_text"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/button_start_work" />-->
-
-<!--    <androidx.appcompat.widget.AppCompatButton-->
-<!--        android:id="@+id/button_postpone"-->
-<!--        android:layout_width="@dimen/_240mdp"-->
-<!--        android:layout_height="@dimen/_28mdp"-->
-<!--        android:layout_marginTop="@dimen/_10mdp"-->
-<!--        android:background="@drawable/disable_button"-->
-<!--        android:text="@string/to_postpone_client"-->
-<!--        android:textAllCaps="false"-->
-<!--        android:textColor="@color/gray_text"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/button_redirect" />-->
-
-<!--    <androidx.appcompat.widget.AppCompatButton-->
-<!--        android:id="@+id/button_finish_work"-->
-<!--        android:layout_width="@dimen/_240mdp"-->
-<!--        android:layout_height="@dimen/_28mdp"-->
-<!--        android:layout_marginTop="@dimen/_10mdp"-->
-<!--        android:background="@drawable/disable_button"-->
-<!--        android:text="@string/to_finish_work"-->
-<!--        android:textAllCaps="false"-->
-<!--        android:textColor="@color/gray_text"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/button_postpone" />-->
-
-<!--    <androidx.appcompat.widget.AppCompatButton-->
-<!--        android:id="@+id/button_call_next_client_one_mode"-->
-<!--        android:layout_width="@dimen/_240mdp"-->
-<!--        android:layout_height="@dimen/_56mdp"-->
-<!--        android:layout_marginTop="@dimen/_36mdp"-->
-<!--        android:background="@drawable/green_button"-->
-<!--        android:text="@string/to_call_next_client"-->
-<!--        android:textAllCaps="false"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:visibility="gone"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/status_of_client" />-->
-
-<!--    <androidx.appcompat.widget.AppCompatButton-->
-<!--        android:id="@+id/button_call_next_client_again_one_mode"-->
-<!--        android:layout_width="@dimen/_240mdp"-->
-<!--        android:layout_height="@dimen/_56mdp"-->
-<!--        android:layout_marginTop="@dimen/_20mdp"-->
-<!--        android:background="@drawable/green_button"-->
-<!--        android:text="@string/to_call_next_client_again"-->
-<!--        android:textAllCaps="false"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:visibility="gone"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/button_call_next_client_one_mode" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
 
