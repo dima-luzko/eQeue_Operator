@@ -9,15 +9,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/amount_of_clients"
-        android:textColor="@color/text_light"
-        android:textSize="@dimen/_13font_mdp"
+style="@style/roboto_regular_14"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/amount_of_clients"
-        style="@style/roboto_bold_13"
+        style="@style/roboto_bold_14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8font_mdp"

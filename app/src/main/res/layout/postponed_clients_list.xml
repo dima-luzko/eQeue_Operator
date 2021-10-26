@@ -91,31 +91,29 @@
 
     <TextView
         android:id="@+id/amount_of_clients_text1"
-        android:layout_width="@dimen/_230mdp"
+        android:layout_width="@dimen/_238mdp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_35font_mdp"
         android:layout_marginTop="@dimen/_14mdp"
         android:text="@string/amount_of_postponed_clients1"
-        android:textColor="@color/text_light"
-        android:textSize="@dimen/_13font_mdp"
+style="@style/roboto_regular_14"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <TextView
         android:id="@+id/amount_of_clients_text2"
+        style="@style/roboto_regular_14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_35font_mdp"
-
         android:text="@string/amount_of_postponed_clients2"
-        android:textColor="@color/text_light"
-        android:textSize="@dimen/_13font_mdp"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/amount_of_clients_text1" />
 
     <TextView
         android:id="@+id/amount_of_clients"
-        style="@style/roboto_bold_13"
+        style="@style/roboto_bold_14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8font_mdp"
@@ -159,7 +157,7 @@
         android:layout_height="@dimen/_28mdp"
         android:background="@drawable/green_button"
         android:fontFamily="@font/roboto_regular"
-        android:text="@string/to_postpone"
+        android:text="@string/to_call_client"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="@dimen/_12font_mdp"

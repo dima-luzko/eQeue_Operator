@@ -21,8 +21,7 @@
 
             <TextView
                 android:id="@+id/check_ip_text"
-                style="@style/roboto_regular_12_green_buttons"
-                android:textColor="@color/text_dark"
+                style="@style/roboto_regular_12_dark"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_20mdp"
                 android:layout_marginTop="@dimen/_30mdp"

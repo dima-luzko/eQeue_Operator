@@ -80,7 +80,6 @@
     <TextView
         android:id="@+id/postpone_text_hh"
         style="@style/roboto_regular_14"
-        android:textColor="@color/text_light"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_20mdp"
         android:layout_marginTop="@dimen/_20mdp"
@@ -113,7 +112,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/to_postpone_a"
-        style="@style/roboto_regular_10"
+        style="@style/roboto_regular_10_dark"
         android:layout_marginStart="@dimen/_8mdp"
         app:layout_constraintStart_toStartOf="@id/time"
         app:layout_constraintTop_toTopOf="@id/time"
@@ -121,7 +120,7 @@
         />
 
     <TextView
-        style="@style/roboto_bold_10"
+        style="@style/roboto_bold_10_dark"
         android:layout_width="@dimen/_14mdp"
         android:layout_height="@dimen/_14mdp"
         android:layout_marginStart="@dimen/_4mdp"
@@ -130,14 +129,13 @@
         app:layout_constraintBottom_toBottomOf="@id/time"
         app:layout_constraintStart_toEndOf="@id/to_postpone_a"
         app:layout_constraintTop_toTopOf="@id/time"
-
          />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/minus"
-        style="@style/roboto_regular_10"
+        style="@style/roboto_regular_10_dark"
         android:layout_marginEnd="@dimen/_36mdp"
         app:layout_constraintTop_toTopOf="@id/time"
         app:layout_constraintBottom_toBottomOf="@id/time"
@@ -207,7 +205,7 @@
         android:layout_height="@dimen/_20mdp"
         android:text="@string/only_for_me"
         android:buttonTint="@color/button_gray"
-        style="@style/roboto_regular_10"
+        style="@style/roboto_regular_10_dark"
         android:layout_marginEnd="@dimen/_8mdp"
         android:layout_marginStart="@dimen/_8mdp"
         app:layout_constraintBottom_toBottomOf="@id/only_for_me_client_view"

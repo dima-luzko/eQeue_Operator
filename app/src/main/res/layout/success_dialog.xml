@@ -21,8 +21,7 @@
 
             <TextView
                 android:id="@+id/check_ip_text"
-                style="@style/roboto_regular_12_green_buttons"
-                android:textColor="@color/text_dark"
+                style="@style/roboto_regular_12_dark"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_20mdp"
                 android:layout_marginTop="@dimen/_30mdp"
@@ -43,7 +42,7 @@
                 android:layout_marginTop="@dimen/_20mdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/check_ip_text" />
+                app:layout_constraintTop_toBottomOf="@id/check_ip_text" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
