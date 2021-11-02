@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Комментарий lkbyysq длинный ghjhjjh оалалвыладвтосаотчмот"
+        android:maxLines="2"
         android:textColor="#D6FFFFFF"
         app:layout_constraintBottom_toBottomOf="@id/area"
         android:layout_marginBottom="@dimen/_3mdp"

@@ -112,16 +112,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settings_text_one_button_mode" />
 
-    <TextView
-        android:id="@+id/settings_text_one_button_mode_explanation2"
-        style="@style/roboto_regular_10_light"
-        android:layout_width="@dimen/_135mdp"
-        android:layout_height="@dimen/_25mdp"
-        android:layout_marginStart="@dimen/_35mdp"
-        android:text="Когда выключен, доступны Отложить и Перенаправить"
+<!--    <TextView-->
+<!--        android:id="@+id/settings_text_one_button_mode_explanation2"-->
+<!--        style="@style/roboto_regular_10_light"-->
+<!--        android:layout_width="@dimen/_135mdp"-->
+<!--        android:layout_height="@dimen/_25mdp"-->
+<!--        android:layout_marginStart="@dimen/_35mdp"-->
+<!--        android:text="Когда выключен, доступны Отложить и Перенаправить"-->
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_text_one_button_mode_explanation" />
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/settings_text_one_button_mode_explanation" />-->
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch_postpone"
@@ -148,6 +148,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/settings_text_one_button_mode" />
 
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/appCompatButton"-->
+<!--        style="@style/roboto_regular_12_green_buttons"-->
+<!--        android:layout_width="@dimen/_200mdp"-->
+<!--        android:layout_height="@dimen/_30mdp"-->
+<!--        android:background="@drawable/green_button"-->
+<!--        android:text="@string/save"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:layout_marginTop="@dimen/_35mdp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/settings_text_one_button_mode_explanation" />-->
+
+
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/appCompatButton"
         style="@style/roboto_regular_12_green_buttons"
@@ -156,14 +171,10 @@
         android:background="@drawable/green_button"
         android:text="@string/save"
         android:textAllCaps="false"
-        android:layout_marginTop="@dimen/_35mdp"
+        android:layout_marginBottom="@dimen/_30mdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_text_one_button_mode_explanation2" />
-
-
-
-
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
 

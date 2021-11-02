@@ -35,7 +35,6 @@
                 style="@style/Widget.AppCompat.ActionBar"
                 android:layout_width="@dimen/_20mdp"
                 android:layout_height="@dimen/_20mdp"
-                android:progressTint="@color/yellow"
                 android:layout_marginTop="@dimen/_20mdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

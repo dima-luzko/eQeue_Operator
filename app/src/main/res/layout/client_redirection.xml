@@ -152,7 +152,7 @@
         style="@style/roboto_regular_10"
         android:layout_width="@dimen/_200mdp"
         android:layout_height="@dimen/_28mdp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/_10mdp"
         android:background="@drawable/input"
         android:gravity="center_vertical"
         android:paddingStart="@dimen/_8mdp"
@@ -178,6 +178,37 @@
         app:layout_constraintStart_toStartOf="@id/only_for_me_client_view"
         app:layout_constraintTop_toTopOf="@id/only_for_me_client_view" />
 
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/button_redirection"-->
+<!--        android:layout_width="@dimen/_200mdp"-->
+<!--        android:layout_height="@dimen/_28mdp"-->
+<!--        android:background="@drawable/green_button"-->
+<!--        android:fontFamily="@font/roboto_regular"-->
+<!--        android:text="@string/to_redirect"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="@dimen/_12font_mdp"-->
+<!--        android:layout_marginTop="@dimen/_20mdp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/only_for_me_client_view" />-->
+
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/button_cancel"-->
+<!--        style="@style/roboto_regular_14"-->
+<!--        android:layout_width="@dimen/_200mdp"-->
+<!--        android:layout_height="@dimen/_28mdp"-->
+<!--        android:background="@drawable/button_login"-->
+<!--        android:text="@string/cancel"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:textSize="@dimen/_12font_mdp"-->
+<!--        android:layout_marginTop="@dimen/_10mdp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/button_redirection" />-->
+
+
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_redirection"
         android:layout_width="@dimen/_200mdp"
@@ -188,10 +219,10 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="@dimen/_12font_mdp"
-        android:layout_marginTop="@dimen/_20mdp"
+        android:layout_marginBottom="@dimen/_10mdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/only_for_me_client_view" />
+        app:layout_constraintBottom_toTopOf="@id/button_cancel"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_cancel"
@@ -199,14 +230,11 @@
         android:layout_width="@dimen/_200mdp"
         android:layout_height="@dimen/_28mdp"
         android:background="@drawable/button_login"
-
         android:text="@string/cancel"
         android:textAllCaps="false"
         android:textSize="@dimen/_12font_mdp"
-        android:layout_marginTop="@dimen/_10mdp"
+        android:layout_marginBottom="@dimen/_20mdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_redirection" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
