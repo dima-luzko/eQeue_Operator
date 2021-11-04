@@ -33,9 +33,7 @@
         android:layout_marginStart="@dimen/_6mdp"
         android:layout_marginTop="@dimen/_10mdp"
         android:text="@string/workspace"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_12font_mdp"
-        android:textStyle="bold"
+        style="@style/toolbar_bold"
         app:layout_constraintStart_toEndOf="@id/user_img"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,9 +44,7 @@
         android:layout_marginStart="@dimen/_6mdp"
         android:layout_marginTop="@dimen/_10mdp"
         android:text="2"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_12font_mdp"
-        android:textStyle="bold"
+        style="@style/toolbar_bold"
         app:layout_constraintStart_toEndOf="@id/workspace"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -58,9 +54,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_6mdp"
         android:text="@string/operator"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_12font_mdp"
-        android:textStyle="normal"
+        style="@style/toolbar_normal"
+
         app:layout_constraintStart_toEndOf="@id/user_img"
         app:layout_constraintTop_toBottomOf="@id/workspace" />
 
@@ -70,9 +65,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_6mdp"
         android:text="Пользователь"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_12font_mdp"
-        android:textStyle="normal"
+        style="@style/toolbar_normal"
+
         app:layout_constraintStart_toEndOf="@id/operator"
         app:layout_constraintTop_toTopOf="@id/operator" />
 

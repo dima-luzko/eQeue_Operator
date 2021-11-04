@@ -22,9 +22,6 @@
         android:layout_height="@dimen/_28mdp"
         android:background="@drawable/input"
 
-        android:tooltipText="fkdlkflkdlkf"
-        placeholder
-
         android:layout_marginTop="@dimen/_30mdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
