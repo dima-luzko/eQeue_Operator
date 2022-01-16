@@ -2,19 +2,21 @@ package com.example.e_queue
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import com.example.e_queue.app.presentation.fragment.LoginFragment
 import com.example.e_queue.databinding.ActivityMainBinding
-import com.example.e_queue.databinding.CheckIpConnectionDialogBinding
-import com.example.e_queue.databinding.ClientRedirectionBinding
-import com.example.e_queue.databinding.SignInBinding
-
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: CheckIpConnectionDialogBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = CheckIpConnectionDialogBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, LoginFragment())
+        transaction.commit()
+
     }
+
 }

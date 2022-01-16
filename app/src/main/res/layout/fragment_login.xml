@@ -14,18 +14,31 @@
         android:src="@drawable/equeue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
-    <Spinner
+
+    <View
         android:id="@+id/input_login"
         android:layout_width="@dimen/_200mdp"
         android:layout_height="@dimen/_28mdp"
-        android:background="@drawable/input"
-
+        android:background="@drawable/input_img"
         android:layout_marginTop="@dimen/_30mdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/equeue" />
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_user"
+        android:textAlignment="center"
+        android:textColor="@color/login_style_text"
+        app:layout_constraintBottom_toBottomOf="@+id/input_login"
+        app:layout_constraintEnd_toEndOf="@+id/input_login"
+        app:layout_constraintStart_toStartOf="@+id/input_login"
+        app:layout_constraintTop_toTopOf="@+id/input_login" />
 
     <ImageView
         android:id="@+id/button_more"
@@ -37,20 +50,21 @@
         app:tint="@color/checkbox_gray"
         app:layout_constraintBottom_toBottomOf="@+id/input_login"
         app:layout_constraintEnd_toEndOf="@id/input_login"
-        app:layout_constraintTop_toTopOf="@id/input_login" />
+        app:layout_constraintTop_toTopOf="@id/input_login"
+        tools:ignore="ContentDescription" />
 
     <EditText
         android:id="@+id/input_password"
         android:layout_width="@dimen/_200mdp"
         android:layout_height="@dimen/_28mdp"
-        android:background="@drawable/input"
+        android:background="@drawable/input_img"
         android:layout_marginTop="@dimen/_10mdp"
         style="@style/roboto_regular_10"
         android:maxLines="1"
         android:maxLength="32"
-        android:hint="Пароль..."
+        android:hint="@string/password"
         android:inputType="textPassword"
-        android:textColorHint="#A2A0A0"
+        android:textColorHint="@color/login_style_text"
         android:paddingStart="@dimen/_8mdp"
         android:textAlignment="center"
         android:paddingEnd="@dimen/_8mdp"
@@ -67,6 +81,7 @@
         android:src="@drawable/ic_open_eye"
         app:tint="@color/checkbox_gray"
         android:layout_marginEnd="@dimen/_6mdp"
+        tools:ignore="ContentDescription"
         app:layout_constraintBottom_toBottomOf="@id/input_password"
         app:layout_constraintEnd_toEndOf="@id/input_password"
         app:layout_constraintTop_toTopOf="@id/input_password" />
