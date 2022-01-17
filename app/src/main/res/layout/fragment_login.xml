@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:background="@drawable/bg_gradient">
 
     <ImageView
@@ -74,7 +76,7 @@
 
 
     <ImageView
-        android:id="@+id/open_eye_icon"
+        android:id="@+id/eye_icon"
         android:visibility="visible"
         android:layout_width="@dimen/_16mdp"
         android:layout_height="@dimen/_16mdp"
