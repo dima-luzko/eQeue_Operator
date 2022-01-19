@@ -20,12 +20,16 @@
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="@dimen/_10mdp"
+                android:layout_marginBottom="@dimen/_10mdp"
                 android:id="@+id/choose_user_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_max="@dimen/_160mdp"
+                android:scrollbarStyle="outsideInset"
+                android:scrollbars="vertical"
+                app:layout_constraintHeight_max="@dimen/_170mdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

@@ -32,6 +32,7 @@
 
     <TextView
         android:id="@+id/user_name"
+        android:textSize="@dimen/_10font_mdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/choose_user"
@@ -88,7 +89,21 @@
         app:layout_constraintEnd_toEndOf="@id/input_password"
         app:layout_constraintTop_toTopOf="@id/input_password" />
 
+    <ImageView
+        android:id="@+id/allert_image"
+        android:layout_width="@dimen/_16mdp"
+        android:layout_height="@dimen/_16mdp"
+        android:src="@drawable/icon_attention"
+        android:visibility="invisible"
+        tools:ignore="ContentDescription"
+        android:layout_marginStart="@dimen/_6mdp"
+        app:layout_constraintBottom_toBottomOf="@id/input_password"
+        app:layout_constraintStart_toStartOf="@id/input_password"
+        app:layout_constraintTop_toTopOf="@id/input_password" />
+
+
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/sign_in"
         android:layout_width="@dimen/_200mdp"
         android:layout_height="@dimen/_28mdp"
         android:background="@drawable/button_login"

@@ -10,12 +10,12 @@ import android.view.Window
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.e_queue.app.data.model.LoggedUser
 import com.example.e_queue.app.data.model.User
 import com.example.e_queue.app.presentation.adapter.ChooseUserItemAdapter
 import com.example.e_queue.databinding.FragmentChooseUserDialogBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.example.e_queue.framework.remote.RemoteDataSource
+import kotlinx.coroutines.*
 
 
 class ChooseUserDialogFragment : DialogFragment() {
@@ -42,51 +42,55 @@ class ChooseUserDialogFragment : DialogFragment() {
         setUserList()
     }
 
-    private fun setUserList(){
-        with(binding.chooseUserList){
-            layoutManager = LinearLayoutManager(
-                requireContext(),
-                LinearLayoutManager.VERTICAL,
-                false
-            )
-            adapter = ChooseUserItemAdapter(userList) {
-                bundle.putString("UserName",it.name)
-                parentFragmentManager.setFragmentResult("name",bundle)
-                dialog?.dismiss()
+    private fun setUserList() {
+        GlobalScope.launch(Dispatchers.Main) {
+            with(binding.chooseUserList) {
+                layoutManager = LinearLayoutManager(
+                    requireContext(),
+                    LinearLayoutManager.VERTICAL,
+                    false
+                )
+                adapter = ChooseUserItemAdapter(
+                    userList()
+                ) {
+                    bundle.putSerializable("data",LoggedUser(id =it.id,name = it.name, point = it.point,password = it.password))
+//                    with(bundle){
+//                        putString("UserName", it.name)
+//                        putInt("UserID", it.id)
+//                        putString("UserPoint", it.point)
+//                        putString("UserPassword",it.password)
+//                    }
+                    parentFragmentManager.setFragmentResult("name", bundle)
+                    dialog?.dismiss()
+                }
+                hasFixedSize()
             }
-            hasFixedSize()
         }
     }
 
-    private val userList = listOf(
-        User(
-            name = "lox1"
-        ),
-        User(
-            name = "lox2"
-        ),
-        User(
-            name = "lox3"
-        ),
-        User(
-            name = "lox4"
-        ),
-        User(
-            name = "lox5"
-        ),
-        User(
-            name = "lox6"
-        )
-    )
+    private suspend fun userList(): List<User> = withContext(Dispatchers.IO) {
+        val response = RemoteDataSource.retrofit.getUsers()
+        withContext(Dispatchers.Main) {
+            response.map {
+                User(
+                    id = it.id,
+                    password = it.password,
+                    point = it.point,
+                    name = it.name,
+                    plan = it.plan
+                )
+            }
+        }
+    }
 
     companion object {
         fun showDialog(fragmentManager: FragmentManager) {
             GlobalScope.launch(Dispatchers.Main) {
-                    val fragment = ChooseUserDialogFragment()
-                    fragment.show(
-                        fragmentManager,
-                        ChooseUserDialogFragment::class.java.simpleName
-                    )
+                val fragment = ChooseUserDialogFragment()
+                fragment.show(
+                    fragmentManager,
+                    ChooseUserDialogFragment::class.java.simpleName
+                )
             }
         }
     }
