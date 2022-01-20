@@ -3,6 +3,7 @@ package com.example.e_queue
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -20,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, LoginFragment())
         transaction.commit()
@@ -43,5 +43,4 @@ class MainActivity : AppCompatActivity() {
         }
         return super.dispatchTouchEvent(event)
     }
-
 }

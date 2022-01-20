@@ -54,12 +54,6 @@ class ChooseUserDialogFragment : DialogFragment() {
                     userList()
                 ) {
                     bundle.putSerializable("data",LoggedUser(id =it.id,name = it.name, point = it.point,password = it.password))
-//                    with(bundle){
-//                        putString("UserName", it.name)
-//                        putInt("UserID", it.id)
-//                        putString("UserPoint", it.point)
-//                        putString("UserPassword",it.password)
-//                    }
                     parentFragmentManager.setFragmentResult("name", bundle)
                     dialog?.dismiss()
                 }

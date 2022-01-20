@@ -2,11 +2,10 @@ package com.example.e_queue.app.presentation.fragment
 
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import android.widget.TextView.OnEditorActionListener
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.e_queue.R
@@ -33,7 +32,6 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         chooseUser()
         lookPassword()
-        //setUserName()
         checkLoginAndPassword()
     }
 
@@ -41,15 +39,6 @@ class LoginFragment : Fragment() {
     private fun chooseUser() {
         binding.inputLogin.setOnClickListener {
             ChooseUserDialogFragment.showDialog(parentFragmentManager)
-        }
-    }
-
-    private fun setUserName() {
-        parentFragmentManager.setFragmentResultListener(
-            "name", this
-        ) { _, bundle ->
-            val loggedUser = bundle.get("data") as LoggedUser
-            binding.userName.text = loggedUser.name
         }
     }
 
@@ -87,14 +76,33 @@ class LoginFragment : Fragment() {
         snackBar.show()
     }
 
-    private fun checkLoginAndPassword() {
+    private fun operationWithInputPassword() {
         with(binding) {
-            signIn.setOnClickListener {
-                if (binding.userName.text == getString(R.string.choose_user)) {
-                    snackBar(R.string.choose_user_snack_bar)
+            inputPassword.setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    allertImage.visibility = View.INVISIBLE
+                    inputPassword.setBackgroundResource(R.drawable.input_img)
                 }
             }
 
+            inputPassword.setOnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    inputPassword.clearFocus()
+                }
+                false
+            }
+
+        }
+    }
+
+    private fun checkLoginAndPassword() {
+        with(binding) {
+            operationWithInputPassword()
+            signIn.setOnClickListener {
+                if (userName.text == getString(R.string.choose_user)) {
+                    snackBar(R.string.choose_user_snack_bar)
+                }
+            }
             parentFragmentManager.setFragmentResultListener(
                 "name", viewLifecycleOwner
             ) { _, bundle ->
@@ -111,29 +119,15 @@ class LoginFragment : Fragment() {
                         allertImage.visibility = View.VISIBLE
                         inputPassword.setBackgroundResource(R.drawable.error_input)
                         snackBar(R.string.enter_password_snack_bar)
-                        GlobalScope.launch(Dispatchers.Main) {
-                            withContext(Dispatchers.IO) {
-                                delay(2900)
-                            }
-                                allertImage.visibility = View.INVISIBLE
-                                inputPassword.setBackgroundResource(R.drawable.input_img)
-                        }
                     } else if (inputPassword.text.toString() != user.password) {
                         allertImage.visibility = View.VISIBLE
                         inputPassword.setBackgroundResource(R.drawable.error_input)
                         snackBar(R.string.wrong_password_snack_bar)
-                        GlobalScope.launch(Dispatchers.Main) {
-                            withContext(Dispatchers.IO) {
-                                delay(2900)
-                            }
-                                allertImage.visibility = View.INVISIBLE
-                                inputPassword.setBackgroundResource(R.drawable.input_img)
-                        }
                     }
                 }
             }
         }
-
-
     }
+
+
 }

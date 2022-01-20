@@ -32,7 +32,7 @@
 
     <TextView
         android:id="@+id/user_name"
-        android:textSize="@dimen/_10font_mdp"
+        android:textSize="@dimen/_11font_mdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/choose_user"
@@ -63,7 +63,9 @@
         android:background="@drawable/input_img"
         android:layout_marginTop="@dimen/_10mdp"
         style="@style/roboto_regular_10"
+        android:textSize="@dimen/_11font_mdp"
         android:maxLines="1"
+        android:imeOptions="actionDone"
         android:maxLength="32"
         android:hint="@string/password"
         android:inputType="textPassword"
@@ -73,7 +75,8 @@
         android:paddingEnd="@dimen/_8mdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/input_login" />
+        app:layout_constraintTop_toBottomOf="@id/input_login"
+        tools:ignore="Autofill" />
 
 
     <ImageView
