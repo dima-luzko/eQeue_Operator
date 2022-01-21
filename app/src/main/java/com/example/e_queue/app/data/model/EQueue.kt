@@ -36,11 +36,30 @@ data class Service(
     val name: String
 )
 
-data class LoggedUser(
+data class SelectedUser(
     val id: Int,
     val name: String,
     val point: String,
     val password: String
 ) : Serializable
+
+data class LoggedUser(
+    val id: Int,
+    val name: String,
+    val point: String
+) : Serializable
+
+@kotlinx.serialization.Serializable
+data class Message(
+    @SerializedName("self_services")
+    val selfServices: List<SelfServices>
+)
+
+data class SelfServices(
+     @SerializedName("id")
+    val id : Int,
+    @SerializedName("service_name")
+    val serviceName: String
+)
 
 

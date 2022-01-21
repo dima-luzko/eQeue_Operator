@@ -3,7 +3,6 @@ package com.example.e_queue
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -11,7 +10,6 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.e_queue.app.presentation.fragment.LoginFragment
 import com.example.e_queue.databinding.ActivityMainBinding
-import de.halfbit.edgetoedge.edgeToEdge
 
 
 class MainActivity : AppCompatActivity() {

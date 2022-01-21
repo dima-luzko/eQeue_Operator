@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.e_queue.R
 import com.example.e_queue.app.data.model.LoggedUser
+import com.example.e_queue.app.data.model.SelectedUser
 import com.example.e_queue.databinding.FragmentLoginBinding
 import com.example.e_queue.utils.changeBackgroundAndNavBarColor
 import com.google.android.material.snackbar.Snackbar
@@ -105,13 +106,16 @@ class LoginFragment : Fragment() {
             parentFragmentManager.setFragmentResultListener(
                 "name", viewLifecycleOwner
             ) { _, bundle ->
-                val user = bundle.get("data") as LoggedUser
+                val user = bundle.get("data") as SelectedUser
                 userName.text = user.name
                 signIn.setOnClickListener {
                     if (inputPassword.text.toString() == user.password || user.password.isEmpty()) {
                         val transaction = parentFragmentManager.beginTransaction()
                         transaction.replace(R.id.fragment_container, MainFragment())
                         transaction.commit()
+
+                        bundle.putSerializable("loggedUser",LoggedUser(id =user.id,name = user.name, point = user.point))
+                        parentFragmentManager.setFragmentResult("user", bundle)
                     } else if (user.password.isNotEmpty() && inputPassword.text.toString()
                             .isEmpty()
                     ) {

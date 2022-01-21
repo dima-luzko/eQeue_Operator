@@ -3,6 +3,7 @@ package com.example.e_queue.app.presentation.fragment
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +11,15 @@ import android.view.Window
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.e_queue.app.data.model.LoggedUser
+import com.example.e_queue.app.data.model.SelectedUser
 import com.example.e_queue.app.data.model.User
 import com.example.e_queue.app.presentation.adapter.ChooseUserItemAdapter
 import com.example.e_queue.databinding.FragmentChooseUserDialogBinding
 import com.example.e_queue.framework.remote.RemoteDataSource
+import io.ktor.client.*
+import io.ktor.client.features.websocket.*
+import io.ktor.http.*
+import io.ktor.http.cio.websocket.*
 import kotlinx.coroutines.*
 
 
@@ -51,9 +56,9 @@ class ChooseUserDialogFragment : DialogFragment() {
                     false
                 )
                 adapter = ChooseUserItemAdapter(
-                    userList()
+                    userList().filterIndexed { index, _ -> index !=0 }
                 ) {
-                    bundle.putSerializable("data",LoggedUser(id =it.id,name = it.name, point = it.point,password = it.password))
+                    bundle.putSerializable("data",SelectedUser(id =it.id,name = it.name, point = it.point,password = it.password))
                     parentFragmentManager.setFragmentResult("name", bundle)
                     dialog?.dismiss()
                 }
@@ -65,6 +70,7 @@ class ChooseUserDialogFragment : DialogFragment() {
     private suspend fun userList(): List<User> = withContext(Dispatchers.IO) {
         val response = RemoteDataSource.retrofit.getUsers()
         withContext(Dispatchers.Main) {
+
             response.map {
                 User(
                     id = it.id,
