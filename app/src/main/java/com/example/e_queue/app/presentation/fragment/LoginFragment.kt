@@ -5,14 +5,13 @@ import android.text.method.PasswordTransformationMethod
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
-import android.widget.TextView.OnEditorActionListener
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.e_queue.R
 import com.example.e_queue.app.data.model.LoggedUser
 import com.example.e_queue.databinding.FragmentLoginBinding
+import com.example.e_queue.utils.changeBackgroundAndNavBarColor
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.*
 
 
 class LoginFragment : Fragment() {
@@ -25,6 +24,7 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
+        changeBackgroundAndNavBarColor(requireActivity(),R.color.transparent)
         return binding.root
     }
 
@@ -91,7 +91,6 @@ class LoginFragment : Fragment() {
                 }
                 false
             }
-
         }
     }
 

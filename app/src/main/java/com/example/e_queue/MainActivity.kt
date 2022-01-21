@@ -11,6 +11,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.e_queue.app.presentation.fragment.LoginFragment
 import com.example.e_queue.databinding.ActivityMainBinding
+import de.halfbit.edgetoedge.edgeToEdge
 
 
 class MainActivity : AppCompatActivity() {
@@ -43,4 +44,5 @@ class MainActivity : AppCompatActivity() {
         }
         return super.dispatchTouchEvent(event)
     }
+
 }

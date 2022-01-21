@@ -28,5 +28,6 @@
     <color name="background_choose_user_item">#F4F1F1</color>
     <color name="user_item_text">#9A9999</color>
     <color name="snackBar">#C0577A</color>
+    <color name="transparent">#64000000</color>
 
 </resources>
