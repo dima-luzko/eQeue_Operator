@@ -19,6 +19,7 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private var changeEye = false
+    private var bundle = Bundle()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -103,6 +104,7 @@ class LoginFragment : Fragment() {
                     snackBar(R.string.choose_user_snack_bar)
                 }
             }
+
             parentFragmentManager.setFragmentResultListener(
                 "name", viewLifecycleOwner
             ) { _, bundle ->
@@ -114,7 +116,9 @@ class LoginFragment : Fragment() {
                         transaction.replace(R.id.fragment_container, MainFragment())
                         transaction.commit()
 
-                        bundle.putSerializable("loggedUser",LoggedUser(id =user.id,name = user.name, point = user.point))
+                        bundle.putSerializable("loggedUser",
+                            LoggedUser(id =user.id,name = user.name, point = user.point, service_id = user.service_id)
+                        )
                         parentFragmentManager.setFragmentResult("user", bundle)
                     } else if (user.password.isNotEmpty() && inputPassword.text.toString()
                             .isEmpty()

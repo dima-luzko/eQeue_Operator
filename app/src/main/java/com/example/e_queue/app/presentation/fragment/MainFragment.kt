@@ -1,6 +1,5 @@
 package com.example.e_queue.app.presentation.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,26 +11,15 @@ import androidx.fragment.app.Fragment
 import com.example.e_queue.R
 import com.example.e_queue.app.data.model.LoggedUser
 import com.example.e_queue.databinding.FragmentMainBinding
+import com.example.e_queue.framework.remote.RemoteDataSource
 import com.example.e_queue.utils.changeBackgroundAndNavBarColor
-import io.ktor.client.*
-import io.ktor.client.engine.cio.*
-import io.ktor.client.features.json.*
-import io.ktor.client.features.websocket.*
-import io.ktor.http.*
-import io.ktor.http.cio.websocket.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import ua.naiksoftware.stomp.Stomp
-import ua.naiksoftware.stomp.StompClient
-import ua.naiksoftware.stomp.dto.LifecycleEvent
+import kotlinx.coroutines.*
 
 
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
-    private var mStompClient: StompClient? = null
+    private var whileStart = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,12 +38,16 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         parentFragmentManager.setFragmentResultListener(
             "user", viewLifecycleOwner
         ) { _, bundle ->
             val loggedUser = bundle.get("loggedUser") as LoggedUser
             binding.toolbar.workspaceNumber.text = loggedUser.point
             binding.toolbar.operatorName.text = loggedUser.name
+            GlobalScope.launch(Dispatchers.Main) {
+                loggedUser.service_id?.let { getServiceLength(it) }
+            }
         }
 
         binding.toolbar.exit.setOnClickListener {
@@ -66,13 +58,44 @@ class MainFragment : Fragment() {
 
     }
 
+    private suspend fun getServiceLength(serviceId: Long) {
+        GlobalScope.launch(Dispatchers.IO) {
+            while (whileStart){
+                val response = RemoteDataSource().retrofit.getUserServiceLength(serviceId)
+                withContext(Dispatchers.Main) {
+                    binding.quantity.amountOfClients.text = response.length.toString()
+                    Log.d("pidoras","${response.length}")
+                }
+                delay(5000)
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        whileStart = true
+        Log.d("state","onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        whileStart = false
+        Log.d("state","onPause")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        whileStart = false
+        Log.d("state","onDestroy")
+    }
+
 
     private fun getUserInfo() {
         parentFragmentManager.setFragmentResultListener(
             "name", this
         ) { _, bundle ->
             val result = bundle.getString("UserName")
-            Toast.makeText(requireContext(), result, Toast.LENGTH_LONG).show()
+
         }
     }
 

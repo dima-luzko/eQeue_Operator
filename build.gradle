@@ -3,10 +3,7 @@ buildscript {
     ext.kotlin_version = "1.5.10"
     repositories {
         google()
-        mavenCentral()
-        maven {
-            url 'https://www.jitpack.io'
-        }
+        jcenter()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.2.2"
@@ -20,7 +17,6 @@ buildscript {
 allprojects {
     repositories {
         google()
-        mavenCentral()
         jcenter() // Warning: this repository is going to shut down soon
         maven { url 'https://jitpack.io' }
     }

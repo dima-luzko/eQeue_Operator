@@ -1,6 +1,8 @@
 package com.example.e_queue.app.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
 data class User(
@@ -13,10 +15,10 @@ data class User(
     @SerializedName("name")
     val name: String,
     @SerializedName("plan")
-    val plan: List<Plan>?
+    val plan: List<UserPlan>?
 )
 
-data class Plan(
+data class UserPlan(
     @SerializedName("id")
     val id: Int,
     @SerializedName("coeff")
@@ -26,40 +28,36 @@ data class Plan(
     @SerializedName("flex_invt")
     val flexInvite: Boolean,
     @SerializedName("service")
-    val service: Service
+    val service: PlanService
 )
 
-data class Service(
+data class PlanService(
     @SerializedName("id")
     val id: Long,
     @SerializedName("name")
     val name: String
 )
 
+data class UserServiceLength(
+    @SerializedName("length_line")
+    val length: Int
+)
+
+@Parcelize
 data class SelectedUser(
     val id: Int,
     val name: String,
     val point: String,
-    val password: String
-) : Serializable
+    val password: String,
+    val service_id: Long?
+) : Parcelable
 
 data class LoggedUser(
     val id: Int,
     val name: String,
-    val point: String
+    val point: String,
+    val service_id: Long?
 ) : Serializable
 
-@kotlinx.serialization.Serializable
-data class Message(
-    @SerializedName("self_services")
-    val selfServices: List<SelfServices>
-)
-
-data class SelfServices(
-     @SerializedName("id")
-    val id : Int,
-    @SerializedName("service_name")
-    val serviceName: String
-)
 
 

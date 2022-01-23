@@ -3,30 +3,27 @@ package com.example.e_queue.app.presentation.fragment
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.e_queue.app.data.model.SelectedUser
-import com.example.e_queue.app.data.model.User
 import com.example.e_queue.app.presentation.adapter.ChooseUserItemAdapter
+import com.example.e_queue.app.presentation.viewModel.EQueueViewModel
 import com.example.e_queue.databinding.FragmentChooseUserDialogBinding
-import com.example.e_queue.framework.remote.RemoteDataSource
-import io.ktor.client.*
-import io.ktor.client.features.websocket.*
-import io.ktor.http.*
-import io.ktor.http.cio.websocket.*
 import kotlinx.coroutines.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class ChooseUserDialogFragment : DialogFragment() {
 
     private lateinit var binding: FragmentChooseUserDialogBinding
     private var bundle = Bundle()
+    private val userViewModel by viewModel<EQueueViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,54 +41,55 @@ class ChooseUserDialogFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUserList()
+        getUserList()
     }
 
-    private fun setUserList() {
-        GlobalScope.launch(Dispatchers.Main) {
-            with(binding.chooseUserList) {
-                layoutManager = LinearLayoutManager(
-                    requireContext(),
-                    LinearLayoutManager.VERTICAL,
-                    false
-                )
-                adapter = ChooseUserItemAdapter(
-                    userList().filterIndexed { index, _ -> index !=0 }
-                ) {
-                    bundle.putSerializable("data",SelectedUser(id =it.id,name = it.name, point = it.point,password = it.password))
-                    parentFragmentManager.setFragmentResult("name", bundle)
-                    dialog?.dismiss()
-                }
-                hasFixedSize()
-            }
-        }
-    }
+    private fun getUserList() {
+        with(userViewModel) {
+            getUserList()
+            CoroutineScope(Dispatchers.Main).launch {
+                user.observe(viewLifecycleOwner, Observer { observeUserList ->
 
-    private suspend fun userList(): List<User> = withContext(Dispatchers.IO) {
-        val response = RemoteDataSource.retrofit.getUsers()
-        withContext(Dispatchers.Main) {
+                    with(binding.chooseUserList) {
+                        layoutManager = LinearLayoutManager(
+                            requireContext(),
+                            LinearLayoutManager.VERTICAL,
+                            false
+                        )
+                        adapter = ChooseUserItemAdapter(
+                            observeUserList.filterIndexed { index, _ -> index != 0 }
+                        ) { userAdapter ->
+                            val firstServiceId = userAdapter.plan?.map { plan -> plan.service.id }
+                            val serviceId =
+                                if (userAdapter.plan?.isEmpty() == true) 1 else firstServiceId?.first()
+                            bundle.putParcelable(
+                                "data", SelectedUser(
+                                    id = userAdapter.id,
+                                    name = userAdapter.name,
+                                    point = userAdapter.point,
+                                    password = userAdapter.password,
+                                    service_id = serviceId
+                                )
+                            )
+                            parentFragmentManager.setFragmentResult("name", bundle)
+                            dialog?.dismiss()
+                        }
+                        hasFixedSize()
+                    }
 
-            response.map {
-                User(
-                    id = it.id,
-                    password = it.password,
-                    point = it.point,
-                    name = it.name,
-                    plan = it.plan
-                )
+                })
             }
+
         }
     }
 
     companion object {
         fun showDialog(fragmentManager: FragmentManager) {
-            GlobalScope.launch(Dispatchers.Main) {
-                val fragment = ChooseUserDialogFragment()
-                fragment.show(
-                    fragmentManager,
-                    ChooseUserDialogFragment::class.java.simpleName
-                )
-            }
+            val fragment = ChooseUserDialogFragment()
+            fragment.show(
+                fragmentManager,
+                ChooseUserDialogFragment::class.java.simpleName
+            )
         }
     }
 
