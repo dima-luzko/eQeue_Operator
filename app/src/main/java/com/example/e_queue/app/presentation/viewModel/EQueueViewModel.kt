@@ -1,6 +1,5 @@
 package com.example.e_queue.app.presentation.viewModel
 
-import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_queue.app.data.model.User
 import com.example.e_queue.app.domain.repository.EQueueRepository
-import com.example.e_queue.app.presentation.di.viewModelModules
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch

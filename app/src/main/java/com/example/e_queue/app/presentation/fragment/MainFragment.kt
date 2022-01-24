@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.e_queue.R
@@ -39,32 +38,37 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        parentFragmentManager.setFragmentResultListener(
-            "user", viewLifecycleOwner
-        ) { _, bundle ->
-            val loggedUser = bundle.get("loggedUser") as LoggedUser
-            binding.toolbar.workspaceNumber.text = loggedUser.point
-            binding.toolbar.operatorName.text = loggedUser.name
-            GlobalScope.launch(Dispatchers.Main) {
-                loggedUser.service_id?.let { getServiceLength(it) }
-            }
-        }
+        setToolbarText()
+        unLoggedUser()
 
+//            CoroutineScope(Dispatchers.Main).launch {
+//                loggedUser.service_id?.let { getServiceLength(it) }
+//            }
+    }
+
+    private fun setToolbarText() {
+        val loggedUser = getUserInfo()
+        with(binding.toolbar) {
+            operatorName.text = loggedUser?.name
+            workspaceNumber.text = loggedUser?.point
+        }
+    }
+
+    private fun unLoggedUser() {
         binding.toolbar.exit.setOnClickListener {
             val transaction = parentFragmentManager.beginTransaction()
             transaction.replace(R.id.fragment_container, LoginFragment())
             transaction.commit()
         }
-
     }
 
     private suspend fun getServiceLength(serviceId: Long) {
-        GlobalScope.launch(Dispatchers.IO) {
-            while (whileStart){
+        CoroutineScope(Dispatchers.IO).launch {
+            while (whileStart) {
                 val response = RemoteDataSource().retrofit.getUserServiceLength(serviceId)
                 withContext(Dispatchers.Main) {
                     binding.quantity.amountOfClients.text = response.length.toString()
-                    Log.d("pidoras","${response.length}")
+                    Log.d("pidoras", "${response.length}")
                 }
                 delay(5000)
             }
@@ -74,29 +78,24 @@ class MainFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         whileStart = true
-        Log.d("state","onResume")
+        Log.d("state", "onResume")
     }
 
     override fun onPause() {
         super.onPause()
         whileStart = false
-        Log.d("state","onPause")
+        Log.d("state", "onPause")
     }
 
     override fun onDestroy() {
         super.onDestroy()
         whileStart = false
-        Log.d("state","onDestroy")
+        Log.d("state", "onDestroy")
     }
 
 
-    private fun getUserInfo() {
-        parentFragmentManager.setFragmentResultListener(
-            "name", this
-        ) { _, bundle ->
-            val result = bundle.getString("UserName")
-
-        }
+    private fun getUserInfo(): LoggedUser? {
+        return arguments?.getParcelable("loggedUser")
     }
 
 }

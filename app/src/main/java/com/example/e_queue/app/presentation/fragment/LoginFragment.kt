@@ -10,9 +10,11 @@ import androidx.fragment.app.Fragment
 import com.example.e_queue.R
 import com.example.e_queue.app.data.model.LoggedUser
 import com.example.e_queue.app.data.model.SelectedUser
+import com.example.e_queue.app.presentation.viewModel.SelectedUserViewModel
 import com.example.e_queue.databinding.FragmentLoginBinding
 import com.example.e_queue.utils.changeBackgroundAndNavBarColor
 import com.google.android.material.snackbar.Snackbar
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class LoginFragment : Fragment() {
@@ -20,13 +22,14 @@ class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private var changeEye = false
     private var bundle = Bundle()
+    private val userNameViewModel by viewModel<SelectedUserViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
-        changeBackgroundAndNavBarColor(requireActivity(),R.color.transparent)
+        changeBackgroundAndNavBarColor(requireActivity(), R.color.transparent)
         return binding.root
     }
 
@@ -35,8 +38,15 @@ class LoginFragment : Fragment() {
         chooseUser()
         lookPassword()
         checkLoginAndPassword()
+        setSelectedUserInViewModel()
+        setSelectedUser()
     }
 
+    private fun setSelectedUser() {
+        userNameViewModel.userName.observe(viewLifecycleOwner) {
+            binding.userName.text = it.name
+        }
+    }
 
     private fun chooseUser() {
         binding.inputLogin.setOnClickListener {
@@ -104,22 +114,16 @@ class LoginFragment : Fragment() {
                     snackBar(R.string.choose_user_snack_bar)
                 }
             }
-
-            parentFragmentManager.setFragmentResultListener(
-                "name", viewLifecycleOwner
-            ) { _, bundle ->
-                val user = bundle.get("data") as SelectedUser
-                userName.text = user.name
+            userNameViewModel.userName.observe(viewLifecycleOwner) { user ->
                 signIn.setOnClickListener {
                     if (inputPassword.text.toString() == user.password || user.password.isEmpty()) {
-                        val transaction = parentFragmentManager.beginTransaction()
-                        transaction.replace(R.id.fragment_container, MainFragment())
-                        transaction.commit()
-
-                        bundle.putSerializable("loggedUser",
-                            LoggedUser(id =user.id,name = user.name, point = user.point, service_id = user.service_id)
+                        replaceFragment(
+                            fragment = MainFragment(),
+                            id = user.id,
+                            name = user.name,
+                            point = user.point,
+                            serviceId = user.service_id
                         )
-                        parentFragmentManager.setFragmentResult("user", bundle)
                     } else if (user.password.isNotEmpty() && inputPassword.text.toString()
                             .isEmpty()
                     ) {
@@ -136,5 +140,36 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun replaceFragment(
+        fragment: Fragment,
+        id: Int,
+        name: String,
+        point: String,
+        serviceId: Long?
+    ) {
+        bundle.putParcelable(
+            "loggedUser",
+            LoggedUser(
+                id = id,
+                name = name,
+                point = point,
+                service_id = serviceId
+            )
+        )
+        fragment.arguments = bundle
+
+        val transaction = parentFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
+    }
+
+    private fun setSelectedUserInViewModel() {
+        parentFragmentManager.setFragmentResultListener(
+            "name", viewLifecycleOwner
+        ) { _, bundle ->
+            val user = bundle.get("data") as SelectedUser
+            userNameViewModel.setUserName(user)
+        }
+    }
 
 }

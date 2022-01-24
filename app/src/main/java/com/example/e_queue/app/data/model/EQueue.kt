@@ -3,7 +3,6 @@ package com.example.e_queue.app.data.model
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
-import java.io.Serializable
 
 data class User(
     @SerializedName("id")
@@ -52,12 +51,13 @@ data class SelectedUser(
     val service_id: Long?
 ) : Parcelable
 
+@Parcelize
 data class LoggedUser(
     val id: Int,
     val name: String,
     val point: String,
     val service_id: Long?
-) : Serializable
+) : Parcelable
 
 
 
