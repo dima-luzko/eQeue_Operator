@@ -6,8 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_queue.app.data.model.LoggedUser
+import com.example.e_queue.app.data.model.NextCustomerInfo
 import com.example.e_queue.app.data.model.UserServiceLength
 import com.example.e_queue.app.domain.repository.EQueueRepository
+import com.example.e_queue.utils.Constants.Companion.LOG_NEXT_CUSTOMER_INFO
 import com.example.e_queue.utils.Constants.Companion.LOG_SERVICE_LENGTH
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -19,7 +21,8 @@ class LoggedUserViewModel constructor(
     val loggedUserModel: LoggedUser
 ) : ViewModel() {
 
-    private var myJob: Job? = null
+    private var jobForServiceLength: Job? = null
+    private var jobForNextCustomerInfo: Job? = null
 
     private val _loggedUser = MutableLiveData<LoggedUser>()
     val loggedUser: LiveData<LoggedUser> = _loggedUser
@@ -27,13 +30,16 @@ class LoggedUserViewModel constructor(
     private val _serviceLength = MutableLiveData<UserServiceLength>()
     val serviceLength: LiveData<UserServiceLength> = _serviceLength
 
+    private val _nextCustomerInfo = MutableLiveData<NextCustomerInfo>()
+    val nextCustomerInfo: LiveData<NextCustomerInfo> = _nextCustomerInfo
+
     fun setUserParams() {
         _loggedUser.postValue(loggedUserModel)
     }
 
-    private suspend fun getServiceLength(serviceId: Long?) {
+    private suspend fun getServiceLength() {
         while (true) {
-            val length = eQueueRepository.getUserServiceLength(serviceId)
+            val length = eQueueRepository.getUserServiceLength(loggedUserModel.serviceId)
             _serviceLength.postValue(length)
             Log.d(
                 LOG_SERVICE_LENGTH,
@@ -43,15 +49,39 @@ class LoggedUserViewModel constructor(
         }
     }
 
+    private suspend fun getNextCustomerInfo() {
+        while (true) {
+            val customer = eQueueRepository.getNextCustomerInfo(loggedUserModel.id)
+            _nextCustomerInfo.postValue(customer)
+            Log.d(
+                LOG_NEXT_CUSTOMER_INFO,
+                "Next customer - ${customer.prefix}${customer.number} "
+            )
+            delay(5000)
+        }
+    }
+
+    fun startGetNextCustomerInfo() {
+        jobForNextCustomerInfo = viewModelScope.launch(Dispatchers.IO) {
+            runCatching { getNextCustomerInfo() }
+        }
+    }
+
+    fun stopGetNextCustomerInfo() {
+        jobForNextCustomerInfo?.cancel()
+    }
+
     fun startGetServiceLength() {
-        myJob = viewModelScope.launch(Dispatchers.IO) {
-            getServiceLength(loggedUserModel.service_id)
+        jobForServiceLength = viewModelScope.launch(Dispatchers.IO) {
+            getServiceLength()
         }
         Log.d(LOG_SERVICE_LENGTH, "START get service length")
+        Log.d(LOG_NEXT_CUSTOMER_INFO, "START get next customer")
     }
 
     fun stopGetServiceLength() {
-        myJob?.cancel()
+        jobForServiceLength?.cancel()
         Log.d(LOG_SERVICE_LENGTH, "STOP get service length")
+        Log.d(LOG_NEXT_CUSTOMER_INFO, "STOP get next customer")
     }
 }

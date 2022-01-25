@@ -42,13 +42,27 @@ data class UserServiceLength(
     val length: Int
 )
 
+data class NextCustomerInfo(
+    @SerializedName("number")
+    val number: Int,
+    @SerializedName("to_service")
+    val serviceName: NextCustomerServiceInfo,
+    @SerializedName("prefix")
+    val prefix: String
+)
+
+data class NextCustomerServiceInfo(
+    @SerializedName("name")
+    val name: String
+)
+
 @Parcelize
 data class SelectedUser(
     val id: Int,
     val name: String,
     val point: String,
     val password: String,
-    val service_id: Long?
+    val serviceId: Long?
 ) : Parcelable
 
 @Parcelize
@@ -56,7 +70,7 @@ data class LoggedUser(
     val id: Int,
     val name: String,
     val point: String,
-    val service_id: Long?
+    val serviceId: Long?
 ) : Parcelable
 
 

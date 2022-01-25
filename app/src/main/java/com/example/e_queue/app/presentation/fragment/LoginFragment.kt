@@ -125,7 +125,7 @@ class LoginFragment : Fragment() {
                             id = user.id,
                             name = user.name,
                             point = user.point,
-                            serviceId = user.service_id
+                            serviceId = user.serviceId
                         )
                     } else if (user.password.isNotEmpty() && inputPassword.text.toString()
                             .isEmpty()
@@ -156,7 +156,7 @@ class LoginFragment : Fragment() {
                 id = id,
                 name = name,
                 point = point,
-                service_id = serviceId
+                serviceId = serviceId
             )
         )
         fragment.arguments = bundle

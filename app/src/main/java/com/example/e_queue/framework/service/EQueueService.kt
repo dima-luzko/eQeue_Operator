@@ -14,4 +14,8 @@ interface EQueueService {
     @GET("terminal/aboutService")
     suspend fun getUserServiceLength(@Query("service_id") userServiceId: Long): UserServiceLength
 
+    @GET("operator/getNextCustomerInfo")
+    suspend fun getNextCustomerInfo(@Query("user_id") userId: Int): NextCustomerInfo
+
+
 }

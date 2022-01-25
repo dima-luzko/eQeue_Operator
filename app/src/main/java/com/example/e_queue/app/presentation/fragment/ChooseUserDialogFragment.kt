@@ -66,7 +66,7 @@ class ChooseUserDialogFragment : DialogFragment() {
                                 name = userAdapter.name,
                                 point = userAdapter.point,
                                 password = userAdapter.password,
-                                service_id = serviceId
+                                serviceId = serviceId
                             )
                         )
                         parentFragmentManager.setFragmentResult(SELECTED_USER_REQUEST_KEY, bundle)

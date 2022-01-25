@@ -73,19 +73,29 @@ class MainFragment : Fragment() {
 
     private fun setServiceLength() {
         loggedUserViewModel.serviceLength.observe(viewLifecycleOwner){
-            binding.quantity.amountOfClients.text = it.length.toString()
+            if(it.length == 0){
+                binding.quantity.amountOfClients.text = "0"
+            } else {
+                binding.quantity.amountOfClients.text = it.length.toString()
+            }
+
         }
+    }
+
+    private fun setNextCustomer(){
 
     }
 
     override fun onStart() {
         super.onStart()
         loggedUserViewModel.startGetServiceLength()
+        loggedUserViewModel.startGetNextCustomerInfo()
     }
 
     override fun onStop() {
         super.onStop()
         loggedUserViewModel.stopGetServiceLength()
+        loggedUserViewModel.stopGetNextCustomerInfo()
     }
 
 }
