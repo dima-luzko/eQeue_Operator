@@ -12,6 +12,9 @@ import com.example.e_queue.app.data.model.LoggedUser
 import com.example.e_queue.app.data.model.SelectedUser
 import com.example.e_queue.app.presentation.viewModel.SelectedUserViewModel
 import com.example.e_queue.databinding.FragmentLoginBinding
+import com.example.e_queue.utils.Constants.Companion.LOGGED_USER_ARG
+import com.example.e_queue.utils.Constants.Companion.SELECTED_USER_ARG
+import com.example.e_queue.utils.Constants.Companion.SELECTED_USER_REQUEST_KEY
 import com.example.e_queue.utils.changeBackgroundAndNavBarColor
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -148,7 +151,7 @@ class LoginFragment : Fragment() {
         serviceId: Long?
     ) {
         bundle.putParcelable(
-            "loggedUser",
+            LOGGED_USER_ARG,
             LoggedUser(
                 id = id,
                 name = name,
@@ -165,9 +168,9 @@ class LoginFragment : Fragment() {
 
     private fun setSelectedUserInViewModel() {
         parentFragmentManager.setFragmentResultListener(
-            "name", viewLifecycleOwner
+            SELECTED_USER_REQUEST_KEY, viewLifecycleOwner
         ) { _, bundle ->
-            val user = bundle.get("data") as SelectedUser
+            val user = bundle.get(SELECTED_USER_ARG) as SelectedUser
             userNameViewModel.setUserName(user)
         }
     }

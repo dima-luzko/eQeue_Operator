@@ -9,13 +9,11 @@ import com.example.e_queue.app.domain.repository.EQueueRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class EQueueViewModel constructor(private val eQueueRepository: EQueueRepository) : ViewModel() {
+class UserListViewModel constructor(private val eQueueRepository: EQueueRepository) : ViewModel() {
     private val _user = MutableLiveData<List<User>>()
     val user: LiveData<List<User>> = _user
 
-
-
-    var userList: List<User> = listOf()
+    private var userList: List<User> = listOf()
 
     fun getUserList() {
         viewModelScope.launch(Dispatchers.IO){
