@@ -47,7 +47,7 @@ class ChooseUserDialogFragment : DialogFragment() {
     private fun getUserList() {
         with(userViewModel) {
             getUserList()
-            CoroutineScope(Dispatchers.Main).launch {
+           // CoroutineScope(Dispatchers.Main).launch {
                 user.observe(viewLifecycleOwner) { observeUserList ->
                     with(binding.chooseUserList) {
                         layoutManager = LinearLayoutManager(
@@ -75,7 +75,7 @@ class ChooseUserDialogFragment : DialogFragment() {
                         }
                         hasFixedSize()
                     }
-                }
+               // }
             }
 
         }

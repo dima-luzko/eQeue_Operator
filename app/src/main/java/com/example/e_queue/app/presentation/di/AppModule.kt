@@ -1,8 +1,10 @@
 package com.example.e_queue.app.presentation.di
 
+import com.example.e_queue.app.data.model.LoggedUser
 import com.example.e_queue.app.data.repositoryImpl.EQueueRepositoryImpl
 import com.example.e_queue.app.domain.repository.EQueueRepository
 import com.example.e_queue.app.presentation.viewModel.EQueueViewModel
+import com.example.e_queue.app.presentation.viewModel.LoggedUserViewModel
 import com.example.e_queue.app.presentation.viewModel.SelectedUserViewModel
 import com.example.e_queue.framework.remote.RemoteDataSource
 import org.koin.dsl.module
@@ -15,6 +17,11 @@ val dataSourceModules = module {
 val viewModelModules = module {
     viewModel { EQueueViewModel(get()) }
     viewModel { SelectedUserViewModel() }
+    viewModel { (model: LoggedUser) ->
+        LoggedUserViewModel(
+            loggedUserModel = model,
+            eQueueRepository = get()
+        ) }
 }
 
 val repositoryModules = module {
