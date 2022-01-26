@@ -5,9 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.e_queue.app.data.model.LoggedUser
-import com.example.e_queue.app.data.model.NextCustomerInfo
-import com.example.e_queue.app.data.model.UserServiceLength
+import com.example.e_queue.app.data.model.*
 import com.example.e_queue.app.domain.repository.EQueueRepository
 import com.example.e_queue.utils.Constants.Companion.LOG_NEXT_CUSTOMER_INFO
 import com.example.e_queue.utils.Constants.Companion.LOG_SERVICE_LENGTH
@@ -15,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class LoggedUserViewModel constructor(
     private val eQueueRepository: EQueueRepository,
@@ -33,6 +32,9 @@ class LoggedUserViewModel constructor(
     private val _nextCustomerInfo = MutableLiveData<NextCustomerInfo>()
     val nextCustomerInfo: LiveData<NextCustomerInfo> = _nextCustomerInfo
 
+    private val _inviteNextCustomerInfo = MutableLiveData<InviteNextCustomerInfo>()
+    val inviteNextCustomerInfo : LiveData<InviteNextCustomerInfo> = _inviteNextCustomerInfo
+
     fun setUserParams() {
         _loggedUser.postValue(loggedUserModel)
     }
@@ -49,21 +51,47 @@ class LoggedUserViewModel constructor(
         }
     }
 
+    fun inviteNextCustomer(){
+        runCatching {
+            viewModelScope.launch(Dispatchers.IO){
+                val nextCustomerInfo = eQueueRepository.inviteNextCustomer(loggedUserModel.id)
+                _inviteNextCustomerInfo.postValue(nextCustomerInfo)
+            }
+        }
+    }
+
+    fun killNextCustomer() {
+        viewModelScope.launch(Dispatchers.IO){
+            eQueueRepository.killNextCustomer(loggedUserModel.id)
+        }
+    }
+
     private suspend fun getNextCustomerInfo() {
         while (true) {
-            val customer = eQueueRepository.getNextCustomerInfo(loggedUserModel.id)
-            _nextCustomerInfo.postValue(customer)
-            Log.d(
-                LOG_NEXT_CUSTOMER_INFO,
-                "Next customer - ${customer.prefix}${customer.number} "
-            )
+            try {
+                val customer = eQueueRepository.getNextCustomerInfo(loggedUserModel.id)
+                _nextCustomerInfo.postValue(customer)
+                Log.d(
+                    LOG_NEXT_CUSTOMER_INFO,
+                    "Next customer - ${customer.prefix}${customer.number} "
+                )
+            } catch (error: HttpException) {
+                val customer = NextCustomerInfo(
+                    number = "",
+                    prefix = ""
+                )
+                if (error.code() == 404) {
+                    _nextCustomerInfo.postValue(customer)
+                    Log.d(LOG_NEXT_CUSTOMER_INFO, "No next Customer!")
+                }
+            }
             delay(5000)
         }
     }
 
     fun startGetNextCustomerInfo() {
         jobForNextCustomerInfo = viewModelScope.launch(Dispatchers.IO) {
-            runCatching { getNextCustomerInfo() }
+            getNextCustomerInfo()
         }
     }
 
@@ -73,7 +101,7 @@ class LoggedUserViewModel constructor(
 
     fun startGetServiceLength() {
         jobForServiceLength = viewModelScope.launch(Dispatchers.IO) {
-            getServiceLength()
+            runCatching { getServiceLength() }
         }
         Log.d(LOG_SERVICE_LENGTH, "START get service length")
         Log.d(LOG_NEXT_CUSTOMER_INFO, "START get next customer")

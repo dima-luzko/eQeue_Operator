@@ -44,14 +44,21 @@ data class UserServiceLength(
 
 data class NextCustomerInfo(
     @SerializedName("number")
-    val number: Int,
-    @SerializedName("to_service")
-    val serviceName: NextCustomerServiceInfo,
+    val number: String,
     @SerializedName("prefix")
     val prefix: String
 )
 
-data class NextCustomerServiceInfo(
+data class InviteNextCustomerInfo(
+    @SerializedName("number")
+    val number: String,
+    @SerializedName("to_service")
+    val serviceName: InviteNextCustomerServiceInfo,
+    @SerializedName("prefix")
+    val prefix: String
+)
+
+data class InviteNextCustomerServiceInfo(
     @SerializedName("name")
     val name: String
 )

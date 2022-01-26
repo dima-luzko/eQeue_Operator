@@ -1,6 +1,7 @@
 package com.example.e_queue.app.presentation.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,8 @@ class MainFragment : Fragment() {
     private val loggedUserViewModel: LoggedUserViewModel by viewModel {
         parametersOf(arguments?.getParcelable<LoggedUser>(LOGGED_USER_ARG))
     }
+
+    private var statusClient = 0
 
     companion object {
         fun newInstance(loggedUserModel: LoggedUser) = MainFragment().apply {
@@ -50,12 +53,15 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setToolbarText()
         setServiceLength()
+        setNextCustomer()
+        changeStatusClient()
+        handleClicks()
         unLoggedUser()
     }
 
     private fun setToolbarText() {
         loggedUserViewModel.setUserParams()
-        loggedUserViewModel.loggedUser.observe(viewLifecycleOwner){
+        loggedUserViewModel.loggedUser.observe(viewLifecycleOwner) {
             with(binding.toolbar) {
                 operatorName.text = it.name
                 workspaceNumber.text = it.point
@@ -72,30 +78,103 @@ class MainFragment : Fragment() {
     }
 
     private fun setServiceLength() {
-        loggedUserViewModel.serviceLength.observe(viewLifecycleOwner){
-            if(it.length == 0){
-                binding.quantity.amountOfClients.text = "0"
-            } else {
-                binding.quantity.amountOfClients.text = it.length.toString()
-            }
-
+        loggedUserViewModel.serviceLength.observe(viewLifecycleOwner) {
+            binding.quantity.amountOfClients.text =
+                if (it.length == 0) "0" else it.length.toString()
         }
     }
 
-    private fun setNextCustomer(){
+    private fun setNextCustomer() {
+        loggedUserViewModel.nextCustomerInfo.observe(viewLifecycleOwner) {
+            binding.nextClientNumber.text = (it.prefix + it.number)
+            binding.nextClientArrow.visibility =
+                if (binding.nextClientNumber.text.isEmpty()) View.INVISIBLE else View.VISIBLE
+        }
+    }
 
+    private fun inviteNextCustomer() {
+        loggedUserViewModel.inviteNextCustomer()
+    }
+
+    private fun killNextCustomer() {
+        loggedUserViewModel.killNextCustomer()
+        with(binding.include) {
+            currentClientNumber.text = ""
+            currentClientService.text = ""
+        }
+    }
+
+    private fun handleClicks() {
+//        loggedUserViewModel.serviceLength.observe(viewLifecycleOwner) {
+//            if (it.length == 0) {
+//                with(binding.someButton.buttonCallNextClient){
+//                    isEnabled = false
+//                    background = ContextCompat.getDrawable(requireActivity(),R.drawable.disable_button)
+//                    setTextColor(ContextCompat.getColor(requireContext(),R.color.gray_text))
+//                }
+//            } else {
+//                with(binding.someButton.buttonCallNextClient){
+//                    isEnabled = true
+//                    background = ContextCompat.getDrawable(requireActivity(), R.drawable.green_button)
+//                    setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+//                }
+//            }
+//        }
+        with(binding.someButton) {
+            buttonCallNextClient.setOnClickListener {
+                statusClient = 1
+                inviteNextCustomer()
+                setInviteCustomerInfo()
+            }
+            buttonNoClient.setOnClickListener {
+                statusClient = 0
+                killNextCustomer()
+            }
+        }
+    }
+
+    private fun changeStatusClient(){
+        with(binding.statusOfClient){
+            when(statusClient){
+                0 -> {
+                    background = ContextCompat.getDrawable(requireActivity(),R.drawable.status_client_is_not_called)
+                    text = getString(R.string.status_client_is_not_called)
+                }
+                1 -> {
+                    background = ContextCompat.getDrawable(requireActivity(),R.drawable.status_client_is_called)
+                    text = getString(R.string.status_client_is_called)
+                }
+                2 -> {
+                    background = ContextCompat.getDrawable(requireActivity(),R.drawable.status_work_with_client)
+                    text = getString(R.string.status_work_with_client)
+                }
+            }
+        }
+    }
+
+    private fun setInviteCustomerInfo() {
+        loggedUserViewModel.inviteNextCustomerInfo.observe(viewLifecycleOwner) {
+            with(binding.include) {
+                currentClientNumber.text = (it.prefix + it.number)
+                currentClientService.text = it.serviceName.name
+            }
+        }
     }
 
     override fun onStart() {
         super.onStart()
-        loggedUserViewModel.startGetServiceLength()
-        loggedUserViewModel.startGetNextCustomerInfo()
+        with(loggedUserViewModel) {
+            startGetServiceLength()
+            startGetNextCustomerInfo()
+        }
     }
 
     override fun onStop() {
         super.onStop()
-        loggedUserViewModel.stopGetServiceLength()
-        loggedUserViewModel.stopGetNextCustomerInfo()
+        with(loggedUserViewModel) {
+            stopGetServiceLength()
+            stopGetNextCustomerInfo()
+        }
     }
 
 }

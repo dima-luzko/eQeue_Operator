@@ -1,5 +1,6 @@
 package com.example.e_queue.app.data.repositoryImpl
 
+import com.example.e_queue.app.data.model.InviteNextCustomerInfo
 import com.example.e_queue.app.data.model.NextCustomerInfo
 import com.example.e_queue.app.data.model.User
 import com.example.e_queue.app.data.model.UserServiceLength
@@ -17,6 +18,14 @@ class EQueueRepositoryImpl(private val dataSource: RemoteDataSource): EQueueRepo
 
     override suspend fun getNextCustomerInfo(userId: Int): NextCustomerInfo {
         return dataSource.retrofit.getNextCustomerInfo(userId)
+    }
+
+    override suspend fun inviteNextCustomer(userId: Int): InviteNextCustomerInfo {
+        return dataSource.retrofit.inviteNextCustomer(userId)
+    }
+
+    override suspend fun killNextCustomer(userId: Int) {
+        dataSource.retrofit.killNextCustomer(userId)
     }
 
 }

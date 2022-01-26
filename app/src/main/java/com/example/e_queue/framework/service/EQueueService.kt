@@ -17,5 +17,11 @@ interface EQueueService {
     @GET("operator/getNextCustomerInfo")
     suspend fun getNextCustomerInfo(@Query("user_id") userId: Int): NextCustomerInfo
 
+    @GET("operator/inviteNextCustomer")
+    suspend fun inviteNextCustomer(@Query("user_id") userId: Int) : InviteNextCustomerInfo
+
+    @GET("operator/killNextCustomer")
+    suspend fun killNextCustomer(@Query("user_id") userId: Int)
+
 
 }
