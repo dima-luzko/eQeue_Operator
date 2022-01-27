@@ -3,7 +3,7 @@
     <size
         android:height="@dimen/_28mdp"
         android:width="@dimen/_240mdp" />
-    <solid android:color="@color/green" />
+    <solid android:color="@color/button_kill_customer"></solid>
 
     <corners android:radius="@dimen/_8mdp"/>
 </shape>

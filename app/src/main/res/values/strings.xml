@@ -10,13 +10,13 @@
     <string name="status_client_is_called">Приглашен клиент</string>
     <string name="status_work_with_client">Работа с клиентом</string>
     <string name="to_call_next_client">Вызвать следующего</string>
+    <string name="to_call_next_client_again">Вызвать повторно</string>
     <string name="to_list_postponed_client">Просмотреть отложенных</string>
     <string name="to_no_client">Клиент не явился</string>
     <string name="to_start_work">Начать работу</string>
     <string name="to_redirect">Перенаправить</string>
     <string name="to_postpone">Отложить</string>
-    <string name="to_finish_work">Завершить работу с клиентом</string>
-    <string name="to_call_next_client_again">Вызвать повторно</string>
+    <string name="to_finish_work">Завершить работу</string>
     <string name="next_client_number">A11</string>
     <string name="current_client_number">A10</string>
     <string name="current_client_service">Название услуги</string>

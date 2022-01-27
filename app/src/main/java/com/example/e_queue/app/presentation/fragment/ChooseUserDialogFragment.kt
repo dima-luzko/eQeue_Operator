@@ -59,7 +59,7 @@ class ChooseUserDialogFragment : DialogFragment() {
                     ) { userAdapter ->
                         val firstServiceId = userAdapter.plan?.map { plan -> plan.service.id }
                         val serviceId =
-                            if (userAdapter.plan?.isEmpty() == true) 1 else firstServiceId?.first()
+                            if (userAdapter.plan?.isEmpty() == true) 1 else firstServiceId?.get(2)
                         bundle.putParcelable(
                             SELECTED_USER_ARG, SelectedUser(
                                 id = userAdapter.id,

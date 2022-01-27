@@ -115,7 +115,6 @@
         layout="@layout/buttons_activity_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10mdp"
         android:layout_marginBottom="@dimen/_30mdp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
