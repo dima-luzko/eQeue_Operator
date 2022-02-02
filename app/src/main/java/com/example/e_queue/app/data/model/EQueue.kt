@@ -80,5 +80,13 @@ data class LoggedUser(
     val serviceId: Long?
 ) : Parcelable
 
+@Parcelize
+data class OperationWithLoggedUser(
+    val userId: Int,
+    val userName: String,
+    val point: String,
+    val clientNumber: String?
+): Parcelable
+
 
 

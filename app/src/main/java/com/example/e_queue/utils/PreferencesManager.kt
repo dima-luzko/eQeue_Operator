@@ -12,10 +12,10 @@ class PreferencesManager private constructor(context: Context) {
         const val PREF_BUTTON_LOOK_POSTPONED_LIST_CUSTOMER = "prefButtonLookPostponedListCustomer"
         const val PREF_BUTTON_START_WORK_WITH_CUSTOMER = "prefButtonStartWorkWithCustomer"
         const val PREF_BUTTON_INVITE_AGAIN_CUSTOMER = "prefButtonInviteAgainCustomer"
-        const val PREF_BUTTON_KILL_NEXT_CUSTOMER = "prefButtonKillNextCustomer"
+        const val PREF_BUTTON_NO_NEXT_CUSTOMER = "prefButtonNoNextCustomer"
         const val PREF_BUTTON_REDIRECT_CUSTOMER = "prefButtonRedirectCustomer"
         const val PREF_BUTTON_CUSTOMER_TO_POSTPONED = "prefButtonCustomerToPostponed"
-        const val PREF_BUTTON_FINISH_WORK_WITH_POSTPONED = "prefButtonFinishWorkWithCustomer"
+        const val PREF_BUTTON_FINISH_WORK_WITH_CUSTOMER = "prefButtonFinishWorkWithCustomer"
         const val PREF_ONE_MODE_BUTTON_INVITE_NEXT_CUSTOMER = "prefOneModeButtonInviteNextCustomer"
         const val PREF_ONE_MODE_BUTTON_INVITE_AGAIN_CUSTOMER = "prefOneModeButtonInviteAgainCustomer"
 

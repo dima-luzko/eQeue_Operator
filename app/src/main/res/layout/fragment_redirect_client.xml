@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -23,51 +22,49 @@
         android:layout_marginStart="@dimen/_10mdp"
         android:layout_marginTop="@dimen/_8mdp"
         android:adjustViewBounds="true"
-        android:scaleType="fitXY"
         android:foregroundTintMode="add"
+        android:scaleType="fitXY"
         android:src="@drawable/ic_settings"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/workspace"
+        style="@style/toolbar_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_6mdp"
         android:layout_marginTop="@dimen/_10mdp"
         android:text="@string/workspace"
-        style="@style/toolbar_bold"
         app:layout_constraintStart_toEndOf="@id/user_img"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/workspace_number"
+        style="@style/toolbar_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_6mdp"
         android:layout_marginTop="@dimen/_10mdp"
-        android:text="2"
-        style="@style/toolbar_bold"
         app:layout_constraintStart_toEndOf="@id/workspace"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/operator"
+        style="@style/toolbar_normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_6mdp"
         android:text="@string/operator"
-        style="@style/toolbar_normal"
         app:layout_constraintStart_toEndOf="@id/user_img"
         app:layout_constraintTop_toBottomOf="@id/workspace" />
 
     <TextView
         android:id="@+id/operator_name"
+        style="@style/toolbar_normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_6mdp"
-        android:text="Пользователь"
-        style="@style/toolbar_normal"
         app:layout_constraintStart_toEndOf="@id/operator"
         app:layout_constraintTop_toTopOf="@id/operator" />
 
@@ -84,56 +81,56 @@
 
     <TextView
         android:id="@+id/number_of_client"
+        style="@style/roboto_bold_14"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_20mdp"
-        android:text="A12"
-        style="@style/roboto_bold_14"
-        app:layout_constraintTop_toBottomOf="@id/postpone_text_hh"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/postpone_text_hh" />
 
-    <Spinner
+    <View
         android:id="@+id/input_login"
         android:layout_width="@dimen/_200mdp"
         android:layout_height="@dimen/_28mdp"
-        android:background="@drawable/input_img"
         android:layout_marginTop="@dimen/_20mdp"
+        android:background="@drawable/input_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/number_of_client" />
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Название услуги"
-    style="@style/roboto_regular_10_light"
-    app:layout_constraintStart_toStartOf="@id/input_login"
-    app:layout_constraintTop_toTopOf="@id/input_login"
-    app:layout_constraintBottom_toBottomOf="@id/input_login"
-    android:layout_marginStart="@dimen/_8mdp"/>
+
+    <TextView
+        android:id="@+id/choose_service_name"
+        style="@style/roboto_regular_10_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8mdp"
+        android:text="Название услуги"
+        app:layout_constraintBottom_toBottomOf="@id/input_login"
+        app:layout_constraintStart_toStartOf="@id/input_login"
+        app:layout_constraintTop_toTopOf="@id/input_login" />
 
     <ImageView
         android:id="@+id/button_more"
         android:layout_width="@dimen/_12mdp"
         android:layout_height="@dimen/_12mdp"
-        android:src="@drawable/ic_more"
-        android:layout_marginEnd="@dimen/_7mdp"
         android:layout_marginTop="@dimen/_1mdp"
-        app:tint="@color/checkbox_gray"
+        android:layout_marginEnd="@dimen/_7mdp"
+        android:src="@drawable/ic_more"
         app:layout_constraintBottom_toBottomOf="@+id/input_login"
         app:layout_constraintEnd_toEndOf="@id/input_login"
-        app:layout_constraintTop_toTopOf="@id/input_login" />
+        app:layout_constraintTop_toTopOf="@id/input_login"
+        app:tint="@color/checkbox_gray" />
 
     <EditText
         android:id="@+id/input_postponing_comment"
+        style="@style/roboto_regular_10_light"
         android:layout_width="@dimen/_200mdp"
         android:layout_height="@dimen/_70mdp"
-        android:background="@drawable/input_img"
         android:layout_marginTop="@dimen/_10mdp"
-        android:text="Комментарий..."
-        style="@style/roboto_regular_10_light"
+        android:background="@drawable/input_img_for_comments"
         android:gravity="left"
         android:padding="@dimen/_8mdp"
+        android:text="Комментарий..."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/input_login" />
@@ -156,77 +153,45 @@
 
     <CheckBox
         android:id="@+id/checkbox_with_return_client"
+        style="@style/roboto_regular_10_dark"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_20mdp"
-        android:text="@string/with_return_of_client"
-        android:buttonTint="@color/green"
-        android:paddingStart="@dimen/_3mdp"
-        android:checked="true"
-
-        style="@style/roboto_regular_10_dark"
-        android:layout_marginEnd="@dimen/_8mdp"
         android:layout_marginStart="@dimen/_5mdp"
+        android:layout_marginEnd="@dimen/_8mdp"
+        android:buttonTint="@color/green"
+        android:checked="false"
+        android:paddingStart="@dimen/_3mdp"
+        android:text="@string/with_return_of_client"
         app:layout_constraintBottom_toBottomOf="@id/only_for_me_client_view"
         app:layout_constraintStart_toStartOf="@id/only_for_me_client_view"
         app:layout_constraintTop_toTopOf="@id/only_for_me_client_view" />
-
-<!--    <androidx.appcompat.widget.AppCompatButton-->
-<!--        android:id="@+id/button_redirection"-->
-<!--        android:layout_width="@dimen/_200mdp"-->
-<!--        android:layout_height="@dimen/_28mdp"-->
-<!--        android:background="@drawable/green_button"-->
-<!--        android:fontFamily="@font/roboto_regular"-->
-<!--        android:text="@string/to_redirect"-->
-<!--        android:textAllCaps="false"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textSize="@dimen/_12font_mdp"-->
-<!--        android:layout_marginTop="@dimen/_20mdp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/only_for_me_client_view" />-->
-
-<!--    <androidx.appcompat.widget.AppCompatButton-->
-<!--        android:id="@+id/button_cancel"-->
-<!--        style="@style/roboto_regular_14"-->
-<!--        android:layout_width="@dimen/_200mdp"-->
-<!--        android:layout_height="@dimen/_28mdp"-->
-<!--        android:background="@drawable/button_login"-->
-<!--        android:text="@string/cancel"-->
-<!--        android:textAllCaps="false"-->
-<!--        android:textSize="@dimen/_12font_mdp"-->
-<!--        android:layout_marginTop="@dimen/_10mdp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/button_redirection" />-->
-
-
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_redirection"
         android:layout_width="@dimen/_200mdp"
         android:layout_height="@dimen/_28mdp"
+        android:layout_marginBottom="@dimen/_10mdp"
         android:background="@drawable/green_button"
         android:fontFamily="@font/roboto_regular"
         android:text="@string/to_redirect"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="@dimen/_12font_mdp"
-        android:layout_marginBottom="@dimen/_10mdp"
+        app:layout_constraintBottom_toTopOf="@id/button_cancel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/button_cancel"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_cancel"
         style="@style/roboto_regular_14"
         android:layout_width="@dimen/_200mdp"
         android:layout_height="@dimen/_28mdp"
+        android:layout_marginBottom="@dimen/_20mdp"
         android:background="@drawable/button_login"
         android:text="@string/cancel"
         android:textAllCaps="false"
         android:textSize="@dimen/_12font_mdp"
-        android:layout_marginBottom="@dimen/_20mdp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
