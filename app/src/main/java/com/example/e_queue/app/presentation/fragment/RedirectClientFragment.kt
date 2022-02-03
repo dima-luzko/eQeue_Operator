@@ -5,12 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.example.e_queue.R
-import com.example.e_queue.app.data.model.LoggedUser
 import com.example.e_queue.app.data.model.OperationWithLoggedUser
-import com.example.e_queue.app.presentation.viewModel.WithLoggedUserViewModel
+import com.example.e_queue.app.presentation.viewModel.OperationWithLoggedUserViewModel
 import com.example.e_queue.databinding.FragmentRedirectClientBinding
 import com.example.e_queue.utils.Constants
 import com.example.e_queue.utils.changeBackgroundAndNavBarColor
@@ -20,7 +18,7 @@ import org.koin.core.parameter.parametersOf
 class RedirectClientFragment : Fragment() {
 
     private lateinit var binding: FragmentRedirectClientBinding
-    private val operationWithLoggedUserViewModel: WithLoggedUserViewModel by viewModel {
+    private val operationOperationWithLoggedUserViewModel: OperationWithLoggedUserViewModel by viewModel {
         parametersOf(arguments?.getParcelable<OperationWithLoggedUser>(Constants.OPERATION_WITH_LOGGED_USER_ARG))
     }
 
@@ -48,14 +46,8 @@ class RedirectClientFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        operationWithLoggedUserViewModel.setParams()
-        operationWithLoggedUserViewModel.operationWithLoggedUser.observe(viewLifecycleOwner) { loggedUser ->
-            with(binding) {
-                operatorName.text = loggedUser.userName
-                workspaceNumber.text = loggedUser.point
-                numberOfClient.text = loggedUser.clientNumber
-            }
-        }
+        setRedirectCustomerParams()
+
 
         binding.buttonCancel.setOnClickListener {
             parentFragmentManager.popBackStack()
@@ -67,8 +59,17 @@ class RedirectClientFragment : Fragment() {
             //MainFragment.newInstance().
             // parentFragmentManager.popBackStack()
         }
+    }
 
-
+    private fun setRedirectCustomerParams() {
+        operationOperationWithLoggedUserViewModel.setParams()
+        operationOperationWithLoggedUserViewModel.operationWithLoggedUser.observe(viewLifecycleOwner) { loggedUser ->
+            with(binding) {
+                operatorName.text = loggedUser.userName
+                workspaceNumber.text = loggedUser.point
+                numberOfClient.text = loggedUser.clientNumber
+            }
+        }
     }
 
 }

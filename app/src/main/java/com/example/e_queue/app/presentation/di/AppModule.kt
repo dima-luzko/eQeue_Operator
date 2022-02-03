@@ -7,7 +7,7 @@ import com.example.e_queue.app.domain.repository.EQueueRepository
 import com.example.e_queue.app.presentation.viewModel.LoggedUserViewModel
 import com.example.e_queue.app.presentation.viewModel.SelectedUserViewModel
 import com.example.e_queue.app.presentation.viewModel.UserListViewModel
-import com.example.e_queue.app.presentation.viewModel.WithLoggedUserViewModel
+import com.example.e_queue.app.presentation.viewModel.OperationWithLoggedUserViewModel
 import com.example.e_queue.framework.remote.RemoteDataSource
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -27,7 +27,7 @@ val viewModelModules = module {
     }
 
     viewModel { (modelUser: OperationWithLoggedUser) ->
-        WithLoggedUserViewModel(
+        OperationWithLoggedUserViewModel(
             operationWithUser = modelUser,
             eQueueRepository = get()
         )

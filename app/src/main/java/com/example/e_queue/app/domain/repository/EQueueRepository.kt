@@ -1,14 +1,12 @@
 package com.example.e_queue.app.domain.repository
 
-import com.example.e_queue.app.data.model.InviteNextCustomerInfo
-import com.example.e_queue.app.data.model.NextCustomerInfo
-import com.example.e_queue.app.data.model.User
-import com.example.e_queue.app.data.model.UserServiceLength
+import com.example.e_queue.app.data.model.*
 
 interface EQueueRepository {
     suspend fun getUsers(): List<User>
-    suspend fun getUserServiceLength(userServiceId: Long?): UserServiceLength
     suspend fun getNextCustomerInfo(userId: Int): NextCustomerInfo
     suspend fun inviteNextCustomer(userId: Int): InviteNextCustomerInfo
     suspend fun killNextCustomer(userId: Int)
+    suspend fun getStartCustomer(userId: Int)
+    suspend fun getSelfServices(userId: Int): ServicesLength
 }

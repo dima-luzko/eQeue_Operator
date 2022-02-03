@@ -5,7 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.e_queue.app.data.model.*
+import com.example.e_queue.app.data.model.InviteNextCustomerInfo
+import com.example.e_queue.app.data.model.LoggedUser
+import com.example.e_queue.app.data.model.NextCustomerInfo
 import com.example.e_queue.app.domain.repository.EQueueRepository
 import com.example.e_queue.utils.Constants.Companion.LOG_NEXT_CUSTOMER_INFO
 import com.example.e_queue.utils.Constants.Companion.LOG_SERVICE_LENGTH
@@ -26,14 +28,14 @@ class LoggedUserViewModel constructor(
     private val _loggedUser = MutableLiveData<LoggedUser>()
     val loggedUser: LiveData<LoggedUser> = _loggedUser
 
-    private val _serviceLength = MutableLiveData<UserServiceLength>()
-    val serviceLength: LiveData<UserServiceLength> = _serviceLength
+    private val _serviceLength = MutableLiveData<Int>()
+    val serviceLength: LiveData<Int> = _serviceLength
 
     private val _nextCustomerInfo = MutableLiveData<NextCustomerInfo>()
     val nextCustomerInfo: LiveData<NextCustomerInfo> = _nextCustomerInfo
 
     private val _inviteNextCustomerInfo = MutableLiveData<InviteNextCustomerInfo>()
-    val inviteNextCustomerInfo : LiveData<InviteNextCustomerInfo> = _inviteNextCustomerInfo
+    val inviteNextCustomerInfo: LiveData<InviteNextCustomerInfo> = _inviteNextCustomerInfo
 
     fun setUserParams() {
         _loggedUser.postValue(loggedUserModel)
@@ -41,19 +43,25 @@ class LoggedUserViewModel constructor(
 
     private suspend fun getServiceLength() {
         while (true) {
-            val length = eQueueRepository.getUserServiceLength(loggedUserModel.serviceId)
-            _serviceLength.postValue(length)
-            Log.d(
-                LOG_SERVICE_LENGTH,
-                "Now length in service - ${length.length} for user: ${loggedUserModel.name}"
-            )
+            val length = eQueueRepository.getSelfServices(loggedUserModel.id)
+            if (length.selfServices.isNotEmpty()) {
+                var sum = 0
+                length.selfServices.forEach { value ->
+                    sum += value.line.count()
+                }
+                Log.d(
+                    LOG_SERVICE_LENGTH,
+                    "Now length in service - $sum for user: ${loggedUserModel.name}"
+                )
+                _serviceLength.postValue(sum)
+            }
             delay(5000)
         }
     }
 
-    fun inviteNextCustomer(){
+    fun inviteNextCustomer() {
         runCatching {
-            viewModelScope.launch(Dispatchers.IO){
+            viewModelScope.launch(Dispatchers.IO) {
                 val nextCustomerInfo = eQueueRepository.inviteNextCustomer(loggedUserModel.id)
                 _inviteNextCustomerInfo.postValue(nextCustomerInfo)
             }
@@ -61,8 +69,14 @@ class LoggedUserViewModel constructor(
     }
 
     fun killNextCustomer() {
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO) {
             eQueueRepository.killNextCustomer(loggedUserModel.id)
+        }
+    }
+
+    fun getStartCustomer() {
+        viewModelScope.launch(Dispatchers.IO) {
+            eQueueRepository.getStartCustomer(loggedUserModel.id)
         }
     }
 
@@ -101,7 +115,7 @@ class LoggedUserViewModel constructor(
 
     fun startGetServiceLength() {
         jobForServiceLength = viewModelScope.launch(Dispatchers.IO) {
-            runCatching { getServiceLength() }
+            getServiceLength()
         }
         Log.d(LOG_SERVICE_LENGTH, "START get service length")
         Log.d(LOG_NEXT_CUSTOMER_INFO, "START get next customer")

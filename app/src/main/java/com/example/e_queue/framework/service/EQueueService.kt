@@ -11,9 +11,6 @@ interface EQueueService {
     @GET("operator/getUsers")
     suspend fun getUsers(): List<User>
 
-    @GET("terminal/aboutService")
-    suspend fun getUserServiceLength(@Query("service_id") userServiceId: Long): UserServiceLength
-
     @GET("operator/getNextCustomerInfo")
     suspend fun getNextCustomerInfo(@Query("user_id") userId: Int): NextCustomerInfo
 
@@ -23,5 +20,10 @@ interface EQueueService {
     @GET("operator/killNextCustomer")
     suspend fun killNextCustomer(@Query("user_id") userId: Int)
 
+    @GET("operator/getStartCustomer")
+    suspend fun getStartCustomer(@Query("user_id") userId: Int)
+
+    @GET("operator/getSelfServices")
+    suspend fun getSelfServices(@Query("user_id") userId: Int) : ServicesLength
 
 }

@@ -1,6 +1,7 @@
 package com.example.e_queue.app.presentation.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ import com.example.e_queue.utils.Constants.Companion.OPERATION_WITH_LOGGED_USER_
 import com.example.e_queue.utils.changeBackgroundAndNavBarColor
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import kotlin.system.exitProcess
 
 
 class MainFragment : Fragment() {
@@ -95,9 +97,8 @@ class MainFragment : Fragment() {
     }
 
     private fun setServiceLength() {
-        loggedUserViewModel.serviceLength.observe(viewLifecycleOwner) {
-            binding.quantity.amountOfClients.text =
-                if (it.length == 0) "0" else it.length.toString()
+        loggedUserViewModel.serviceLength.observe(viewLifecycleOwner) { serviceLength ->
+            binding.quantity.amountOfClients.text = serviceLength.toString()
         }
     }
 
@@ -121,22 +122,26 @@ class MainFragment : Fragment() {
         }
     }
 
+    private fun getStartWorkWithCustomer(){
+        loggedUserViewModel.getStartCustomer()
+    }
+
     private fun handleClicks() {
-//        loggedUserViewModel.serviceLength.observe(viewLifecycleOwner) {
-//            if (it.length == 0) {
-//                with(binding.someButton.buttonCallNextClient){
-//                    isEnabled = false
-//                    background = ContextCompat.getDrawable(requireActivity(),R.drawable.disable_button)
-//                    setTextColor(ContextCompat.getColor(requireContext(),R.color.gray_text))
-//                }
-//            } else {
-//                with(binding.someButton.buttonCallNextClient){
-//                    isEnabled = true
-//                    background = ContextCompat.getDrawable(requireActivity(), R.drawable.green_button)
-//                    setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-//                }
-//            }
-//        }
+        loggedUserViewModel.serviceLength.observe(viewLifecycleOwner) {
+            if (it == 0) {
+                with(binding.someButton.buttonCallNextClient){
+                    isEnabled = false
+                    background = ContextCompat.getDrawable(requireActivity(),R.drawable.disable_button)
+                    setTextColor(ContextCompat.getColor(requireContext(),R.color.gray_text))
+                }
+            } else {
+                with(binding.someButton.buttonCallNextClient){
+                    isEnabled = true
+                    background = ContextCompat.getDrawable(requireActivity(), R.drawable.green_button)
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                }
+            }
+        }
         with(binding.someButton) {
             buttonCallNextClient.setOnClickListener {
                 statusClient = 1
@@ -162,12 +167,13 @@ class MainFragment : Fragment() {
                 visibleButtonCustomerToPostponed = true
                 visibleButtonFinishWorkWithCustomer = true
 
+                getStartWorkWithCustomer()
                 changeButtonVisible()
                 changeStatusClient()
             }
             buttonNoClient.setOnClickListener {
                 statusClient = 0
-                //killNextCustomer()
+                killNextCustomer()
 
                 visibleButtonStartWorkWithCustomer = false
                 visibleButtonInviteAgainCustomer = false
@@ -337,7 +343,9 @@ class MainFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         changeButtonVisible()
+        setInviteCustomerInfo()
     }
+
 
 //    override fun onDestroyView() {
 //        super.onDestroyView()

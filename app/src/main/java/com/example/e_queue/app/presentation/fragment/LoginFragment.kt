@@ -124,8 +124,7 @@ class LoginFragment : Fragment() {
                             fragment = MainFragment(),
                             id = user.id,
                             name = user.name,
-                            point = user.point,
-                            serviceId = user.serviceId
+                            point = user.point
                         )
                     } else if (user.password.isNotEmpty() && inputPassword.text.toString()
                             .isEmpty()
@@ -147,16 +146,14 @@ class LoginFragment : Fragment() {
         fragment: Fragment,
         id: Int,
         name: String,
-        point: String,
-        serviceId: Long?
+        point: String
     ) {
         bundle.putParcelable(
             LOGGED_USER_ARG,
             LoggedUser(
                 id = id,
                 name = name,
-                point = point,
-                serviceId = serviceId
+                point = point
             )
         )
         fragment.arguments = bundle

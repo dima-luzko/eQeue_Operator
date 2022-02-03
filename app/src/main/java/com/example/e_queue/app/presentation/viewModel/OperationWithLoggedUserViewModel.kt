@@ -9,7 +9,7 @@ import com.example.e_queue.app.domain.repository.EQueueRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class WithLoggedUserViewModel constructor(
+class OperationWithLoggedUserViewModel constructor(
     private val eQueueRepository: EQueueRepository,
     val operationWithUser: OperationWithLoggedUser
 ) :

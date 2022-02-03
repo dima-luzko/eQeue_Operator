@@ -58,15 +58,12 @@ class ChooseUserDialogFragment : DialogFragment() {
                         observeUserList.filterIndexed { index, _ -> index != 0 }
                     ) { userAdapter ->
                         val firstServiceId = userAdapter.plan?.map { plan -> plan.service.id }
-                        val serviceId =
-                            if (userAdapter.plan?.isEmpty() == true) 1 else firstServiceId?.get(2)
                         bundle.putParcelable(
                             SELECTED_USER_ARG, SelectedUser(
                                 id = userAdapter.id,
                                 name = userAdapter.name,
                                 point = userAdapter.point,
-                                password = userAdapter.password,
-                                serviceId = serviceId
+                                password = userAdapter.password
                             )
                         )
                         parentFragmentManager.setFragmentResult(SELECTED_USER_REQUEST_KEY, bundle)

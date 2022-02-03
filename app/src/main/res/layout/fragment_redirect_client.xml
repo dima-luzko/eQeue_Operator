@@ -93,7 +93,7 @@
         android:layout_width="@dimen/_200mdp"
         android:layout_height="@dimen/_28mdp"
         android:layout_marginTop="@dimen/_20mdp"
-        android:background="@drawable/input_img"
+        android:background="@drawable/input_img_for_comments"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/number_of_client" />
@@ -130,7 +130,7 @@
         android:background="@drawable/input_img_for_comments"
         android:gravity="left"
         android:padding="@dimen/_8mdp"
-        android:text="Комментарий..."
+        android:hint="@string/comments"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/input_login" />
@@ -142,7 +142,7 @@
         android:layout_width="@dimen/_200mdp"
         android:layout_height="@dimen/_28mdp"
         android:layout_marginTop="@dimen/_10mdp"
-        android:background="@drawable/input_img"
+        android:background="@drawable/input_img_for_comments"
         android:gravity="center_vertical"
         android:paddingStart="@dimen/_8mdp"
         android:paddingEnd="@dimen/_7mdp"

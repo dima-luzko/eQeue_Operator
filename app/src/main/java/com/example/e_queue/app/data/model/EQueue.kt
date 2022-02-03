@@ -63,21 +63,40 @@ data class InviteNextCustomerServiceInfo(
     val name: String
 )
 
+data class ServicesLength(
+    @SerializedName("self_services")
+    val selfServices: List<SelfServices>
+)
+
+data class SelfServices(
+    @SerializedName("id")
+    val id: Long,
+    @SerializedName("service_name")
+    val serviceName: String,
+    @SerializedName("line")
+    val line: List<ServiceInfoForServiceLength>
+)
+
+data class ServiceInfoForServiceLength(
+    @SerializedName("id")
+    val id: Long,
+    @SerializedName("number")
+    val number: String,
+)
+
 @Parcelize
 data class SelectedUser(
     val id: Int,
     val name: String,
     val point: String,
-    val password: String,
-    val serviceId: Long?
+    val password: String
 ) : Parcelable
 
 @Parcelize
 data class LoggedUser(
     val id: Int,
     val name: String,
-    val point: String,
-    val serviceId: Long?
+    val point: String
 ) : Parcelable
 
 @Parcelize
@@ -87,6 +106,8 @@ data class OperationWithLoggedUser(
     val point: String,
     val clientNumber: String?
 ): Parcelable
+
+
 
 
 
