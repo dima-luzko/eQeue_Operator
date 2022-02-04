@@ -104,7 +104,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8mdp"
-        android:text="Название услуги"
+        android:text="@string/service_name"
         app:layout_constraintBottom_toBottomOf="@id/input_service"
         app:layout_constraintStart_toStartOf="@id/input_service"
         app:layout_constraintTop_toTopOf="@id/input_service" />

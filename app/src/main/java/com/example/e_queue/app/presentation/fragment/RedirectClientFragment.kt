@@ -1,14 +1,16 @@
 package com.example.e_queue.app.presentation.fragment
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.e_queue.R
 import com.example.e_queue.app.data.model.BodyForRedirectCustomer
+import com.example.e_queue.app.data.model.LoggedUser
 import com.example.e_queue.app.data.model.OperationWithLoggedUser
 import com.example.e_queue.app.data.model.SelectedServices
 import com.example.e_queue.app.presentation.viewModel.OperationWithLoggedUserViewModel
@@ -16,9 +18,10 @@ import com.example.e_queue.app.presentation.viewModel.SelectedServicesViewModel
 import com.example.e_queue.databinding.FragmentRedirectClientBinding
 import com.example.e_queue.utils.Constants
 import com.example.e_queue.utils.changeBackgroundAndNavBarColor
+import com.example.e_queue.utils.snackBar
+import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import kotlin.properties.Delegates
 
 class RedirectClientFragment : Fragment() {
 
@@ -27,6 +30,7 @@ class RedirectClientFragment : Fragment() {
         parametersOf(arguments?.getParcelable<OperationWithLoggedUser>(Constants.OPERATION_WITH_LOGGED_USER_ARG))
     }
     private val selectedServicesViewModel by viewModel<SelectedServicesViewModel>()
+    private val bundle = Bundle()
 
 //    companion object {
 //        fun newInstance(operationWithLoggedUser: OperationWithLoggedUser) = MainFragment().apply {
@@ -51,24 +55,31 @@ class RedirectClientFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setSelectedServiceInViewModel()
         setCustomerParams()
         chooseService()
+        setServiceName()
+        handleClick()
+    }
 
-
-        binding.buttonCancel.setOnClickListener {
-            requireActivity().onBackPressed()
+    private fun handleClick() {
+        with(binding) {
+            buttonCancel.setOnClickListener {
+                requireActivity().onBackPressed()
+            }
+            buttonRedirection.setOnClickListener {
+                if (chooseServiceName.text == getString(R.string.service_name)) {
+                    snackBar(requireView(),requireContext(),R.string.choose_service_snack_bar)
+                } else {
+                    redirectCustomer()
+                }
+            }
         }
-        binding.buttonRedirection.setOnClickListener {
-            val transaction = parentFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, MainFragment())
-            transaction.commit()
-        }
+    }
 
-        selectedServicesViewModel.services.observe(viewLifecycleOwner){
+    private fun setServiceName() {
+        selectedServicesViewModel.services.observe(viewLifecycleOwner) {
             binding.chooseServiceName.text = it.name
-
         }
     }
 
@@ -78,16 +89,47 @@ class RedirectClientFragment : Fragment() {
         }
     }
 
-//    private fun redirectCustomer(){
-//        selectedServicesViewModel.services.observe(viewLifecycleOwner){
-//            val body = BodyForRedirectCustomer(
-//                serviceId = it.id
-//
-//            )
-//
-//        }
-//
-//    }
+    private fun replaceFragment(
+        fragment: Fragment,
+        id: Int,
+        name: String,
+        point: String
+    ) {
+        bundle.putParcelable(
+            Constants.LOGGED_USER_ARG,
+            LoggedUser(
+                id = id,
+                name = name,
+                point = point
+            )
+        )
+        fragment.arguments = bundle
+
+        val transaction = parentFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
+    }
+
+    private fun redirectCustomer() {
+        operationOperationWithLoggedUserViewModel.operationWithLoggedUser.observe(viewLifecycleOwner) { loggedUser ->
+            selectedServicesViewModel.services.observe(viewLifecycleOwner) { service ->
+                val body = BodyForRedirectCustomer(
+                    serviceId = service.id,
+                    userId = loggedUser.userId,
+                    comments = binding.inputPostponingComment.text.toString(),
+                    resultId = 1,
+                    requestBack = binding.checkboxWithReturnClient.isChecked
+                )
+                operationOperationWithLoggedUserViewModel.redirectCustomer(body)
+            }
+            replaceFragment(
+                MainFragment(),
+                loggedUser.userId,
+                loggedUser.userName,
+                loggedUser.point
+            )
+        }
+    }
 
     private fun setCustomerParams() {
         operationOperationWithLoggedUserViewModel.setParams()

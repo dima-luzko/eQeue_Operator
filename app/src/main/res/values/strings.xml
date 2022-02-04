@@ -50,9 +50,11 @@
     <string name="password">Пароль…</string>
     <string name="choose_user">Выберите пользователя…</string>
     <string name="choose_user_snack_bar">Необходимо выбрать пользователя.</string>
+    <string name="choose_service_snack_bar">Необходимо выбрать услугу.</string>
     <string name="enter_password_snack_bar">Для входа необходимо ввести пароль.</string>
     <string name="wrong_password_snack_bar">Введен не верный пароль.</string>
-    <string name="comments">Комментарий...</string>
+    <string name="comments">Комментарий…</string>
+    <string name="service_name">Название услуги</string>
 
 
 </resources>
