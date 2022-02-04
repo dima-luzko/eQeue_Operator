@@ -29,4 +29,12 @@ class EQueueRepositoryImpl(private val dataSource: RemoteDataSource): EQueueRepo
         return  dataSource.retrofit.getSelfServices(userId)
     }
 
+    override suspend fun getServices(): ServicesList {
+       return dataSource.retrofit.getServices()
+    }
+
+    override suspend fun redirectCustomer(customer: BodyForRedirectCustomer) {
+        dataSource.retrofit.redirectCustomer(customer)
+    }
+
 }

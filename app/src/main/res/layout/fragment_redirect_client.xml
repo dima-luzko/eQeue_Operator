@@ -89,7 +89,7 @@
         app:layout_constraintTop_toBottomOf="@id/postpone_text_hh" />
 
     <View
-        android:id="@+id/input_login"
+        android:id="@+id/input_service"
         android:layout_width="@dimen/_200mdp"
         android:layout_height="@dimen/_28mdp"
         android:layout_marginTop="@dimen/_20mdp"
@@ -105,9 +105,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8mdp"
         android:text="Название услуги"
-        app:layout_constraintBottom_toBottomOf="@id/input_login"
-        app:layout_constraintStart_toStartOf="@id/input_login"
-        app:layout_constraintTop_toTopOf="@id/input_login" />
+        app:layout_constraintBottom_toBottomOf="@id/input_service"
+        app:layout_constraintStart_toStartOf="@id/input_service"
+        app:layout_constraintTop_toTopOf="@id/input_service" />
 
     <ImageView
         android:id="@+id/button_more"
@@ -116,9 +116,9 @@
         android:layout_marginTop="@dimen/_1mdp"
         android:layout_marginEnd="@dimen/_7mdp"
         android:src="@drawable/ic_more"
-        app:layout_constraintBottom_toBottomOf="@+id/input_login"
-        app:layout_constraintEnd_toEndOf="@id/input_login"
-        app:layout_constraintTop_toTopOf="@id/input_login"
+        app:layout_constraintBottom_toBottomOf="@+id/input_service"
+        app:layout_constraintEnd_toEndOf="@id/input_service"
+        app:layout_constraintTop_toTopOf="@id/input_service"
         app:tint="@color/checkbox_gray" />
 
     <EditText
@@ -133,7 +133,7 @@
         android:hint="@string/comments"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/input_login" />
+        app:layout_constraintTop_toBottomOf="@id/input_service" />
 
 
     <TextView

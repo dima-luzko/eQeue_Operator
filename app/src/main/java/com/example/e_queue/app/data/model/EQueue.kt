@@ -37,9 +37,16 @@ data class PlanService(
     val name: String
 )
 
-data class UserServiceLength(
-    @SerializedName("length_line")
-    val length: Int
+data class ServicesList(
+    @SerializedName("inner_services")
+    val innerServices: List<InnerServicesForServiceList>
+)
+
+data class InnerServicesForServiceList(
+    @SerializedName("id")
+    val id: Long,
+    @SerializedName("name")
+    val name: String
 )
 
 data class NextCustomerInfo(
@@ -68,6 +75,19 @@ data class ServicesLength(
     val selfServices: List<SelfServices>
 )
 
+data class BodyForRedirectCustomer(
+    @SerializedName("service_id")
+    val serviceId: Long,
+    @SerializedName("user_id")
+    val userId: Int,
+    @SerializedName("comments")
+    val comments: String?,
+    @SerializedName("result_id")
+    val resultId: Int,
+    @SerializedName("request_back")
+    val requestBack: Boolean
+)
+
 data class SelfServices(
     @SerializedName("id")
     val id: Long,
@@ -90,6 +110,12 @@ data class SelectedUser(
     val name: String,
     val point: String,
     val password: String
+) : Parcelable
+
+@Parcelize
+data class SelectedServices(
+    val id: Long,
+    val name: String
 ) : Parcelable
 
 @Parcelize

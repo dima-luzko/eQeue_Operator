@@ -7,7 +7,9 @@ class Constants {
         const val LOG_NEXT_CUSTOMER_INFO = "next_customer_info"
         const val LOGGED_USER_ARG = "LOGGED_USER_ARG"
         const val SELECTED_USER_ARG = "SELECTED_USER_ARG"
+        const val SELECTED_SERVICES_ARG = "SELECTED_SERVICES_ARG"
         const val SELECTED_USER_REQUEST_KEY = "SELECTED_USER_REQUEST_KEY"
+        const val SELECTED_SERVICE_REQUEST_KEY = "SELECTED_SERVICE_REQUEST_KEY"
         const val OPERATION_WITH_LOGGED_USER_ARG = "OPERATION_WITH_LOGGED_USER_ARG"
     }
 }

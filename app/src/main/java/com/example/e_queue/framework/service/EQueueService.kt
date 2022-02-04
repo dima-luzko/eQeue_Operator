@@ -1,9 +1,7 @@
 package com.example.e_queue.framework.service
 
 import com.example.e_queue.app.data.model.*
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface EQueueService {
 
@@ -25,5 +23,11 @@ interface EQueueService {
 
     @GET("operator/getSelfServices")
     suspend fun getSelfServices(@Query("user_id") userId: Int) : ServicesLength
+
+    @GET("terminal/getServices")
+    suspend fun getServices(): ServicesList
+
+    @POST("operator/redirectCustomer")
+    suspend fun redirectCustomer(@Body customer: BodyForRedirectCustomer)
 
 }

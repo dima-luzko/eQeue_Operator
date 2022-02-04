@@ -344,6 +344,7 @@ class MainFragment : Fragment() {
         super.onResume()
         changeButtonVisible()
         setInviteCustomerInfo()
+        changeStatusClient()
     }
 
 

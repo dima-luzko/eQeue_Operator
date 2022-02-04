@@ -10,26 +10,24 @@ import android.view.Window
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.e_queue.app.data.model.SelectedUser
-import com.example.e_queue.app.presentation.adapter.ChooseUserItemAdapter
-import com.example.e_queue.app.presentation.viewModel.UserListViewModel
-import com.example.e_queue.databinding.FragmentChooseUserDialogBinding
-import com.example.e_queue.utils.Constants.Companion.SELECTED_USER_ARG
-import com.example.e_queue.utils.Constants.Companion.SELECTED_USER_REQUEST_KEY
+import com.example.e_queue.app.data.model.SelectedServices
+import com.example.e_queue.app.presentation.adapter.ChooseServiceRedirectItemAdapter
+import com.example.e_queue.app.presentation.viewModel.ServicesListViewModel
+import com.example.e_queue.databinding.FragmentChooseRedirectClientDialogBinding
+import com.example.e_queue.utils.Constants
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+class ChooseServicesDialogFragment : DialogFragment() {
 
-class ChooseUserDialogFragment : DialogFragment() {
-
-    private lateinit var binding: FragmentChooseUserDialogBinding
+    private lateinit var binding: FragmentChooseRedirectClientDialogBinding
     private var bundle = Bundle()
-    private val userViewModel by viewModel<UserListViewModel>()
+    private val servicesViewModel by viewModel<ServicesListViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentChooseUserDialogBinding.inflate(inflater, container, false)
+        binding = FragmentChooseRedirectClientDialogBinding.inflate(inflater, container, false)
         dialog?.window?.let {
             with(it) {
                 setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -41,31 +39,29 @@ class ChooseUserDialogFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getUserList()
+        getServicesList()
     }
 
-    private fun getUserList() {
-        with(userViewModel) {
-            getUserList()
-            user.observe(viewLifecycleOwner) { observeUserList ->
-                with(binding.chooseUserList) {
+    private fun getServicesList() {
+        with(servicesViewModel) {
+            getServicesList()
+            services.observe(viewLifecycleOwner) { observeServicesList ->
+                with(binding.chooseServiceList) {
                     layoutManager = LinearLayoutManager(
                         requireContext(),
                         LinearLayoutManager.VERTICAL,
                         false
                     )
-                    adapter = ChooseUserItemAdapter(
-                        observeUserList.filterIndexed { index, _ -> index != 0 }
-                    ) { userAdapter ->
+                    adapter = ChooseServiceRedirectItemAdapter(
+                        observeServicesList
+                    ) { servicesAdapter ->
                         bundle.putParcelable(
-                            SELECTED_USER_ARG, SelectedUser(
-                                id = userAdapter.id,
-                                name = userAdapter.name,
-                                point = userAdapter.point,
-                                password = userAdapter.password
+                            Constants.SELECTED_SERVICES_ARG, SelectedServices(
+                                id = servicesAdapter.id,
+                                name = servicesAdapter.name
                             )
                         )
-                        parentFragmentManager.setFragmentResult(SELECTED_USER_REQUEST_KEY, bundle)
+                        parentFragmentManager.setFragmentResult(Constants.SELECTED_SERVICE_REQUEST_KEY, bundle)
                         dialog?.dismiss()
                     }
                     hasFixedSize()
@@ -77,10 +73,10 @@ class ChooseUserDialogFragment : DialogFragment() {
 
     companion object {
         fun showDialog(fragmentManager: FragmentManager) {
-            val fragment = ChooseUserDialogFragment()
+            val fragment = ChooseServicesDialogFragment()
             fragment.show(
                 fragmentManager,
-                ChooseUserDialogFragment::class.java.simpleName
+                ChooseServicesDialogFragment::class.java.simpleName
             )
         }
     }

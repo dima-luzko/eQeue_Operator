@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.e_queue.app.data.model.BodyForRedirectCustomer
 import com.example.e_queue.app.data.model.OperationWithLoggedUser
 import com.example.e_queue.app.domain.repository.EQueueRepository
 import kotlinx.coroutines.Dispatchers
@@ -22,9 +23,9 @@ class OperationWithLoggedUserViewModel constructor(
         _operationWithLoggedUser.postValue(operationWithUser)
     }
 
-    fun killNextCustomer() {
+    fun redirectCustomer(body: BodyForRedirectCustomer){
         viewModelScope.launch(Dispatchers.IO){
-            operationWithLoggedUser.value?.let { eQueueRepository.killNextCustomer(it.userId) }
+            eQueueRepository.redirectCustomer(body)
         }
     }
 }
