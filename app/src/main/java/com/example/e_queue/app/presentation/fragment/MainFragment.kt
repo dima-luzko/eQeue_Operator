@@ -209,10 +209,19 @@ class MainFragment : Fragment() {
                         clientNumber = binding.include.currentClientNumber.text.toString()
                     )
                 }
-
             }
 
-
+            buttonPostpone.setOnClickListener {
+                loggedUserViewModel.loggedUser.observe(viewLifecycleOwner){ loggedUser ->
+                    replaceFragment(
+                        fragment = PostponedClientFragment(),
+                        userId = loggedUser.id,
+                        userName = loggedUser.name,
+                        point = loggedUser.point,
+                        clientNumber = binding.include.currentClientNumber.text.toString()
+                    )
+                }
+            }
         }
     }
 
@@ -346,27 +355,6 @@ class MainFragment : Fragment() {
         setInviteCustomerInfo()
         changeStatusClient()
     }
-
-
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        PreferencesManager.getInstance(requireContext())
-//            .putBoolean(PreferencesManager.PREF_BUTTON_INVITE_NEXT_CUSTOMER, true)
-//        PreferencesManager.getInstance(requireContext())
-//            .putBoolean(PreferencesManager.PREF_BUTTON_LOOK_POSTPONED_LIST_CUSTOMER, true)
-//        PreferencesManager.getInstance(requireContext())
-//            .putBoolean(PreferencesManager.PREF_BUTTON_START_WORK_WITH_CUSTOMER, false)
-//        PreferencesManager.getInstance(requireContext())
-//            .putBoolean(PreferencesManager.PREF_BUTTON_INVITE_AGAIN_CUSTOMER, false)
-//        PreferencesManager.getInstance(requireContext())
-//            .putBoolean(PreferencesManager.PREF_BUTTON_NO_NEXT_CUSTOMER, false)
-//        PreferencesManager.getInstance(requireContext())
-//            .putBoolean(PreferencesManager.PREF_BUTTON_REDIRECT_CUSTOMER, false)
-//        PreferencesManager.getInstance(requireContext())
-//            .putBoolean(PreferencesManager.PREF_BUTTON_CUSTOMER_TO_POSTPONED, false)
-//        PreferencesManager.getInstance(requireContext())
-//            .putBoolean(PreferencesManager.PREF_BUTTON_FINISH_WORK_WITH_CUSTOMER, false)
-//    }
 
     override fun onStart() {
         super.onStart()
