@@ -11,13 +11,11 @@ import com.example.e_queue.R
 import com.example.e_queue.app.data.model.BodyForFinishWorkWithCustomer
 import com.example.e_queue.app.data.model.LoggedUser
 import com.example.e_queue.app.data.model.OperationWithLoggedUser
-import com.example.e_queue.app.data.model.SelectedResults
 import com.example.e_queue.app.presentation.adapter.ChooseResultsAdapter
 import com.example.e_queue.app.presentation.viewModel.OperationWithLoggedUserViewModel
 import com.example.e_queue.app.presentation.viewModel.ResultsListViewModel
 import com.example.e_queue.databinding.FragmentResultBinding
 import com.example.e_queue.utils.Constants
-import com.example.e_queue.utils.PreferencesManager
 import com.example.e_queue.utils.changeBackgroundAndNavBarColor
 import com.example.e_queue.utils.snackBar
 import org.koin.androidx.viewmodel.ext.android.viewModel

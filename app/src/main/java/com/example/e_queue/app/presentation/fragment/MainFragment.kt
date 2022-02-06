@@ -27,17 +27,15 @@ class MainFragment : Fragment() {
         parametersOf(arguments?.getParcelable<LoggedUser>(LOGGED_USER_ARG))
     }
     private val bundle = Bundle()
-
-    var statusClient = 0
-
-    var visibleButtonInviteNextCustomer = false
-    var visibleButtonLookPostponedListCustomer = false
-    var visibleButtonStartWorkWithCustomer = false
-    var visibleButtonInviteAgainCustomer = false
-    var visibleButtonNoNextCustomer = false
-    var visibleButtonRedirectCustomer = false
-    var visibleButtonCustomerToPostponed = false
-    var visibleButtonFinishWorkWithCustomer = false
+    private var statusClient = 0
+    private var visibleButtonInviteNextCustomer = false
+    private var visibleButtonLookPostponedListCustomer = false
+    private var visibleButtonStartWorkWithCustomer = false
+    private var visibleButtonInviteAgainCustomer = false
+    private var visibleButtonNoNextCustomer = false
+    private var visibleButtonRedirectCustomer = false
+    private var visibleButtonCustomerToPostponed = false
+    private var visibleButtonFinishWorkWithCustomer = false
     private var visibleOneModeButtonInviteNextCustomer = false
     private var visibleOneModeButtonInviteAgainCustomer = false
 
@@ -46,7 +44,6 @@ class MainFragment : Fragment() {
             arguments = bundleOf(LOGGED_USER_ARG to loggedUserModel)
         }
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,15 +62,12 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        visibleButtonInviteNextCustomer = true
+        visibleButtonLookPostponedListCustomer = true
         setToolbarText()
         setServiceLength()
         setNextCustomer()
-
         handleClicks()
-
-        visibleButtonInviteNextCustomer = true
-        visibleButtonLookPostponedListCustomer = true
-
         unLoggedUser()
     }
 
@@ -273,7 +267,6 @@ class MainFragment : Fragment() {
             )
         )
         fragment.arguments = bundle
-
         val transaction = parentFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, fragment).addToBackStack(null)
         transaction.commit()
@@ -281,65 +274,25 @@ class MainFragment : Fragment() {
 
     private fun changeButtonVisible() {
         with(binding.someButton) {
-            if (visibleButtonInviteNextCustomer) {
-                buttonCallNextClient.visibility = View.VISIBLE
-            } else {
-                buttonCallNextClient.visibility = View.GONE
-            }
-
-            if (visibleButtonLookPostponedListCustomer) {
-                buttonListPostponedClients.visibility = View.VISIBLE
-            } else {
-                buttonListPostponedClients.visibility = View.GONE
-            }
-
-            if (visibleButtonStartWorkWithCustomer) {
-                buttonStartWork.visibility = View.VISIBLE
-            } else {
-                buttonStartWork.visibility = View.GONE
-            }
-
-            if (visibleButtonInviteAgainCustomer) {
-                buttonCallNextClientAgain.visibility = View.VISIBLE
-            } else {
-                buttonCallNextClientAgain.visibility = View.GONE
-            }
-
-            if (visibleButtonNoNextCustomer) {
-                buttonNoClient.visibility = View.VISIBLE
-            } else {
-                buttonNoClient.visibility = View.GONE
-            }
-
-            if (visibleButtonRedirectCustomer) {
-                buttonRedirect.visibility = View.VISIBLE
-            } else {
-                buttonRedirect.visibility = View.GONE
-            }
-
-            if (visibleButtonCustomerToPostponed) {
-                buttonPostpone.visibility = View.VISIBLE
-            } else {
-                buttonPostpone.visibility = View.GONE
-            }
-
-            if (visibleButtonFinishWorkWithCustomer) {
-                buttonFinishWork.visibility = View.VISIBLE
-            } else {
-                buttonFinishWork.visibility = View.GONE
-            }
-
-            if (visibleOneModeButtonInviteNextCustomer) {
-                buttonCallNextClientOneMode.visibility = View.VISIBLE
-            } else {
-                buttonCallNextClientOneMode.visibility = View.GONE
-            }
-
-            if (visibleOneModeButtonInviteAgainCustomer) {
-                buttonCallNextClientAgainOneMode.visibility = View.VISIBLE
-            } else {
-                buttonCallNextClientAgainOneMode.visibility = View.GONE
-            }
+            buttonCallNextClient.visibility =
+                if (visibleButtonInviteNextCustomer) View.VISIBLE else View.GONE
+            buttonListPostponedClients.visibility =
+                if (visibleButtonLookPostponedListCustomer) View.VISIBLE else View.GONE
+            buttonStartWork.visibility =
+                if (visibleButtonStartWorkWithCustomer) View.VISIBLE else View.GONE
+            buttonCallNextClientAgain.visibility =
+                if (visibleButtonInviteAgainCustomer) View.VISIBLE else View.GONE
+            buttonNoClient.visibility = if (visibleButtonNoNextCustomer) View.VISIBLE else View.GONE
+            buttonRedirect.visibility =
+                if (visibleButtonRedirectCustomer) View.VISIBLE else View.GONE
+            buttonPostpone.visibility =
+                if (visibleButtonCustomerToPostponed) View.VISIBLE else View.GONE
+            buttonFinishWork.visibility =
+                if (visibleButtonFinishWorkWithCustomer) View.VISIBLE else View.GONE
+            buttonCallNextClientOneMode.visibility =
+                if (visibleOneModeButtonInviteNextCustomer) View.VISIBLE else View.GONE
+            buttonCallNextClientAgainOneMode.visibility =
+                if (visibleOneModeButtonInviteAgainCustomer) View.VISIBLE else View.GONE
         }
     }
 
