@@ -7,16 +7,16 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/user_name"
+        android:id="@+id/item"
         android:layout_width="@dimen/_240mdp"
-        android:layout_height="@dimen/_35mdp"
-        android:background="@drawable/choose_user_item"
+        android:layout_height="@dimen/_40mdp"
+        android:background="@drawable/img_for_result_list"
         android:gravity="center"
         android:ellipsize="end"
         android:lines="1"
         android:paddingEnd="@dimen/_20mdp"
         android:paddingStart="@dimen/_20mdp"
-        android:paddingBottom="@dimen/_4mdp"
+        android:paddingBottom="@dimen/_2mdp"
         android:textAlignment="center"
         android:textColor="@color/user_item_text"
         android:textSize="@dimen/_12font_mdp"
@@ -24,4 +24,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

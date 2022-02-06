@@ -30,4 +30,10 @@ interface EQueueService {
     @POST("operator/redirectCustomer")
     suspend fun redirectCustomer(@Body customer: BodyForRedirectCustomer)
 
+    @GET("operator/getResultsList")
+    suspend fun getResultsList(): ResultList
+
+    @POST("operator/getFinishCustomer")
+    suspend fun finishWorkWithCustomer(@Body result: BodyForFinishWorkWithCustomer)
+
 }

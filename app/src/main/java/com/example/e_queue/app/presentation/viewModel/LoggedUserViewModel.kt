@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.e_queue.app.data.model.BodyForFinishWorkWithCustomer
 import com.example.e_queue.app.data.model.InviteNextCustomerInfo
 import com.example.e_queue.app.data.model.LoggedUser
 import com.example.e_queue.app.data.model.NextCustomerInfo
@@ -100,6 +101,12 @@ class LoggedUserViewModel constructor(
                 }
             }
             delay(5000)
+        }
+    }
+
+    fun finishWorkWithCustomer(body: BodyForFinishWorkWithCustomer) {
+        viewModelScope.launch(Dispatchers.IO) {
+            eQueueRepository.finishWorkWithCustomer(body)
         }
     }
 

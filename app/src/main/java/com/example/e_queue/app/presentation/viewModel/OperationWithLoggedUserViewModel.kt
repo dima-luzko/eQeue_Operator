@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.e_queue.app.data.model.BodyForFinishWorkWithCustomer
 import com.example.e_queue.app.data.model.BodyForRedirectCustomer
 import com.example.e_queue.app.data.model.OperationWithLoggedUser
 import com.example.e_queue.app.domain.repository.EQueueRepository
@@ -23,9 +24,15 @@ class OperationWithLoggedUserViewModel constructor(
         _operationWithLoggedUser.postValue(operationWithUser)
     }
 
-    fun redirectCustomer(body: BodyForRedirectCustomer){
-        viewModelScope.launch(Dispatchers.IO){
+    fun redirectCustomer(body: BodyForRedirectCustomer) {
+        viewModelScope.launch(Dispatchers.IO) {
             eQueueRepository.redirectCustomer(body)
+        }
+    }
+
+    fun finishWorkWithCustomer(body: BodyForFinishWorkWithCustomer) {
+        viewModelScope.launch(Dispatchers.IO) {
+            eQueueRepository.finishWorkWithCustomer(body)
         }
     }
 }

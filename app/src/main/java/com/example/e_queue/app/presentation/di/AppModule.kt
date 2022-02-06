@@ -28,8 +28,9 @@ val viewModelModules = module {
             eQueueRepository = get()
         )
     }
-    viewModel{SelectedServicesViewModel()}
-    viewModel{ServicesListViewModel(get())}
+    viewModel { SelectedServicesViewModel() }
+    viewModel { ServicesListViewModel(get()) }
+    viewModel { ResultsListViewModel(get()) }
 }
 
 val repositoryModules = module {

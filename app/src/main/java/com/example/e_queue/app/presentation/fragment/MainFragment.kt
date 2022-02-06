@@ -1,7 +1,6 @@
 package com.example.e_queue.app.presentation.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.example.e_queue.R
+import com.example.e_queue.app.data.model.BodyForFinishWorkWithCustomer
 import com.example.e_queue.app.data.model.LoggedUser
 import com.example.e_queue.app.data.model.OperationWithLoggedUser
 import com.example.e_queue.app.presentation.viewModel.LoggedUserViewModel
@@ -18,7 +18,6 @@ import com.example.e_queue.utils.Constants.Companion.OPERATION_WITH_LOGGED_USER_
 import com.example.e_queue.utils.changeBackgroundAndNavBarColor
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import kotlin.system.exitProcess
 
 
 class MainFragment : Fragment() {
@@ -122,22 +121,24 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun getStartWorkWithCustomer(){
+    private fun getStartWorkWithCustomer() {
         loggedUserViewModel.getStartCustomer()
     }
 
     private fun handleClicks() {
         loggedUserViewModel.serviceLength.observe(viewLifecycleOwner) {
             if (it == 0) {
-                with(binding.someButton.buttonCallNextClient){
+                with(binding.someButton.buttonCallNextClient) {
                     isEnabled = false
-                    background = ContextCompat.getDrawable(requireActivity(),R.drawable.disable_button)
-                    setTextColor(ContextCompat.getColor(requireContext(),R.color.gray_text))
+                    background =
+                        ContextCompat.getDrawable(requireActivity(), R.drawable.disable_button)
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_text))
                 }
             } else {
-                with(binding.someButton.buttonCallNextClient){
+                with(binding.someButton.buttonCallNextClient) {
                     isEnabled = true
-                    background = ContextCompat.getDrawable(requireActivity(), R.drawable.green_button)
+                    background =
+                        ContextCompat.getDrawable(requireActivity(), R.drawable.green_button)
                     setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                 }
             }
@@ -186,21 +187,31 @@ class MainFragment : Fragment() {
             }
 
             buttonFinishWork.setOnClickListener {
-                statusClient = 0
-
-                visibleButtonRedirectCustomer = false
-                visibleButtonCustomerToPostponed = false
-                visibleButtonFinishWorkWithCustomer = false
-                visibleButtonInviteNextCustomer = true
-                visibleButtonLookPostponedListCustomer = true
-
-                changeButtonVisible()
-                changeStatusClient()
-
+                loggedUserViewModel.loggedUser.observe(viewLifecycleOwner) { loggedUser ->
+                    loggedUserViewModel.inviteNextCustomerInfo.observe(viewLifecycleOwner) {
+                        if (!it.serviceName.resultRequired) {
+                            val body = BodyForFinishWorkWithCustomer(
+                                userId = loggedUser.id,
+                                resultId = -1
+                            )
+                            finishWorkWithCustomer(body)
+                        } else {
+                            loggedUserViewModel.loggedUser.observe(viewLifecycleOwner) { loggedUser ->
+                                replaceFragment(
+                                    fragment = ResultFragment(),
+                                    userId = loggedUser.id,
+                                    userName = loggedUser.name,
+                                    point = loggedUser.point,
+                                    clientNumber = binding.include.currentClientNumber.text.toString()
+                                )
+                            }
+                        }
+                    }
+                }
             }
 
             buttonRedirect.setOnClickListener {
-                loggedUserViewModel.loggedUser.observe(viewLifecycleOwner){ loggedUser ->
+                loggedUserViewModel.loggedUser.observe(viewLifecycleOwner) { loggedUser ->
                     replaceFragment(
                         fragment = RedirectClientFragment(),
                         userId = loggedUser.id,
@@ -212,7 +223,7 @@ class MainFragment : Fragment() {
             }
 
             buttonPostpone.setOnClickListener {
-                loggedUserViewModel.loggedUser.observe(viewLifecycleOwner){ loggedUser ->
+                loggedUserViewModel.loggedUser.observe(viewLifecycleOwner) { loggedUser ->
                     replaceFragment(
                         fragment = PostponedClientFragment(),
                         userId = loggedUser.id,
@@ -223,6 +234,26 @@ class MainFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun finishWorkWithCustomer(body: BodyForFinishWorkWithCustomer) {
+        statusClient = 0
+
+        visibleButtonRedirectCustomer = false
+        visibleButtonCustomerToPostponed = false
+        visibleButtonFinishWorkWithCustomer = false
+        visibleButtonInviteNextCustomer = true
+        visibleButtonLookPostponedListCustomer = true
+
+        with(binding.include) {
+            currentClientNumber.text = ""
+            currentClientService.text = ""
+        }
+
+        changeButtonVisible()
+        changeStatusClient()
+
+        loggedUserViewModel.finishWorkWithCustomer(body)
     }
 
     private fun replaceFragment(

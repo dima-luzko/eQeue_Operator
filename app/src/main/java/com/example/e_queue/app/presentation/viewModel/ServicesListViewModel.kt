@@ -10,10 +10,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ServicesListViewModel constructor(private val eQueueRepository: EQueueRepository) : ViewModel() {
+
     private val _services = MutableLiveData<ServicesList>()
     val services: LiveData<ServicesList> = _services
-
-
 
     fun getServicesList() {
         viewModelScope.launch(Dispatchers.IO){

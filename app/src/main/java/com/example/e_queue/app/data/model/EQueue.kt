@@ -37,6 +37,18 @@ data class PlanService(
     val name: String
 )
 
+data class ResultList(
+    @SerializedName("result")
+    val result: List<Result>
+)
+
+data class Result(
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("name")
+    val name: String
+)
+
 data class ServicesList(
     @SerializedName("inner_services")
     val innerServices: List<InnerServicesForServiceList>
@@ -67,7 +79,10 @@ data class InviteNextCustomerInfo(
 
 data class InviteNextCustomerServiceInfo(
     @SerializedName("name")
-    val name: String
+    val name: String,
+    @SerializedName("result_required")
+    val resultRequired: Boolean
+
 )
 
 data class ServicesLength(
@@ -88,6 +103,13 @@ data class BodyForRedirectCustomer(
     val requestBack: Boolean
 )
 
+data class BodyForFinishWorkWithCustomer(
+    @SerializedName("user_id")
+    val userId: Int,
+    @SerializedName("result_id")
+    val resultId: Int
+)
+
 data class SelfServices(
     @SerializedName("id")
     val id: Long,
@@ -103,6 +125,12 @@ data class ServiceInfoForServiceLength(
     @SerializedName("number")
     val number: String,
 )
+
+data class SelectedResults(
+    var rowIndex: Int = -1,
+    val resultId: Int
+)
+
 
 @Parcelize
 data class SelectedUser(
@@ -131,7 +159,7 @@ data class OperationWithLoggedUser(
     val userName: String,
     val point: String,
     val clientNumber: String?
-): Parcelable
+) : Parcelable
 
 
 

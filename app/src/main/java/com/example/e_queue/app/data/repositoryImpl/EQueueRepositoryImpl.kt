@@ -37,4 +37,12 @@ class EQueueRepositoryImpl(private val dataSource: RemoteDataSource): EQueueRepo
         dataSource.retrofit.redirectCustomer(customer)
     }
 
+    override suspend fun getResultsList(): ResultList {
+        return dataSource.retrofit.getResultsList()
+    }
+
+    override suspend fun finishWorkWithCustomer(result: BodyForFinishWorkWithCustomer) {
+        dataSource.retrofit.finishWorkWithCustomer(result)
+    }
+
 }

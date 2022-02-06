@@ -11,4 +11,6 @@ interface EQueueRepository {
     suspend fun getSelfServices(userId: Int): ServicesLength
     suspend fun getServices(): ServicesList
     suspend fun redirectCustomer(customer: BodyForRedirectCustomer)
+    suspend fun getResultsList(): ResultList
+    suspend fun finishWorkWithCustomer(result: BodyForFinishWorkWithCustomer)
 }
