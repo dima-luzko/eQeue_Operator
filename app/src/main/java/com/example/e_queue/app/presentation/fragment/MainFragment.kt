@@ -69,6 +69,12 @@ class MainFragment : Fragment() {
         setNextCustomer()
         handleClicks()
         unLoggedUser()
+
+        binding.toolbar.userImg.setOnClickListener {
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, SettingFragment()).addToBackStack(null)
+            transaction.commit()
+        }
     }
 
     private fun setToolbarText() {

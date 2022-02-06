@@ -59,7 +59,8 @@ dependencies {
     //Koin
     implementation 'io.insert-koin:koin-android:3.1.5'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
-//    implementation "io.insert-koin:koin-android-viewmodel:3.1.5"
+    //Switch
+    implementation "com.github.zcweng:switch-button:0.0.3@aar"
 
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

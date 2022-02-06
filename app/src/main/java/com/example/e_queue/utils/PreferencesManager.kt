@@ -8,10 +8,9 @@ class PreferencesManager private constructor(context: Context) {
         context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
 
     companion object {
-        const val PREF_SELECTED_RESULTS = "PREF_SELECTED_RESULTS"
-        const val PREF_BUTTON_LOOK_POSTPONED_LIST_CUSTOMER = "prefButtonLookPostponedListCustomer"
-        const val PREF_BUTTON_START_WORK_WITH_CUSTOMER = "prefButtonStartWorkWithCustomer"
-        const val PREF_BUTTON_INVITE_AGAIN_CUSTOMER = "prefButtonInviteAgainCustomer"
+        const val PREF_SWITCH_POSTPONED = "PREF_SWITCH_POSTPONED"
+        const val PREF_SWITCH_REDIRECT = "PREF_SWITCH_REDIRECT"
+        const val PREF_SWITCH_ONE_MODE = "PREF_SWITCH_ONE_MODE"
 
         private var ourInstance: PreferencesManager? = null
         fun getInstance(context: Context): PreferencesManager {
