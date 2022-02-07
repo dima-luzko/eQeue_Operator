@@ -7,13 +7,16 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.e_queue.R
+import com.example.e_queue.app.presentation.viewModel.SettingViewModel
 import com.example.e_queue.databinding.FragmentSettingsBinding
 import com.example.e_queue.utils.PreferencesManager
 import com.example.e_queue.utils.changeBackgroundAndNavBarColor
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingFragment : Fragment() {
 
     private lateinit var binding: FragmentSettingsBinding
+    private val settingViewModel by viewModel<SettingViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,50 +37,76 @@ class SettingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setSwitchState()
+        setSwitchStateToViewModelAndSharedPrefs()
+        checkSwitchState()
+        setEnableSwitch()
 
         binding.icBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
     }
 
-    private fun setSwitchState() {
+    private fun setSwitchStateToViewModelAndSharedPrefs(){
         with(binding) {
             switchPostpone.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    PreferencesManager.getInstance(requireContext())
-                        .putBoolean(PreferencesManager.PREF_SWITCH_POSTPONED, true)
-                } else {
-                    PreferencesManager.getInstance(requireContext())
-                        .putBoolean(PreferencesManager.PREF_SWITCH_POSTPONED, false)
-                }
+                PreferencesManager.getInstance(requireContext())
+                    .putBoolean(PreferencesManager.PREF_SWITCH_POSTPONED, isChecked)
+                settingViewModel.changeStateSwitchPostponed(isChecked)
             }
             switchRedirect.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    PreferencesManager.getInstance(requireContext())
-                        .putBoolean(PreferencesManager.PREF_SWITCH_REDIRECT, true)
-                } else {
-                    PreferencesManager.getInstance(requireContext())
-                        .putBoolean(PreferencesManager.PREF_SWITCH_REDIRECT, false)
-                }
+                PreferencesManager.getInstance(requireContext())
+                    .putBoolean(PreferencesManager.PREF_SWITCH_REDIRECT, isChecked)
+                settingViewModel.changeStateSwitchRedirect(isChecked)
             }
             switchOneButtonMode.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    switchRedirect.isEnabled = false
-                    switchPostpone.isEnabled = false
-                    PreferencesManager.getInstance(requireContext())
-                        .putBoolean(PreferencesManager.PREF_SWITCH_ONE_MODE, true)
-                } else {
-                    PreferencesManager.getInstance(requireContext())
-                        .putBoolean(PreferencesManager.PREF_SWITCH_ONE_MODE, false)
-                }
+                PreferencesManager.getInstance(requireContext())
+                    .putBoolean(PreferencesManager.PREF_SWITCH_ONE_MODE, isChecked)
+                settingViewModel.changeStateSwitchOneButtonMode(isChecked)
             }
+        }
+    }
 
+    private fun checkSwitchState() {
+        with(binding) {
             switchPostpone.isChecked = PreferencesManager.getInstance(requireContext())
                 .getBoolean(PreferencesManager.PREF_SWITCH_POSTPONED, false)
             switchRedirect.isChecked = PreferencesManager.getInstance(requireContext())
                 .getBoolean(PreferencesManager.PREF_SWITCH_REDIRECT, false)
             switchOneButtonMode.isChecked = PreferencesManager.getInstance(requireContext())
+                .getBoolean(PreferencesManager.PREF_SWITCH_ONE_MODE, false)
+        }
+    }
+
+    private fun setEnableSwitch(){
+        with(binding){
+            settingViewModel.uiState.observe(viewLifecycleOwner){
+                switchPostpone.isEnabled = !it.first
+                switchRedirect.isEnabled = !it.second
+                switchOneButtonMode.isEnabled = !it.third
+            }
+
+            switchOneButtonMode.isEnabled = !(PreferencesManager.getInstance(requireContext())
+                .getBoolean(
+                    PreferencesManager.PREF_SWITCH_POSTPONED,
+                    false
+                ) || PreferencesManager.getInstance(requireContext())
+                .getBoolean(
+                    PreferencesManager.PREF_SWITCH_REDIRECT,
+                    false
+                ))
+
+            if(PreferencesManager.getInstance(requireContext())
+                    .getBoolean(PreferencesManager.PREF_SWITCH_ONE_MODE, false)){
+                switchPostpone.isEnabled = false
+                switchRedirect.isEnabled = false
+            } else {
+                switchPostpone.isEnabled = true
+                switchRedirect.isEnabled = true
+            }
+            switchPostpone.isEnabled = !PreferencesManager.getInstance(requireContext())
+                .getBoolean(PreferencesManager.PREF_SWITCH_ONE_MODE, false)
+
+            switchRedirect.isEnabled = !PreferencesManager.getInstance(requireContext())
                 .getBoolean(PreferencesManager.PREF_SWITCH_ONE_MODE, false)
         }
     }

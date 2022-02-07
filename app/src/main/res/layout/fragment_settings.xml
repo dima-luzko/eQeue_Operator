@@ -112,6 +112,7 @@
 
     <com.suke.widget.SwitchButton
         android:id="@+id/switch_postpone"
+        android:backgroundTint="@color/green"
         android:layout_width="@dimen/_50mdp"
         android:layout_height="@dimen/_30mdp"
         android:layout_marginEnd="@dimen/_20mdp"
