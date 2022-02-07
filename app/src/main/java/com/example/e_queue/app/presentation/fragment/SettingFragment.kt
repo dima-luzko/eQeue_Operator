@@ -94,15 +94,6 @@ class SettingFragment : Fragment() {
                     PreferencesManager.PREF_SWITCH_REDIRECT,
                     false
                 ))
-
-            if(PreferencesManager.getInstance(requireContext())
-                    .getBoolean(PreferencesManager.PREF_SWITCH_ONE_MODE, false)){
-                switchPostpone.isEnabled = false
-                switchRedirect.isEnabled = false
-            } else {
-                switchPostpone.isEnabled = true
-                switchRedirect.isEnabled = true
-            }
             switchPostpone.isEnabled = !PreferencesManager.getInstance(requireContext())
                 .getBoolean(PreferencesManager.PREF_SWITCH_ONE_MODE, false)
 

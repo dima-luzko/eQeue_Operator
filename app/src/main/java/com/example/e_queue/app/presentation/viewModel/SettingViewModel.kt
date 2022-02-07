@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.*
 import com.example.e_queue.utils.PreferencesManager
 
-class SettingViewModel() : ViewModel() {
+class SettingViewModel(context: Context) : ViewModel() {
     private val _switchPostponed = MutableLiveData<Boolean>()
     val switchPostponed: LiveData<Boolean> = _switchPostponed
 
@@ -35,9 +35,12 @@ class SettingViewModel() : ViewModel() {
 
     val uiState: LiveData<UiState> = MediatorLiveData<UiState>().apply {
         val observer = Observer<Boolean> {
-            val postponed = _switchPostponed.value
-            val redirect = _switchRedirect.value
-            val oneMode = _switchOneButtonMode.value
+            val postponed = PreferencesManager.getInstance(context)
+                .getBoolean(PreferencesManager.PREF_SWITCH_POSTPONED, false)
+            val redirect = PreferencesManager.getInstance(context)
+                .getBoolean(PreferencesManager.PREF_SWITCH_REDIRECT, false)
+            val oneMode = PreferencesManager.getInstance(context)
+                .getBoolean(PreferencesManager.PREF_SWITCH_ONE_MODE, false)
 
             value = UiState(
                 first = oneMode == true,
