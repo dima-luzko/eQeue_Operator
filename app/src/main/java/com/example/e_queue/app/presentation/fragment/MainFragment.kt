@@ -73,12 +73,6 @@ class MainFragment : Fragment() {
         setNextCustomer()
         handleClicks()
         unLoggedUser()
-
-        binding.toolbar.userImg.setOnClickListener {
-            val transaction = parentFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, SettingFragment()).addToBackStack(null)
-            transaction.commit()
-        }
     }
 
     private fun setToolbarText() {
@@ -93,9 +87,11 @@ class MainFragment : Fragment() {
 
     private fun unLoggedUser() {
         binding.toolbar.exit.setOnClickListener {
-            val transaction = parentFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, LoginFragment())
-            transaction.commit()
+            if (statusClient == 0) {
+                val transaction = parentFragmentManager.beginTransaction()
+                transaction.replace(R.id.fragment_container, LoginFragment())
+                transaction.commit()
+            }
         }
     }
 
