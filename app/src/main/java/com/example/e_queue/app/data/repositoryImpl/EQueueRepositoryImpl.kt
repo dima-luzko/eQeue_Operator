@@ -45,4 +45,8 @@ class EQueueRepositoryImpl(private val dataSource: RemoteDataSource): EQueueRepo
         dataSource.retrofit.finishWorkWithCustomer(result)
     }
 
+    override suspend fun customerToPostpone(customer: BodyForPostponedCustomer) {
+        dataSource.retrofit.customerToPostpone(customer)
+    }
+
 }

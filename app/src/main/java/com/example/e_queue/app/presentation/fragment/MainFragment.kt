@@ -15,7 +15,12 @@ import com.example.e_queue.app.presentation.viewModel.LoggedUserViewModel
 import com.example.e_queue.databinding.FragmentMainBinding
 import com.example.e_queue.utils.Constants.Companion.LOGGED_USER_ARG
 import com.example.e_queue.utils.Constants.Companion.OPERATION_WITH_LOGGED_USER_ARG
+import com.example.e_queue.utils.PreferencesManager
 import com.example.e_queue.utils.changeBackgroundAndNavBarColor
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -62,8 +67,7 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        visibleButtonInviteNextCustomer = true
-        visibleButtonLookPostponedListCustomer = true
+        changeVisibilityOneButtonMode()
         setToolbarText()
         setServiceLength()
         setNextCustomer()
@@ -125,25 +129,118 @@ class MainFragment : Fragment() {
         loggedUserViewModel.getStartCustomer()
     }
 
+    private fun changeVisibilityOneButtonMode() {
+        if (PreferencesManager.getInstance(requireContext())
+                .getBoolean(PreferencesManager.PREF_SWITCH_ONE_MODE, false)
+        ) {
+            visibleButtonInviteNextCustomer = false
+            visibleButtonLookPostponedListCustomer = false
+            visibleButtonStartWorkWithCustomer = false
+            visibleButtonInviteAgainCustomer = false
+            visibleButtonNoNextCustomer = false
+            visibleButtonRedirectCustomer = false
+            visibleButtonCustomerToPostponed = false
+            visibleButtonFinishWorkWithCustomer = false
+            visibleOneModeButtonInviteNextCustomer = true
+            visibleOneModeButtonInviteAgainCustomer = true
+        } else {
+            visibleButtonInviteNextCustomer = true
+            visibleButtonLookPostponedListCustomer = true
+            visibleOneModeButtonInviteNextCustomer = false
+            visibleOneModeButtonInviteAgainCustomer = false
+        }
+    }
+
     private fun handleClicks() {
+        changeVisibilityOneButtonMode()
         loggedUserViewModel.serviceLength.observe(viewLifecycleOwner) {
-            if (it == 0) {
-                with(binding.someButton.buttonCallNextClient) {
-                    isEnabled = false
-                    background =
+            with(binding) {
+                if (it == 0) {
+                    someButton.buttonCallNextClient.isEnabled = false
+                    someButton.buttonCallNextClientOneMode.isEnabled = false
+                    someButton.buttonCallNextClient.background =
                         ContextCompat.getDrawable(requireActivity(), R.drawable.disable_button)
-                    setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_text))
-                }
-            } else {
-                with(binding.someButton.buttonCallNextClient) {
-                    isEnabled = true
-                    background =
+                    someButton.buttonCallNextClientOneMode.background =
+                        ContextCompat.getDrawable(requireActivity(), R.drawable.disable_button)
+                    someButton.buttonCallNextClient.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.gray_text
+                        )
+                    )
+                    someButton.buttonCallNextClientOneMode.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.gray_text
+                        )
+                    )
+                } else {
+                    someButton.buttonCallNextClient.isEnabled = true
+                    someButton.buttonCallNextClientOneMode.isEnabled = true
+                    someButton.buttonCallNextClient.background =
                         ContextCompat.getDrawable(requireActivity(), R.drawable.green_button)
-                    setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                    someButton.buttonCallNextClientOneMode.background =
+                        ContextCompat.getDrawable(requireActivity(), R.drawable.green_button)
+                    someButton.buttonCallNextClient.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.white
+                        )
+                    )
+                    someButton.buttonCallNextClientOneMode.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.white
+                        )
+                    )
+                }
+                if (it == 0 && include.currentClientNumber.text.isEmpty() || include.currentClientNumber.text.isEmpty() && include.currentClientService.text.isEmpty()) {
+                    with(someButton.buttonCallNextClientAgainOneMode) {
+                        isEnabled = false
+                        background =
+                            ContextCompat.getDrawable(requireActivity(), R.drawable.disable_button)
+                        setTextColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.gray_text
+                            )
+                        )
+                    }
+                } else {
+                    with(someButton.buttonCallNextClientAgainOneMode) {
+                        isEnabled = true
+                        background =
+                            ContextCompat.getDrawable(requireActivity(), R.drawable.green_button)
+                        setTextColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.white
+                            )
+                        )
+                    }
                 }
             }
         }
         with(binding.someButton) {
+            buttonCallNextClientOneMode.setOnClickListener {
+                statusClient = 0
+                killNextCustomer()
+                changeStatusClient()
+
+                CoroutineScope(Dispatchers.Main).launch {
+                    delay(1000)
+                    statusClient = 1
+                    inviteNextCustomer()
+                    setInviteCustomerInfo()
+                    changeStatusClient()
+                }
+            }
+            buttonCallNextClientAgainOneMode.setOnClickListener {
+                statusClient = 1
+                inviteNextCustomer()
+                setInviteCustomerInfo()
+                changeStatusClient()
+            }
             buttonCallNextClient.setOnClickListener {
                 statusClient = 1
                 inviteNextCustomer()
@@ -164,12 +261,23 @@ class MainFragment : Fragment() {
                 visibleButtonStartWorkWithCustomer = false
                 visibleButtonInviteAgainCustomer = false
                 visibleButtonNoNextCustomer = false
-                visibleButtonRedirectCustomer = true
-                visibleButtonCustomerToPostponed = true
+                visibleButtonCustomerToPostponed =
+                    PreferencesManager.getInstance(requireContext())
+                        .getBoolean(PreferencesManager.PREF_SWITCH_POSTPONED, false)
+                visibleButtonRedirectCustomer = PreferencesManager.getInstance(requireContext())
+                    .getBoolean(PreferencesManager.PREF_SWITCH_REDIRECT, false)
                 visibleButtonFinishWorkWithCustomer = true
 
                 getStartWorkWithCustomer()
                 changeButtonVisible()
+                changeStatusClient()
+
+
+            }
+            buttonCallNextClientAgain.setOnClickListener {
+                statusClient = 1
+                inviteNextCustomer()
+                setInviteCustomerInfo()
                 changeStatusClient()
             }
             buttonNoClient.setOnClickListener {
@@ -288,7 +396,8 @@ class MainFragment : Fragment() {
                 if (visibleButtonStartWorkWithCustomer) View.VISIBLE else View.GONE
             buttonCallNextClientAgain.visibility =
                 if (visibleButtonInviteAgainCustomer) View.VISIBLE else View.GONE
-            buttonNoClient.visibility = if (visibleButtonNoNextCustomer) View.VISIBLE else View.GONE
+            buttonNoClient.visibility =
+                if (visibleButtonNoNextCustomer) View.VISIBLE else View.GONE
             buttonRedirect.visibility =
                 if (visibleButtonRedirectCustomer) View.VISIBLE else View.GONE
             buttonPostpone.visibility =

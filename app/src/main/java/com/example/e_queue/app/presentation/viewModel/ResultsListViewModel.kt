@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_queue.app.data.model.ResultList
-import com.example.e_queue.app.data.model.SelectedResults
 import com.example.e_queue.app.domain.repository.EQueueRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

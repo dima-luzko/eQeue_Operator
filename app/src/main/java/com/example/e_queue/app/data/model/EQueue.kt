@@ -70,19 +70,18 @@ data class NextCustomerInfo(
 
 data class InviteNextCustomerInfo(
     @SerializedName("number")
-    val number: String,
+    val number: String?,
     @SerializedName("to_service")
     val serviceName: InviteNextCustomerServiceInfo,
     @SerializedName("prefix")
-    val prefix: String
+    val prefix: String?
 )
 
 data class InviteNextCustomerServiceInfo(
     @SerializedName("name")
-    val name: String,
+    val name: String?,
     @SerializedName("result_required")
     val resultRequired: Boolean
-
 )
 
 data class ServicesLength(
@@ -126,9 +125,20 @@ data class ServiceInfoForServiceLength(
     val number: String,
 )
 
-data class SelectedResults(
-    var rowIndex: Int = -1,
-    val resultId: Int
+data class BodyForPostponedCustomer(
+    @SerializedName("user_id")
+    var userId: Int,
+    @SerializedName("comments")
+    val comments: String?,
+    @SerializedName("is_only_mine")
+    val isOnlyMine: Boolean,
+    @SerializedName("postponed_period")
+    val postponedPeriod: Int
+)
+
+data class ApiError(
+    val errorCode: Int,
+    val errorMessage: String
 )
 
 

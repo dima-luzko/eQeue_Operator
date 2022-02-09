@@ -13,4 +13,5 @@ interface EQueueRepository {
     suspend fun redirectCustomer(customer: BodyForRedirectCustomer)
     suspend fun getResultsList(): ResultList
     suspend fun finishWorkWithCustomer(result: BodyForFinishWorkWithCustomer)
+    suspend fun customerToPostpone(customer: BodyForPostponedCustomer)
 }

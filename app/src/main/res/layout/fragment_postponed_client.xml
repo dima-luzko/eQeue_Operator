@@ -31,42 +31,42 @@
 
     <TextView
         android:id="@+id/workspace"
+        style="@style/toolbar_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_6mdp"
         android:layout_marginTop="@dimen/_10mdp"
         android:text="@string/workspace"
-        style="@style/toolbar_bold"
         app:layout_constraintStart_toEndOf="@id/user_img"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/workspace_number"
+        style="@style/toolbar_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_6mdp"
         android:layout_marginTop="@dimen/_10mdp"
-        style="@style/toolbar_bold"
         app:layout_constraintStart_toEndOf="@id/workspace"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/operator"
+        style="@style/toolbar_normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_6mdp"
         android:text="@string/operator"
-        style="@style/toolbar_normal"
 
         app:layout_constraintStart_toEndOf="@id/user_img"
         app:layout_constraintTop_toBottomOf="@id/workspace" />
 
     <TextView
         android:id="@+id/operator_name"
+        style="@style/toolbar_normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_6mdp"
-        style="@style/toolbar_normal"
         app:layout_constraintStart_toEndOf="@id/operator"
         app:layout_constraintTop_toTopOf="@id/operator" />
 
@@ -83,13 +83,12 @@
 
     <TextView
         android:id="@+id/number_of_client"
+        style="@style/roboto_bold_14"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_20mdp"
-        style="@style/roboto_bold_14"
-        app:layout_constraintTop_toBottomOf="@id/postpone_text_hh"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/postpone_text_hh" />
 
     <View
         android:id="@+id/time"
@@ -99,75 +98,75 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/number_of_client" />
-    <TextView
-        android:id="@+id/to_postpone_a"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/to_postpone_a"
-        style="@style/roboto_regular_10_dark"
-        android:layout_marginStart="@dimen/_8mdp"
-        app:layout_constraintStart_toStartOf="@id/time"
-        app:layout_constraintTop_toTopOf="@id/time"
-        app:layout_constraintBottom_toBottomOf="@id/time"
-        />
 
     <TextView
+        android:id="@+id/to_postpone_a"
+        style="@style/roboto_regular_10_dark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8mdp"
+        android:text="@string/to_postpone_a"
+        app:layout_constraintBottom_toBottomOf="@id/time"
+        app:layout_constraintStart_toStartOf="@id/time"
+        app:layout_constraintTop_toTopOf="@id/time" />
+
+    <TextView
+        android:id="@+id/postponed_period"
         style="@style/roboto_bold_10_dark"
         android:layout_width="@dimen/_14mdp"
         android:layout_height="@dimen/_14mdp"
         android:layout_marginStart="@dimen/_4mdp"
-        android:text="15"
         android:layout_marginTop="@dimen/_1mdp"
+        android:textAlignment="center"
+        android:text="@string/zero"
         app:layout_constraintBottom_toBottomOf="@id/time"
         app:layout_constraintStart_toEndOf="@id/to_postpone_a"
-        app:layout_constraintTop_toTopOf="@id/time"
-         />
+        app:layout_constraintTop_toTopOf="@id/time" />
 
     <TextView
+        style="@style/roboto_regular_10_dark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/minus"
-        style="@style/roboto_regular_10_dark"
         android:layout_marginEnd="@dimen/_36mdp"
-        app:layout_constraintTop_toTopOf="@id/time"
+        android:text="@string/minus"
         app:layout_constraintBottom_toBottomOf="@id/time"
         app:layout_constraintEnd_toStartOf="@id/minus"
-        />
+        app:layout_constraintTop_toTopOf="@id/time" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/minus"
         android:layout_width="@dimen/_16mdp"
         android:layout_height="@dimen/_16mdp"
+        android:layout_marginEnd="@dimen/_8mdp"
+        android:background="@drawable/button_minus"
         android:src="@drawable/ic_minus"
         android:textColor="@color/white"
-        android:background="@drawable/button_minus"
-        android:layout_marginEnd="@dimen/_8mdp"
-        app:layout_constraintTop_toTopOf="@id/time"
         app:layout_constraintBottom_toBottomOf="@id/time"
         app:layout_constraintEnd_toStartOf="@id/plus"
-        />
+        app:layout_constraintTop_toTopOf="@id/time" />
+
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/plus"
         android:layout_width="@dimen/_16mdp"
         android:layout_height="@dimen/_16mdp"
+        android:layout_marginEnd="@dimen/_8mdp"
+        android:background="@drawable/button_plus"
         android:src="@drawable/ic_plus"
         android:textColor="@color/white"
-        android:background="@drawable/button_plus"
-        android:layout_marginEnd="@dimen/_8mdp"
-        app:layout_constraintEnd_toEndOf="@id/time"
-        app:layout_constraintTop_toTopOf="@id/time"
         app:layout_constraintBottom_toBottomOf="@id/time"
-        />
+        app:layout_constraintEnd_toEndOf="@id/time"
+        app:layout_constraintTop_toTopOf="@id/time" />
 
     <EditText
         android:id="@+id/input_postponing_comment"
+        style="@style/roboto_regular_10_light"
         android:layout_width="@dimen/_200mdp"
         android:layout_height="@dimen/_70mdp"
-        android:background="@drawable/input_img_for_comments"
         android:layout_marginTop="@dimen/_10mdp"
-        android:hint="@string/comments"
-        style="@style/roboto_regular_10_light"
+        android:background="@drawable/input_img_for_comments"
         android:gravity="left"
+        android:hint="@string/comments"
+        android:maxLength="150"
         android:padding="@dimen/_8mdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -191,13 +190,13 @@
 
     <CheckBox
         android:id="@+id/checkbox_only_for_me"
+        style="@style/roboto_regular_10_dark"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_20mdp"
-        android:text="@string/only_for_me"
-        android:buttonTint="@color/green"
-        style="@style/roboto_regular_10_dark"
-        android:layout_marginEnd="@dimen/_8mdp"
         android:layout_marginStart="@dimen/_8mdp"
+        android:layout_marginEnd="@dimen/_8mdp"
+        android:buttonTint="@color/green"
+        android:text="@string/only_for_me"
         app:layout_constraintBottom_toBottomOf="@id/only_for_me_client_view"
         app:layout_constraintStart_toStartOf="@id/only_for_me_client_view"
         app:layout_constraintTop_toTopOf="@id/only_for_me_client_view" />
@@ -206,29 +205,29 @@
         android:id="@+id/button_postponing"
         android:layout_width="@dimen/_200mdp"
         android:layout_height="@dimen/_28mdp"
+        android:layout_marginBottom="@dimen/_10mdp"
         android:background="@drawable/green_button"
         android:fontFamily="@font/roboto_regular"
         android:text="@string/to_postpone"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="@dimen/_12font_mdp"
-        android:layout_marginBottom="@dimen/_10mdp"
+        app:layout_constraintBottom_toTopOf="@id/button_cancel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintBottom_toTopOf="@id/button_cancel" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_cancel"
         style="@style/roboto_regular_14"
         android:layout_width="@dimen/_200mdp"
         android:layout_height="@dimen/_28mdp"
+        android:layout_marginBottom="@dimen/_20mdp"
         android:background="@drawable/button_login"
         android:text="@string/cancel"
         android:textAllCaps="false"
         android:textSize="@dimen/_12font_mdp"
-        android:layout_marginBottom="@dimen/_20mdp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

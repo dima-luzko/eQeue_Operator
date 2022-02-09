@@ -43,9 +43,9 @@ class SettingViewModel(context: Context) : ViewModel() {
                 .getBoolean(PreferencesManager.PREF_SWITCH_ONE_MODE, false)
 
             value = UiState(
-                first = oneMode == true,
-                second = oneMode == true,
-                third = postponed == true || redirect == true
+                first = oneMode,
+                second = oneMode,
+                third = postponed || redirect
             )
         }
 

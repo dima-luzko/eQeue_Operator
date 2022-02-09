@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 
 class RemoteDataSource {
     private val gson = GsonBuilder().create()
-    val retrofit = Retrofit.Builder()
+    val retrofit: EQueueService = Retrofit.Builder()
         .baseUrl(Constants.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(getHttpClient())
@@ -26,5 +26,4 @@ class RemoteDataSource {
             .connectTimeout(1L, TimeUnit.MINUTES)
         return builder.build()
     }
-
 }

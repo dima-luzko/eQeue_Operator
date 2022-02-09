@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.e_queue.app.data.model.BodyForFinishWorkWithCustomer
+import com.example.e_queue.app.data.model.BodyForPostponedCustomer
 import com.example.e_queue.app.data.model.BodyForRedirectCustomer
 import com.example.e_queue.app.data.model.OperationWithLoggedUser
 import com.example.e_queue.app.domain.repository.EQueueRepository
@@ -33,6 +34,12 @@ class OperationWithLoggedUserViewModel constructor(
     fun finishWorkWithCustomer(body: BodyForFinishWorkWithCustomer) {
         viewModelScope.launch(Dispatchers.IO) {
             eQueueRepository.finishWorkWithCustomer(body)
+        }
+    }
+
+    fun customerToPostpone(body: BodyForPostponedCustomer){
+        viewModelScope.launch(Dispatchers.IO) {
+            eQueueRepository.customerToPostpone(body)
         }
     }
 }

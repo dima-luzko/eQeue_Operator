@@ -71,7 +71,9 @@ class LoggedUserViewModel constructor(
 
     fun killNextCustomer() {
         viewModelScope.launch(Dispatchers.IO) {
-            eQueueRepository.killNextCustomer(loggedUserModel.id)
+            runCatching {
+                eQueueRepository.killNextCustomer(loggedUserModel.id)
+            }
         }
     }
 

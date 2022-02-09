@@ -57,6 +57,7 @@
     <string name="wrong_password_snack_bar">Введен не верный пароль.</string>
     <string name="comments">Комментарий…</string>
     <string name="service_name">Название услуги</string>
+    <string name="zero">0</string>
 
 
 </resources>

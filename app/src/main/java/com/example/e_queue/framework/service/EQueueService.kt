@@ -36,4 +36,7 @@ interface EQueueService {
     @POST("operator/getFinishCustomer")
     suspend fun finishWorkWithCustomer(@Body result: BodyForFinishWorkWithCustomer)
 
+    @POST("operator/customerToPostpone")
+    suspend fun customerToPostpone(@Body customer: BodyForPostponedCustomer)
+
 }
