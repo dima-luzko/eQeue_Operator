@@ -37,7 +37,8 @@
         android:layout_marginStart="@dimen/_10mdp"
         app:layout_constraintBottom_toBottomOf="@id/toolbar_settings"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/toolbar_settings" />
+        app:layout_constraintTop_toTopOf="@id/toolbar_settings"
+        attr:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/settings_text_hh"
@@ -68,7 +69,8 @@
         android:layout_height="@dimen/_1mdp"
         android:layout_marginTop="@dimen/_15mdp"
         android:src="@drawable/ic_line_between_settings"
-        app:layout_constraintTop_toBottomOf="@id/settings_text_postpone" />
+        app:layout_constraintTop_toBottomOf="@id/settings_text_postpone"
+        attr:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/settings_text_redirect"
@@ -87,7 +89,8 @@
         android:layout_height="@dimen/_1mdp"
         android:src="@drawable/ic_line_between_settings"
         android:layout_marginTop="@dimen/_15mdp"
-        app:layout_constraintTop_toBottomOf="@id/settings_text_redirect" />
+        app:layout_constraintTop_toBottomOf="@id/settings_text_redirect"
+        attr:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/settings_text_one_button_mode"
@@ -135,17 +138,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/settings_text_one_button_mode" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/appCompatButton"
-        style="@style/roboto_regular_12_green_buttons"
-        android:layout_width="@dimen/_200mdp"
-        android:layout_height="@dimen/_30mdp"
-        android:background="@drawable/green_button"
-        android:text="@string/save"
-        android:textAllCaps="false"
-        android:layout_marginBottom="@dimen/_30mdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/appCompatButton"-->
+<!--        style="@style/roboto_regular_12_green_buttons"-->
+<!--        android:layout_width="@dimen/_200mdp"-->
+<!--        android:layout_height="@dimen/_30mdp"-->
+<!--        android:background="@drawable/green_button"-->
+<!--        android:text="@string/save"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:layout_marginBottom="@dimen/_30mdp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

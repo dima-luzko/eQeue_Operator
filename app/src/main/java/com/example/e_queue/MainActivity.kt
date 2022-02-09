@@ -3,7 +3,6 @@ package com.example.e_queue
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
@@ -52,12 +51,10 @@ class MainActivity : AppCompatActivity() {
         when (keyCode) {
             KeyEvent.KEYCODE_VOLUME_DOWN -> {
                 buttonDown = System.currentTimeMillis() / 1000
-                Log.d("p", "$buttonDown")
                 result = true
             }
             KeyEvent.KEYCODE_VOLUME_UP -> {
                 buttonUp = System.currentTimeMillis() / 1000
-                Log.d("p", "$buttonUp")
                 result = true
             }
             else -> result = super.onKeyDown(keyCode, event)
