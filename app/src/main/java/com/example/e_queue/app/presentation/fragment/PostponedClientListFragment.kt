@@ -18,6 +18,7 @@ import com.example.e_queue.databinding.FragmentPostponedClientsListBinding
 import com.example.e_queue.utils.Constants
 import com.example.e_queue.utils.PreferencesManager
 import com.example.e_queue.utils.changeBackgroundAndNavBarColor
+import com.example.e_queue.utils.snackBar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -117,7 +118,11 @@ class PostponedClientListFragment : Fragment() {
                 requireActivity().onBackPressed()
             }
             buttonInviteClient.setOnClickListener {
-                invitePostponedCustomers()
+                if (!selectedResults) {
+                    snackBar(requireView(), requireContext(), R.string.choose_client_snack_bar)
+                } else {
+                    invitePostponedCustomers()
+                }
             }
         }
     }

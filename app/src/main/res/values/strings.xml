@@ -52,6 +52,7 @@
     <string name="choose_user">Выберите пользователя…</string>
     <string name="choose_user_snack_bar">Необходимо выбрать пользователя.</string>
     <string name="choose_results_snack_bar">Необходимо выбрать результат работы.</string>
+    <string name="choose_client_snack_bar">Необходимо выбрать клиента.</string>
     <string name="choose_service_snack_bar">Необходимо выбрать услугу.</string>
     <string name="enter_password_snack_bar">Для входа необходимо ввести пароль.</string>
     <string name="wrong_password_snack_bar">Введен не верный пароль.</string>

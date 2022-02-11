@@ -16,6 +16,7 @@ import com.example.e_queue.app.presentation.viewModel.OperationWithLoggedUserVie
 import com.example.e_queue.app.presentation.viewModel.ResultsListViewModel
 import com.example.e_queue.databinding.FragmentResultBinding
 import com.example.e_queue.utils.Constants
+import com.example.e_queue.utils.PreferencesManager
 import com.example.e_queue.utils.changeBackgroundAndNavBarColor
 import com.example.e_queue.utils.snackBar
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -65,6 +66,8 @@ class ResultFragment : Fragment() {
     }
 
     private fun finishWorkWithCustomer() {
+        PreferencesManager.getInstance(requireContext())
+            .putBoolean(PreferencesManager.PREF_FLAG, false)
         operationOperationWithLoggedUserViewModel.operationWithLoggedUser.observe(viewLifecycleOwner) { loggedUser ->
             resultsListViewModel.selectedResults.observe(viewLifecycleOwner) { result ->
                 val body = BodyForFinishWorkWithCustomer(

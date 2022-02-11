@@ -269,15 +269,11 @@ class MainFragment : Fragment() {
                 }
                 getStartWorkWithCustomer()
                 changeStatusClient()
-                Log.d("uuuu", "call start")
-                PreferencesManager.getInstance(requireContext())
-                    .putBoolean(PreferencesManager.PREF_FLAG, false)
             }
             buttonCallNextClientAgain.setOnClickListener {
                 statusClient = 1
                 inviteNextCustomer()
                 changeStatusClient()
-                Log.d("uuuu", "call again")
             }
             buttonNoClient.setOnClickListener {
                 statusClient = 0
@@ -290,7 +286,6 @@ class MainFragment : Fragment() {
                     buttonListPostponedClients.isVisible = true
                 }
                 changeStatusClient()
-                Log.d("uuuu", "call now")
                 PreferencesManager.getInstance(requireContext())
                     .putBoolean(PreferencesManager.PREF_FLAG, false)
             }
@@ -302,11 +297,21 @@ class MainFragment : Fragment() {
                     val res =
                         arguments?.getParcelable<InvitePostponedClient>(Constants.INVITE_POSTPONED_ARG)
                     loggedUserViewModel.loggedUser.observe(viewLifecycleOwner) { loggedUser ->
-                        val body = BodyForFinishWorkWithCustomer(
-                            userId = loggedUser.id,
-                            resultId = -1
-                        )
-                        finishWorkWithCustomer(body)
+                        if (res?.resultRequired == false) {
+                            val body = BodyForFinishWorkWithCustomer(
+                                userId = loggedUser.id,
+                                resultId = -1
+                            )
+                            finishWorkWithCustomer(body)
+                        } else {
+                            replaceFragment(
+                                fragment = ResultFragment(),
+                                userId = loggedUser.id,
+                                userName = loggedUser.name,
+                                point = loggedUser.point,
+                                clientNumber = binding.include.currentClientNumber.text.toString()
+                            )
+                        }
                     }
                 } else {
                     loggedUserViewModel.loggedUser.observe(viewLifecycleOwner) { loggedUser ->
@@ -432,6 +437,16 @@ class MainFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun setInviteCustomerInfo() {
+        loggedUserViewModel.inviteNextCustomerInfo.observe(viewLifecycleOwner) {
+            with(binding.include) {
+                currentClientNumber.text = it.prefix + it.number
+                currentClientService.text = it.serviceName.name
+            }
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setInvitePostponedCustomerInfo() {
         if (PreferencesManager.getInstance(requireContext())
                 .getBoolean(PreferencesManager.PREF_FLAG, false)
         ) {
@@ -450,19 +465,13 @@ class MainFragment : Fragment() {
             }
             statusClient = 1
             changeStatusClient()
-        } else {
-            loggedUserViewModel.inviteNextCustomerInfo.observe(viewLifecycleOwner) {
-                with(binding.include) {
-                    currentClientNumber.text = it.prefix + it.number
-                    currentClientService.text = it.serviceName.name
-                }
-            }
         }
     }
 
     override fun onResume() {
         super.onResume()
         setInviteCustomerInfo()
+        setInvitePostponedCustomerInfo()
         changeStatusClient()
     }
 
