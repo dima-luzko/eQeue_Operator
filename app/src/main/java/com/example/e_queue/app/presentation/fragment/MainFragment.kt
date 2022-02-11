@@ -383,6 +383,8 @@ class MainFragment : Fragment() {
         }
         changeStatusClient()
         loggedUserViewModel.finishWorkWithCustomer(body)
+        PreferencesManager.getInstance(requireContext())
+            .putBoolean(PreferencesManager.PREF_FLAG, false)
     }
 
     private fun replaceFragment(

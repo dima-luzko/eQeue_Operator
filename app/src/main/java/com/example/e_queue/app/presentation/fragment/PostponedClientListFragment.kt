@@ -113,6 +113,31 @@ class PostponedClientListFragment : Fragment() {
     }
 
     private fun handleClick() {
+        postponedListViewModel.postponedClientLength.observe(viewLifecycleOwner) {
+            with(binding.buttonInviteClient) {
+                if (it == "0") {
+                    isEnabled = false
+                    background =
+                        ContextCompat.getDrawable(requireActivity(), R.drawable.disable_button)
+                    setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.gray_text
+                        )
+                    )
+                } else {
+                    isEnabled = true
+                    background =
+                        ContextCompat.getDrawable(requireActivity(), R.drawable.green_button)
+                    setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.white
+                        )
+                    )
+                }
+            }
+        }
         with(binding) {
             buttonCancel.setOnClickListener {
                 requireActivity().onBackPressed()
@@ -130,9 +155,9 @@ class PostponedClientListFragment : Fragment() {
     private fun invitePostponedCustomers() {
         PreferencesManager.getInstance(requireContext())
             .putBoolean(PreferencesManager.PREF_FLAG, true)
-        operationOperationWithLoggedUserViewModel.operationWithLoggedUser.observe(viewLifecycleOwner){ loggedUser->
+        operationOperationWithLoggedUserViewModel.operationWithLoggedUser.observe(viewLifecycleOwner) { loggedUser ->
             postponedListViewModel.selectedClientId.observe(viewLifecycleOwner) { selectedClientId ->
-                postponedListViewModel.invitePostponedCustomer(loggedUser.userId,selectedClientId)
+                postponedListViewModel.invitePostponedCustomer(loggedUser.userId, selectedClientId)
             }
             postponedListViewModel.invitePostponedCustomer.observe(viewLifecycleOwner) { postponedClient ->
 
