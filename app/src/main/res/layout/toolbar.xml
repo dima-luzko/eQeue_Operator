@@ -25,7 +25,8 @@
         android:scaleType="fitXY"
         android:src="@drawable/ic_settings"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/workspace"
@@ -74,6 +75,19 @@
         android:textStyle="normal"
         app:layout_constraintStart_toEndOf="@+id/operator"
         app:layout_constraintTop_toTopOf="@+id/operator" />
+
+    <TextView
+        android:id="@+id/invisible_result_required"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+        android:visibility="invisible"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12font_mdp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toStartOf="@+id/exit"
+        app:layout_constraintBottom_toBottomOf="@id/toolbars"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/exit"

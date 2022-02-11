@@ -16,7 +16,7 @@
         android:lines="1"
         android:paddingEnd="@dimen/_20mdp"
         android:paddingStart="@dimen/_20mdp"
-        android:paddingBottom="@dimen/_2mdp"
+        android:paddingBottom="@dimen/_5mdp"
         android:textAlignment="center"
         android:textColor="@color/user_item_text"
         android:textSize="@dimen/_12font_mdp"

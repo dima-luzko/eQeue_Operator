@@ -315,32 +315,23 @@ class MainFragment : Fragment() {
                     }
                 } else {
                     loggedUserViewModel.loggedUser.observe(viewLifecycleOwner) { loggedUser ->
-                        val body = BodyForFinishWorkWithCustomer(
-                            userId = loggedUser.id,
-                            resultId = -1
-                        )
-                        finishWorkWithCustomer(body)
+                        if (binding.toolbar.invisibleResultRequired.text == "false") {
+                            val body = BodyForFinishWorkWithCustomer(
+                                userId = loggedUser.id,
+                                resultId = -1
+                            )
+                            finishWorkWithCustomer(body)
+                        } else {
+                            replaceFragment(
+                                fragment = ResultFragment(),
+                                userId = loggedUser.id,
+                                userName = loggedUser.name,
+                                point = loggedUser.point,
+                                clientNumber = binding.include.currentClientNumber.text.toString()
+                            )
+                        }
                     }
                 }
-//                loggedUserViewModel.loggedUser.observe(viewLifecycleOwner) { loggedUser ->
-//                    loggedUserViewModel.inviteNextCustomerInfo.observe(viewLifecycleOwner) {
-//                        if (!it.serviceName.resultRequired) {
-//                            val body = BodyForFinishWorkWithCustomer(
-//                                userId = 2,
-//                                resultId = 1
-//                            )
-//                            loggedUserViewModel.finishWorkWithCustomer(body)
-//                        } else {
-//                            replaceFragment(
-//                                fragment = ResultFragment(),
-//                                userId = 2,
-//                                userName = loggedUser.name,
-//                                point = loggedUser.point,
-//                                clientNumber = binding.include.currentClientNumber.text.toString()
-//                            )
-//                        }
-//                    }
-//                }
             }
 
             buttonRedirect.setOnClickListener {
@@ -440,9 +431,10 @@ class MainFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun setInviteCustomerInfo() {
         loggedUserViewModel.inviteNextCustomerInfo.observe(viewLifecycleOwner) {
-            with(binding.include) {
-                currentClientNumber.text = it.prefix + it.number
-                currentClientService.text = it.serviceName.name
+            with(binding) {
+                include.currentClientNumber.text = it.prefix + it.number
+                include.currentClientService.text = it.serviceName.name
+                toolbar.invisibleResultRequired.text = it.serviceName.resultRequired.toString()
             }
         }
     }
