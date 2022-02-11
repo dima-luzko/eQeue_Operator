@@ -69,12 +69,16 @@ data class NextCustomerInfo(
 )
 
 data class InviteNextCustomerInfo(
+    @SerializedName("id")
+    val id: Long,
     @SerializedName("number")
     val number: String?,
     @SerializedName("to_service")
     val serviceName: InviteNextCustomerServiceInfo,
     @SerializedName("prefix")
-    val prefix: String?
+    val prefix: String?,
+    @SerializedName("post_status")
+    val comments: String?
 )
 
 data class InviteNextCustomerServiceInfo(
@@ -136,12 +140,6 @@ data class BodyForPostponedCustomer(
     val postponedPeriod: Int
 )
 
-data class ApiError(
-    val errorCode: Int,
-    val errorMessage: String
-)
-
-
 @Parcelize
 data class SelectedUser(
     val id: Int,
@@ -171,7 +169,10 @@ data class OperationWithLoggedUser(
     val clientNumber: String?
 ) : Parcelable
 
-
-
-
-
+@Parcelize
+data class InvitePostponedClient(
+    val number: String?,
+    val serviceName: String?,
+    val prefix: String?,
+    val resultRequired: Boolean
+) : Parcelable

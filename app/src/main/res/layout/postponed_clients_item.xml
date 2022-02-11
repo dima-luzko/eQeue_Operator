@@ -1,62 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/_200mdp"
-    android:layout_height="@dimen/_48mdp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<View
-    android:layout_width="@dimen/_200mdp"
-    android:layout_height="@dimen/_48mdp"
-    android:background="@drawable/green_button"
-    />
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/_60mdp">
+
+    <View
+        android:id="@+id/card"
+        android:layout_width="@dimen/_200mdp"
+        android:layout_height="@dimen/_60mdp"
+        android:background="@drawable/background_for_postponed_list"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/container"
+        android:layout_width="@dimen/_160mdp"
+        android:layout_height="@dimen/_18mdp"
+        android:layout_marginTop="@dimen/_5mdp"
+        app:layout_constraintEnd_toEndOf="@+id/card"
+        app:layout_constraintStart_toStartOf="@+id/card"
+        app:layout_constraintTop_toTopOf="@+id/card" />
+
+    <TextView
+        android:id="@+id/client_number"
+        style="@style/roboto_regular_12_green_buttons"
+        android:layout_width="@dimen/_160mdp"
+        android:layout_height="wrap_content"
+        android:text="A4 - Eckeufdfdfdfdfddfdfdfdfdfddfddfdf"
+        android:maxLines="1"
+        android:textSize="@dimen/_11font_mdp"
+        android:textAlignment="center"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/gray"
+        app:layout_constraintEnd_toEndOf="@+id/container"
+        app:layout_constraintStart_toStartOf="@+id/container"
+        app:layout_constraintTop_toTopOf="@+id/container" />
 
     <TextView
         android:id="@+id/comment"
         style="@style/roboto_regular_10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Комментарий lkbyysq длинный ghjhjjh оалалвыладвтосаотчмот"
+        android:layout_width="@dimen/_150mdp"
+        android:layout_height="@dimen/_30mdp"
+        android:ellipsize="end"
+        android:gravity="center"
         android:maxLines="2"
-        android:textColor="#D6FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@id/area"
-        android:layout_marginBottom="@dimen/_3mdp"
-        android:paddingHorizontal="@dimen/_8mdp"
-/>
-
-    <LinearLayout
-        android:id="@+id/area"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
-
-
-        <TextView
-            android:id="@+id/current_client_number"
-            style="@style/roboto_regular_12_green_buttons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="A4"
-            app:layout_constraintBottom_toBottomOf="@+id/dash" />
-
-        <TextView
-            android:id="@+id/dash"
-            style="@style/roboto_regular_12_green_buttons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_3mdp"
-            android:text="-"
-            app:layout_constraintBottom_toBottomOf="@+id/current_client_service"
-            app:layout_constraintStart_toEndOf="@id/current_client_number" />
-
-        <TextView
-            android:id="@+id/current_client_service"
-            style="@style/roboto_regular_12_green_buttons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_3mdp"
-            android:text="Услуга"
-            app:layout_constraintStart_toEndOf="@id/dash" />
-    </LinearLayout>
+        android:textSize="@dimen/_10font_mdp"
+        android:paddingHorizontal="@dimen/_2mdp"
+        android:text="Комментарий lkbyysq длинный ghjhjjh оалалвыладвтосаотчмот"
+        android:textAlignment="center"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@+id/card"
+        app:layout_constraintEnd_toEndOf="@+id/card"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="@+id/card"
+        app:layout_constraintTop_toBottomOf="@+id/container"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="RtlCompat" />
 </androidx.constraintlayout.widget.ConstraintLayout>

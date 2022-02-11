@@ -67,7 +67,7 @@
         app:layout_constraintTop_toTopOf="@id/operator" />
 
     <TextView
-        android:id="@+id/amount_of_clients_text1"
+        android:id="@+id/amount_of_clients"
         style="@style/roboto_regular_14"
         android:layout_width="@dimen/_238mdp"
         android:layout_height="wrap_content"
@@ -77,27 +77,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-    <TextView
-        android:id="@+id/amount_of_clients_text2"
-        style="@style/roboto_regular_14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_35font_mdp"
-        android:text="@string/amount_of_postponed_clients2"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/amount_of_clients_text1" />
-
-    <TextView
-        android:id="@+id/amount_of_clients"
-        style="@style/roboto_bold_14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_8font_mdp"
-        app:layout_constraintStart_toEndOf="@id/amount_of_clients_text2"
-        app:layout_constraintTop_toTopOf="@id/amount_of_clients_text2" />
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/postponed_client_list"
         android:layout_width="wrap_content"
@@ -105,7 +84,7 @@
         android:layout_margin="@dimen/_15mdp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/button_postponing"
+        app:layout_constraintBottom_toTopOf="@+id/button_invite_client"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/amount_of_clients"
@@ -113,7 +92,7 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_postponing"
+        android:id="@+id/button_invite_client"
         android:layout_width="@dimen/_200mdp"
         android:layout_height="@dimen/_28mdp"
         android:layout_marginTop="@dimen/_20mdp"

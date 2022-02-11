@@ -44,7 +44,7 @@
     <string name="no_connection">Нет соединения с сервером</string>
     <string name="ok">ОК</string>
     <string name="success_connection">Соединение с сервером установлено</string>
-    <string name="amount_of_postponed_clients1">Общее число отложенных клиентов</string>
+    <string name="amount_of_postponed_clients1">Общее число отложенных клиентов в очереди: %s</string>
     <string name="amount_of_postponed_clients2">в очереди:</string>
     <string name="to_call_client">Вызвать клиента</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>

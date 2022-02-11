@@ -61,11 +61,9 @@ class LoggedUserViewModel constructor(
     }
 
     fun inviteNextCustomer() {
-        runCatching {
             viewModelScope.launch(Dispatchers.IO) {
                 val nextCustomerInfo = eQueueRepository.inviteNextCustomer(loggedUserModel.id)
                 _inviteNextCustomerInfo.postValue(nextCustomerInfo)
-            }
         }
     }
 

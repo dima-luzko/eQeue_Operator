@@ -1,18 +1,23 @@
 package com.example.e_queue.app.presentation.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.e_queue.R
 import com.example.e_queue.app.data.model.BodyForFinishWorkWithCustomer
+import com.example.e_queue.app.data.model.InvitePostponedClient
 import com.example.e_queue.app.data.model.LoggedUser
 import com.example.e_queue.app.data.model.OperationWithLoggedUser
 import com.example.e_queue.app.presentation.viewModel.LoggedUserViewModel
 import com.example.e_queue.databinding.FragmentMainBinding
+import com.example.e_queue.utils.Constants
 import com.example.e_queue.utils.Constants.Companion.LOGGED_USER_ARG
 import com.example.e_queue.utils.Constants.Companion.OPERATION_WITH_LOGGED_USER_ARG
 import com.example.e_queue.utils.PreferencesManager
@@ -33,16 +38,6 @@ class MainFragment : Fragment() {
     }
     private val bundle = Bundle()
     private var statusClient = 0
-    private var visibleButtonInviteNextCustomer = false
-    private var visibleButtonLookPostponedListCustomer = false
-    private var visibleButtonStartWorkWithCustomer = false
-    private var visibleButtonInviteAgainCustomer = false
-    private var visibleButtonNoNextCustomer = false
-    private var visibleButtonRedirectCustomer = false
-    private var visibleButtonCustomerToPostponed = false
-    private var visibleButtonFinishWorkWithCustomer = false
-    private var visibleOneModeButtonInviteNextCustomer = false
-    private var visibleOneModeButtonInviteAgainCustomer = false
 
     companion object {
         fun newInstance(loggedUserModel: LoggedUser) = MainFragment().apply {
@@ -126,24 +121,20 @@ class MainFragment : Fragment() {
     }
 
     private fun changeVisibilityOneButtonMode() {
-        if (PreferencesManager.getInstance(requireContext())
-                .getBoolean(PreferencesManager.PREF_SWITCH_ONE_MODE, false)
-        ) {
-            visibleButtonInviteNextCustomer = false
-            visibleButtonLookPostponedListCustomer = false
-            visibleButtonStartWorkWithCustomer = false
-            visibleButtonInviteAgainCustomer = false
-            visibleButtonNoNextCustomer = false
-            visibleButtonRedirectCustomer = false
-            visibleButtonCustomerToPostponed = false
-            visibleButtonFinishWorkWithCustomer = false
-            visibleOneModeButtonInviteNextCustomer = true
-            visibleOneModeButtonInviteAgainCustomer = true
-        } else {
-            visibleButtonInviteNextCustomer = true
-            visibleButtonLookPostponedListCustomer = true
-            visibleOneModeButtonInviteNextCustomer = false
-            visibleOneModeButtonInviteAgainCustomer = false
+        with(binding.someButton) {
+            if (PreferencesManager.getInstance(requireContext())
+                    .getBoolean(PreferencesManager.PREF_SWITCH_ONE_MODE, false)
+            ) {
+                buttonCallNextClientOneMode.isVisible = true
+                buttonCallNextClientAgainOneMode.isVisible = true
+                buttonCallNextClient.isVisible = false
+                buttonListPostponedClients.isVisible = false
+            } else {
+                buttonCallNextClientOneMode.isVisible = false
+                buttonCallNextClientAgainOneMode.isVisible = false
+                buttonCallNextClient.isVisible = true
+                buttonListPostponedClients.isVisible = true
+            }
         }
     }
 
@@ -240,78 +231,111 @@ class MainFragment : Fragment() {
             buttonCallNextClient.setOnClickListener {
                 statusClient = 1
                 inviteNextCustomer()
-                setInviteCustomerInfo()
-
-                visibleButtonInviteNextCustomer = false
-                visibleButtonLookPostponedListCustomer = false
-                visibleButtonStartWorkWithCustomer = true
-                visibleButtonInviteAgainCustomer = true
-                visibleButtonNoNextCustomer = true
-
-                changeButtonVisible()
+                with(binding.someButton) {
+                    buttonCallNextClient.isVisible = false
+                    buttonListPostponedClients.isVisible = false
+                    buttonStartWork.isVisible = true
+                    buttonCallNextClientAgain.isVisible = true
+                    buttonNoClient.isVisible = true
+                }
                 changeStatusClient()
+                Log.d("uuuu", "call invite")
+            }
+            buttonListPostponedClients.setOnClickListener {
+                loggedUserViewModel.loggedUser.observe(viewLifecycleOwner) { loggedUser ->
+                    replaceFragment(
+                        fragment = PostponedClientListFragment(),
+                        userId = loggedUser.id,
+                        userName = loggedUser.name,
+                        point = loggedUser.point,
+                        clientNumber = binding.include.currentClientNumber.text.toString()
+                    )
+                }
+                PreferencesManager.getInstance(requireContext())
+                    .putBoolean(PreferencesManager.PREF_FLAG, false)
             }
             buttonStartWork.setOnClickListener {
                 statusClient = 2
 
-                visibleButtonStartWorkWithCustomer = false
-                visibleButtonInviteAgainCustomer = false
-                visibleButtonNoNextCustomer = false
-                visibleButtonCustomerToPostponed =
-                    PreferencesManager.getInstance(requireContext())
+                with(binding.someButton) {
+                    buttonStartWork.isVisible = false
+                    buttonCallNextClientAgain.isVisible = false
+                    buttonNoClient.isVisible = false
+                    buttonPostpone.isVisible = PreferencesManager.getInstance(requireContext())
                         .getBoolean(PreferencesManager.PREF_SWITCH_POSTPONED, false)
-                visibleButtonRedirectCustomer = PreferencesManager.getInstance(requireContext())
-                    .getBoolean(PreferencesManager.PREF_SWITCH_REDIRECT, false)
-                visibleButtonFinishWorkWithCustomer = true
-
+                    buttonRedirect.isVisible = PreferencesManager.getInstance(requireContext())
+                        .getBoolean(PreferencesManager.PREF_SWITCH_REDIRECT, false)
+                    buttonFinishWork.isVisible = true
+                }
                 getStartWorkWithCustomer()
-                changeButtonVisible()
                 changeStatusClient()
-
-
+                Log.d("uuuu", "call start")
+                PreferencesManager.getInstance(requireContext())
+                    .putBoolean(PreferencesManager.PREF_FLAG, false)
             }
             buttonCallNextClientAgain.setOnClickListener {
                 statusClient = 1
                 inviteNextCustomer()
-                setInviteCustomerInfo()
                 changeStatusClient()
+                Log.d("uuuu", "call again")
             }
             buttonNoClient.setOnClickListener {
                 statusClient = 0
                 killNextCustomer()
-
-                visibleButtonStartWorkWithCustomer = false
-                visibleButtonInviteAgainCustomer = false
-                visibleButtonNoNextCustomer = false
-                visibleButtonInviteNextCustomer = true
-                visibleButtonLookPostponedListCustomer = true
-
-                changeButtonVisible()
+                with(binding.someButton) {
+                    buttonStartWork.isVisible = false
+                    buttonCallNextClientAgain.isVisible = false
+                    buttonNoClient.isVisible = false
+                    buttonCallNextClient.isVisible = true
+                    buttonListPostponedClients.isVisible = true
+                }
                 changeStatusClient()
+                Log.d("uuuu", "call now")
+                PreferencesManager.getInstance(requireContext())
+                    .putBoolean(PreferencesManager.PREF_FLAG, false)
             }
 
             buttonFinishWork.setOnClickListener {
-                loggedUserViewModel.loggedUser.observe(viewLifecycleOwner) { loggedUser ->
-                    loggedUserViewModel.inviteNextCustomerInfo.observe(viewLifecycleOwner) {
-                        if (!it.serviceName.resultRequired) {
-                            val body = BodyForFinishWorkWithCustomer(
-                                userId = loggedUser.id,
-                                resultId = -1
-                            )
-                            finishWorkWithCustomer(body)
-                        } else {
-                            loggedUserViewModel.loggedUser.observe(viewLifecycleOwner) { loggedUser ->
-                                replaceFragment(
-                                    fragment = ResultFragment(),
-                                    userId = loggedUser.id,
-                                    userName = loggedUser.name,
-                                    point = loggedUser.point,
-                                    clientNumber = binding.include.currentClientNumber.text.toString()
-                                )
-                            }
-                        }
+                if (PreferencesManager.getInstance(requireContext())
+                        .getBoolean(PreferencesManager.PREF_FLAG, false)
+                ) {
+                    val res =
+                        arguments?.getParcelable<InvitePostponedClient>(Constants.INVITE_POSTPONED_ARG)
+                    loggedUserViewModel.loggedUser.observe(viewLifecycleOwner) { loggedUser ->
+                        val body = BodyForFinishWorkWithCustomer(
+                            userId = loggedUser.id,
+                            resultId = -1
+                        )
+                        finishWorkWithCustomer(body)
+                    }
+                } else {
+                    loggedUserViewModel.loggedUser.observe(viewLifecycleOwner) { loggedUser ->
+                        val body = BodyForFinishWorkWithCustomer(
+                            userId = loggedUser.id,
+                            resultId = -1
+                        )
+                        finishWorkWithCustomer(body)
                     }
                 }
+//                loggedUserViewModel.loggedUser.observe(viewLifecycleOwner) { loggedUser ->
+//                    loggedUserViewModel.inviteNextCustomerInfo.observe(viewLifecycleOwner) {
+//                        if (!it.serviceName.resultRequired) {
+//                            val body = BodyForFinishWorkWithCustomer(
+//                                userId = 2,
+//                                resultId = 1
+//                            )
+//                            loggedUserViewModel.finishWorkWithCustomer(body)
+//                        } else {
+//                            replaceFragment(
+//                                fragment = ResultFragment(),
+//                                userId = 2,
+//                                userName = loggedUser.name,
+//                                point = loggedUser.point,
+//                                clientNumber = binding.include.currentClientNumber.text.toString()
+//                            )
+//                        }
+//                    }
+//                }
             }
 
             buttonRedirect.setOnClickListener {
@@ -341,22 +365,18 @@ class MainFragment : Fragment() {
     }
 
     private fun finishWorkWithCustomer(body: BodyForFinishWorkWithCustomer) {
+        Log.d("uuuu", "call finishhhhhhhhhhh")
         statusClient = 0
-
-        visibleButtonRedirectCustomer = false
-        visibleButtonCustomerToPostponed = false
-        visibleButtonFinishWorkWithCustomer = false
-        visibleButtonInviteNextCustomer = true
-        visibleButtonLookPostponedListCustomer = true
-
-        with(binding.include) {
-            currentClientNumber.text = ""
-            currentClientService.text = ""
+        with(binding) {
+            someButton.buttonCallNextClient.isVisible = true
+            someButton.buttonListPostponedClients.isVisible = true
+            someButton.buttonPostpone.isVisible = false
+            someButton.buttonRedirect.isVisible = false
+            someButton.buttonFinishWork.isVisible = false
+            include.currentClientNumber.text = ""
+            include.currentClientService.text = ""
         }
-
-        changeButtonVisible()
         changeStatusClient()
-
         loggedUserViewModel.finishWorkWithCustomer(body)
     }
 
@@ -380,31 +400,6 @@ class MainFragment : Fragment() {
         val transaction = parentFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, fragment).addToBackStack(null)
         transaction.commit()
-    }
-
-    private fun changeButtonVisible() {
-        with(binding.someButton) {
-            buttonCallNextClient.visibility =
-                if (visibleButtonInviteNextCustomer) View.VISIBLE else View.GONE
-            buttonListPostponedClients.visibility =
-                if (visibleButtonLookPostponedListCustomer) View.VISIBLE else View.GONE
-            buttonStartWork.visibility =
-                if (visibleButtonStartWorkWithCustomer) View.VISIBLE else View.GONE
-            buttonCallNextClientAgain.visibility =
-                if (visibleButtonInviteAgainCustomer) View.VISIBLE else View.GONE
-            buttonNoClient.visibility =
-                if (visibleButtonNoNextCustomer) View.VISIBLE else View.GONE
-            buttonRedirect.visibility =
-                if (visibleButtonRedirectCustomer) View.VISIBLE else View.GONE
-            buttonPostpone.visibility =
-                if (visibleButtonCustomerToPostponed) View.VISIBLE else View.GONE
-            buttonFinishWork.visibility =
-                if (visibleButtonFinishWorkWithCustomer) View.VISIBLE else View.GONE
-            buttonCallNextClientOneMode.visibility =
-                if (visibleOneModeButtonInviteNextCustomer) View.VISIBLE else View.GONE
-            buttonCallNextClientAgainOneMode.visibility =
-                if (visibleOneModeButtonInviteAgainCustomer) View.VISIBLE else View.GONE
-        }
     }
 
     private fun changeStatusClient() {
@@ -435,18 +430,38 @@ class MainFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setInviteCustomerInfo() {
-        loggedUserViewModel.inviteNextCustomerInfo.observe(viewLifecycleOwner) {
-            with(binding.include) {
-                currentClientNumber.text = (it.prefix + it.number)
-                currentClientService.text = it.serviceName.name
+        if (PreferencesManager.getInstance(requireContext())
+                .getBoolean(PreferencesManager.PREF_FLAG, false)
+        ) {
+            val res =
+                arguments?.getParcelable<InvitePostponedClient>(Constants.INVITE_POSTPONED_ARG)
+            with(binding) {
+                include.currentClientNumber.text = res?.prefix + res?.number
+                include.currentClientService.text = res?.serviceName
+                with(someButton) {
+                    buttonCallNextClient.isVisible = false
+                    buttonListPostponedClients.isVisible = false
+                    buttonStartWork.isVisible = true
+                    buttonCallNextClientAgain.isVisible = true
+                    buttonNoClient.isVisible = true
+                }
+            }
+            statusClient = 1
+            changeStatusClient()
+        } else {
+            loggedUserViewModel.inviteNextCustomerInfo.observe(viewLifecycleOwner) {
+                with(binding.include) {
+                    currentClientNumber.text = it.prefix + it.number
+                    currentClientService.text = it.serviceName.name
+                }
             }
         }
     }
 
     override fun onResume() {
         super.onResume()
-        changeButtonVisible()
         setInviteCustomerInfo()
         changeStatusClient()
     }

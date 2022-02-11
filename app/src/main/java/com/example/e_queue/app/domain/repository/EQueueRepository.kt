@@ -14,4 +14,6 @@ interface EQueueRepository {
     suspend fun getResultsList(): ResultList
     suspend fun finishWorkWithCustomer(result: BodyForFinishWorkWithCustomer)
     suspend fun customerToPostpone(customer: BodyForPostponedCustomer)
+    suspend fun getPostponedPoolInfo(): List<InviteNextCustomerInfo>
+    suspend fun invitePostponedCustomer(userId: Int, customerId: Long): InviteNextCustomerInfo
 }

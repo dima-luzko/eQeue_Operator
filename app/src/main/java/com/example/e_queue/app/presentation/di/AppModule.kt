@@ -32,6 +32,7 @@ val viewModelModules = module {
     viewModel { ServicesListViewModel(get()) }
     viewModel { ResultsListViewModel(get()) }
     viewModel { SettingViewModel(get()) }
+    viewModel { PostponedListViewModel(get()) }
 }
 
 val repositoryModules = module {

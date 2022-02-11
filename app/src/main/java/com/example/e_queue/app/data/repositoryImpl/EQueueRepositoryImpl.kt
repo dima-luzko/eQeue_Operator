@@ -49,4 +49,15 @@ class EQueueRepositoryImpl(private val dataSource: RemoteDataSource): EQueueRepo
         dataSource.retrofit.customerToPostpone(customer)
     }
 
+    override suspend fun getPostponedPoolInfo(): List<InviteNextCustomerInfo> {
+        return dataSource.retrofit.getPostponedPoolInfo()
+    }
+
+    override suspend fun invitePostponedCustomer(
+        userId: Int,
+        customerId: Long
+    ): InviteNextCustomerInfo {
+        return dataSource.retrofit.invitePostponedCustomer(userId, customerId)
+    }
+
 }
