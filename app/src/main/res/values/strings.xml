@@ -22,6 +22,7 @@
     <string name="current_client_service">Название услуги</string>
     <string name="settings">Настройки</string>
     <string name="settings_hh">Операции для работы с клиентами</string>
+    <string name="settings_network">Настройки сети</string>
     <string name="one_button_mode">Режим одной кнопки</string>
     <string name="one_button_mode_explanation">Упрощенный режим работы</string>
     <string name="save">Сохранить</string>
@@ -35,6 +36,8 @@
     <string name="only_for_me">Только для меня</string>
     <string name="check_connection">Проверка соединения с сервером</string>
     <string name="enter_ip">Введите IP-адрес сервера</string>
+    <string name="ip_address_server_text">IP-адрес сервера</string>
+    <string name="ip_address">192.168.0.145:8080</string>
     <string name="check_connection_button">Проверить соединение</string>
     <string name="error_ip">Проблемы с подключением к серверу</string>
     <string name="try_again">Попробовать снова</string>
@@ -59,6 +62,8 @@
     <string name="comments">Комментарий…</string>
     <string name="service_name">Название услуги</string>
     <string name="zero">0</string>
+    <string name="server_no_connection">Соединение с сервером не установлено. \nПроверьте введенный IP-адрес и работу \nсервера.</string>
+    <string name="change">Изменить</string>
 
 
 </resources>

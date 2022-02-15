@@ -9,6 +9,17 @@
     android:background="@drawable/bg_gradient">
 
     <ImageView
+        android:id="@+id/setting"
+        android:layout_width="@dimen/_25mdp"
+        android:layout_height="@dimen/_25mdp"
+        android:src="@drawable/icon_settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/_20mdp"
+        android:layout_marginEnd="@dimen/_20mdp"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
         android:id="@+id/equeue"
         android:layout_width="@dimen/_120mdp"
         android:layout_height="@dimen/_35mdp"
@@ -50,7 +61,7 @@
         android:src="@drawable/ic_more"
         android:layout_marginEnd="@dimen/_7mdp"
         android:layout_marginTop="@dimen/_1mdp"
-        app:tint="@color/checkbox_gray"
+        app:tint="@color/login_style_text"
         app:layout_constraintBottom_toBottomOf="@+id/input_login"
         app:layout_constraintEnd_toEndOf="@id/input_login"
         app:layout_constraintTop_toTopOf="@id/input_login"
@@ -85,7 +96,7 @@
         android:layout_width="@dimen/_16mdp"
         android:layout_height="@dimen/_16mdp"
         android:src="@drawable/ic_open_eye"
-        app:tint="@color/checkbox_gray"
+        app:tint="@color/login_style_text"
         android:layout_marginEnd="@dimen/_6mdp"
         tools:ignore="ContentDescription"
         app:layout_constraintBottom_toBottomOf="@id/input_password"
@@ -111,12 +122,15 @@
         android:layout_height="@dimen/_28mdp"
         android:background="@drawable/button_login"
         style="@style/roboto_regular_12_green_buttons"
-        android:textColor="@color/text_dark"
+        android:textColor="@color/login_style_text"
         android:text="@string/button_login"
         android:textAllCaps="false"
         android:layout_marginTop="@dimen/_20mdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/input_password" />
+
+    <include layout="@layout/no_connection_to_server"
+        android:id="@+id/no_connection_view"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -61,6 +61,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
     //Switch
     implementation "com.github.zcweng:switch-button:0.0.3@aar"
+    //Lottie
+    implementation 'com.airbnb.android:lottie:4.2.1'
 
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

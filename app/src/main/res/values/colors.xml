@@ -27,7 +27,8 @@
     <color name="yellow">#F8D477</color>
     <color name="checkbox_gray">#BCB6B9</color>
     <color name="pink">#FDAEBE</color>
-    <color name="login_style_text">#A2A0A0</color>
+<!--    <color name="login_style_text">#A2A0A0</color>-->
+    <color name="login_style_text">#5A5A5A</color>
     <color name="background_choose_user_item">#F4F1F1</color>
     <color name="user_item_text">#9A9999</color>
     <color name="snackBar">#C0577A</color>

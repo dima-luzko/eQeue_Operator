@@ -43,11 +43,20 @@ class LoginFragment : Fragment() {
         checkLoginAndPassword()
         setSelectedUserInViewModel()
         setSelectedUser()
+        goToSettingScreen()
     }
 
     private fun setSelectedUser() {
         userNameViewModel.userName.observe(viewLifecycleOwner) {
             binding.userName.text = it.name
+        }
+    }
+
+    private fun goToSettingScreen(){
+        binding.setting.setOnClickListener {
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, SettingFragment()).addToBackStack(null)
+            transaction.commit()
         }
     }
 

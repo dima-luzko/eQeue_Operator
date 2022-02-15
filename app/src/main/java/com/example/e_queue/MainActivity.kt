@@ -17,8 +17,6 @@ import com.example.e_queue.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private var buttonDown: Long = 0
-    private var buttonUp: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,27 +43,4 @@ class MainActivity : AppCompatActivity() {
         }
         return super.dispatchTouchEvent(event)
     }
-
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        var result: Boolean
-        when (keyCode) {
-            KeyEvent.KEYCODE_VOLUME_DOWN -> {
-                buttonDown = System.currentTimeMillis() / 1000
-                result = true
-            }
-            KeyEvent.KEYCODE_VOLUME_UP -> {
-                buttonUp = System.currentTimeMillis() / 1000
-                result = true
-            }
-            else -> result = super.onKeyDown(keyCode, event)
-        }
-        if (buttonDown - buttonUp in 0..3 || buttonUp - buttonDown in 0..3) {
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, SettingFragment()).addToBackStack(null)
-            transaction.commit()
-            result = true
-        }
-        return result
-    }
-
 }
