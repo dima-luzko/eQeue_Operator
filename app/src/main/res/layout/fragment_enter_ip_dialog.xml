@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
+    android:background="@color/white"
     android:layout_height="@dimen/_150mdp">
 
     <androidx.cardview.widget.CardView
@@ -142,8 +143,8 @@
                 android:id="@+id/check_connection_button"
                 android:layout_width="@dimen/_200mdp"
                 android:layout_height="@dimen/_30mdp"
-                android:background="@drawable/pink_button"
-                android:text="@string/check_connection_button"
+                android:background="@drawable/green_button"
+                android:text="@string/save"
                 android:textAllCaps="false"
                 style="@style/roboto_regular_12_green_buttons"
                 app:layout_constraintBottom_toBottomOf="parent"

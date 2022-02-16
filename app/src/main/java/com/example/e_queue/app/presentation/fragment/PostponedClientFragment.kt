@@ -13,6 +13,7 @@ import com.example.e_queue.app.data.model.OperationWithLoggedUser
 import com.example.e_queue.app.presentation.viewModel.OperationWithLoggedUserViewModel
 import com.example.e_queue.databinding.FragmentPostponedClientBinding
 import com.example.e_queue.utils.Constants
+import com.example.e_queue.utils.PreferencesManager
 import com.example.e_queue.utils.changeBackgroundAndNavBarColor
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -80,6 +81,8 @@ class PostponedClientFragment : Fragment() {
     private fun handleClick() {
         with(binding) {
             buttonCancel.setOnClickListener {
+                PreferencesManager.getInstance(requireContext())
+                    .putBoolean(PreferencesManager.PREF_ON_BACK_PRESSED, true)
                 requireActivity().onBackPressed()
             }
             buttonPostponing.setOnClickListener {

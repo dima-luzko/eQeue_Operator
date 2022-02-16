@@ -67,6 +67,8 @@ class ResultFragment : Fragment() {
 
     private fun finishWorkWithCustomer() {
         PreferencesManager.getInstance(requireContext())
+            .putBoolean(PreferencesManager.PREF_ON_BACK_PRESSED, false)
+        PreferencesManager.getInstance(requireContext())
             .putBoolean(PreferencesManager.PREF_FLAG, false)
         operationOperationWithLoggedUserViewModel.operationWithLoggedUser.observe(viewLifecycleOwner) { loggedUser ->
             resultsListViewModel.selectedResults.observe(viewLifecycleOwner) { result ->

@@ -17,6 +17,7 @@ import com.example.e_queue.app.presentation.viewModel.OperationWithLoggedUserVie
 import com.example.e_queue.app.presentation.viewModel.SelectedServicesViewModel
 import com.example.e_queue.databinding.FragmentRedirectClientBinding
 import com.example.e_queue.utils.Constants
+import com.example.e_queue.utils.PreferencesManager
 import com.example.e_queue.utils.changeBackgroundAndNavBarColor
 import com.example.e_queue.utils.snackBar
 import com.google.android.material.snackbar.Snackbar
@@ -65,11 +66,13 @@ class RedirectClientFragment : Fragment() {
     private fun handleClick() {
         with(binding) {
             buttonCancel.setOnClickListener {
+                PreferencesManager.getInstance(requireContext())
+                    .putBoolean(PreferencesManager.PREF_ON_BACK_PRESSED, true)
                 requireActivity().onBackPressed()
             }
             buttonRedirection.setOnClickListener {
                 if (chooseServiceName.text == getString(R.string.service_name)) {
-                    snackBar(requireView(),requireContext(),R.string.choose_service_snack_bar)
+                    snackBar(requireView(), requireContext(), R.string.choose_service_snack_bar)
                 } else {
                     redirectCustomer()
                 }

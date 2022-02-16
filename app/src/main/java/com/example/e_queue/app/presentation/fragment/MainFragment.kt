@@ -256,7 +256,8 @@ class MainFragment : Fragment() {
             }
             buttonStartWork.setOnClickListener {
                 statusClient = 2
-
+                PreferencesManager.getInstance(requireContext())
+                    .putBoolean(PreferencesManager.PREF_ON_BACK_PRESSED, false)
                 with(binding.someButton) {
                     buttonStartWork.isVisible = false
                     buttonCallNextClientAgain.isVisible = false
@@ -361,7 +362,6 @@ class MainFragment : Fragment() {
     }
 
     private fun finishWorkWithCustomer(body: BodyForFinishWorkWithCustomer) {
-        Log.d("uuuu", "call finishhhhhhhhhhh")
         statusClient = 0
         with(binding) {
             someButton.buttonCallNextClient.isVisible = true
@@ -376,6 +376,8 @@ class MainFragment : Fragment() {
         loggedUserViewModel.finishWorkWithCustomer(body)
         PreferencesManager.getInstance(requireContext())
             .putBoolean(PreferencesManager.PREF_FLAG, false)
+        PreferencesManager.getInstance(requireContext())
+            .putBoolean(PreferencesManager.PREF_ON_BACK_PRESSED, false)
     }
 
     private fun replaceFragment(
@@ -462,8 +464,23 @@ class MainFragment : Fragment() {
         }
     }
 
+    private fun checkBackPressed() {
+        if (PreferencesManager.getInstance(requireContext())
+                .getBoolean(PreferencesManager.PREF_ON_BACK_PRESSED, false)
+        ) {
+            with(binding.someButton) {
+                buttonPostpone.isVisible = PreferencesManager.getInstance(requireContext())
+                    .getBoolean(PreferencesManager.PREF_SWITCH_POSTPONED, false)
+                buttonRedirect.isVisible = PreferencesManager.getInstance(requireContext())
+                    .getBoolean(PreferencesManager.PREF_SWITCH_REDIRECT, false)
+                buttonFinishWork.isVisible = true
+            }
+        }
+    }
+
     override fun onResume() {
         super.onResume()
+        checkBackPressed()
         setInviteCustomerInfo()
         setInvitePostponedCustomerInfo()
         changeStatusClient()

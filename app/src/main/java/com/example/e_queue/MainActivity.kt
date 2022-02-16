@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.e_queue.app.presentation.fragment.LoginFragment
 import com.example.e_queue.app.presentation.fragment.SettingFragment
 import com.example.e_queue.databinding.ActivityMainBinding
+import com.example.e_queue.utils.PreferencesManager
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +23,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        PreferencesManager.getInstance(this)
+            .putBoolean(PreferencesManager.PREF_ON_BACK_PRESSED, false)
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, LoginFragment())
         transaction.commit()

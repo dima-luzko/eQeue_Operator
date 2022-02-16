@@ -12,6 +12,7 @@
     <color name="text_light">#A1A0A0</color>
     <color name="text_dark">#797979</color>
     <color name="green">#41D38D</color>
+    <color name="green_for_settings">#50D467</color>
     <color name="gray_background">#F3F3F3</color>
     <color name="gray_background_light">#B3F3F3F3</color>
     <color name="gray_text">#BABABA</color>

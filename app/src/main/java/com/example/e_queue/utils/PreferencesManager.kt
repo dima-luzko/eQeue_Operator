@@ -12,6 +12,7 @@ class PreferencesManager private constructor(context: Context) {
         const val PREF_SWITCH_REDIRECT = "PREF_SWITCH_REDIRECT"
         const val PREF_SWITCH_ONE_MODE = "PREF_SWITCH_ONE_MODE"
         const val PREF_FLAG = "PREF_FLAG"
+        const val PREF_ON_BACK_PRESSED = "PREF_ON_BACK_PRESSED"
 
         private var ourInstance: PreferencesManager? = null
         fun getInstance(context: Context): PreferencesManager {
