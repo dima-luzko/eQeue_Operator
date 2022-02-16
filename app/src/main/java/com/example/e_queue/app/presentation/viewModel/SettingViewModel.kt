@@ -2,6 +2,7 @@ package com.example.e_queue.app.presentation.viewModel
 
 import android.content.Context
 import androidx.lifecycle.*
+import com.example.e_queue.app.data.model.SelectedUser
 import com.example.e_queue.utils.PreferencesManager
 
 class SettingViewModel(context: Context) : ViewModel() {
@@ -13,6 +14,13 @@ class SettingViewModel(context: Context) : ViewModel() {
 
     private val _switchOneButtonMode = MutableLiveData<Boolean>()
     val switchOneButtonMode: LiveData<Boolean> = _switchOneButtonMode
+
+    private val _ipAddress = MutableLiveData<String>()
+    val ipAddress: LiveData<String> = _ipAddress
+
+    fun setIPAddress(ipAddress: String) {
+        _ipAddress.postValue(ipAddress)
+    }
 
     fun changeStateSwitchPostponed(switchState: Boolean) {
         _switchPostponed.postValue(switchState)

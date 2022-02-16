@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.e_queue.R
+import com.example.e_queue.app.data.model.SelectedUser
 import com.example.e_queue.app.presentation.viewModel.SettingViewModel
 import com.example.e_queue.databinding.FragmentSettingsBinding
+import com.example.e_queue.utils.Constants
 import com.example.e_queue.utils.PreferencesManager
 import com.example.e_queue.utils.changeBackgroundAndNavBarColor
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -36,17 +38,26 @@ class SettingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setSwitchStateToViewModelAndSharedPrefs()
         checkSwitchState()
         setEnableSwitch()
+        handleClick()
+        getSavedIPAddress()
+        setSavedIPAddress()
+    }
 
-        binding.icBack.setOnClickListener {
-            parentFragmentManager.popBackStack()
+    private fun handleClick() {
+        with(binding) {
+            icBack.setOnClickListener {
+                parentFragmentManager.popBackStack()
+            }
+            changeIpAddress.setOnClickListener {
+                EnterIPDialogFragment.showDialog(parentFragmentManager)
+            }
         }
     }
 
-    private fun setSwitchStateToViewModelAndSharedPrefs(){
+    private fun setSwitchStateToViewModelAndSharedPrefs() {
         with(binding) {
             switchPostpone.setOnCheckedChangeListener { _, isChecked ->
                 PreferencesManager.getInstance(requireContext())
@@ -77,9 +88,9 @@ class SettingFragment : Fragment() {
         }
     }
 
-    private fun setEnableSwitch(){
-        with(binding){
-            settingViewModel.uiState.observe(viewLifecycleOwner){
+    private fun setEnableSwitch() {
+        with(binding) {
+            settingViewModel.uiState.observe(viewLifecycleOwner) {
                 switchPostpone.isEnabled = !it.first
                 switchRedirect.isEnabled = !it.second
                 switchOneButtonMode.isEnabled = !it.third
@@ -99,6 +110,25 @@ class SettingFragment : Fragment() {
 
             switchRedirect.isEnabled = !PreferencesManager.getInstance(requireContext())
                 .getBoolean(PreferencesManager.PREF_SWITCH_ONE_MODE, false)
+        }
+    }
+
+    private fun getSavedIPAddress() {
+        parentFragmentManager.setFragmentResultListener(
+            Constants.IP_ADDRESS_REQUEST_KEY, viewLifecycleOwner
+        ) { _, bundle ->
+            val ip = bundle.getString(Constants.IP_ADDRESS_ARG)
+            ip?.let { settingViewModel.setIPAddress(it) }
+        }
+    }
+
+    private fun setSavedIPAddress() {
+        settingViewModel.setIPAddress(
+            PreferencesManager.getInstance(requireContext())
+                .getString(PreferencesManager.PREF_GLUE_IP, "")
+        )
+        settingViewModel.ipAddress.observe(viewLifecycleOwner) {
+            binding.ipAddress.text = it
         }
     }
 }

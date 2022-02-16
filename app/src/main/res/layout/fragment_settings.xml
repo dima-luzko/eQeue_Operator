@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:attr="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:attr="http://schemas.android.com/tools"
     android:background="@color/white">
 
     <androidx.appcompat.widget.Toolbar
@@ -32,9 +32,9 @@
         android:id="@+id/ic_back"
         android:layout_width="@dimen/_30mdp"
         android:layout_height="@dimen/_15mdp"
-        android:src="@drawable/ic_back"
-        android:layout_marginTop="@dimen/_1mdp"
         android:layout_marginStart="@dimen/_10mdp"
+        android:layout_marginTop="@dimen/_1mdp"
+        android:src="@drawable/ic_back"
         app:layout_constraintBottom_toBottomOf="@id/toolbar_settings"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/toolbar_settings"
@@ -57,9 +57,9 @@
         style="@style/roboto_regular_14"
         android:layout_width="@dimen/_70mdp"
         android:layout_height="@dimen/_20mdp"
-        android:text="@string/to_postpone"
-        android:layout_marginTop="@dimen/_25mdp"
         android:layout_marginStart="@dimen/_35mdp"
+        android:layout_marginTop="@dimen/_25mdp"
+        android:text="@string/to_postpone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settings_text_hh" />
 
@@ -67,9 +67,9 @@
         android:id="@+id/line_horizontal_1"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1mdp"
+        android:layout_marginStart="@dimen/_35mdp"
         android:layout_marginTop="@dimen/_15mdp"
         android:src="@drawable/ic_line_between_settings"
-        android:layout_marginStart="@dimen/_35mdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settings_text_postpone"
         attr:ignore="ContentDescription" />
@@ -89,9 +89,9 @@
         android:id="@+id/line_horizontal_2"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1mdp"
-        android:src="@drawable/ic_line_between_settings"
-        android:layout_marginTop="@dimen/_15mdp"
         android:layout_marginStart="@dimen/_35mdp"
+        android:layout_marginTop="@dimen/_15mdp"
+        android:src="@drawable/ic_line_between_settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settings_text_redirect"
         attr:ignore="ContentDescription" />
@@ -121,8 +121,8 @@
         android:id="@+id/switch_postpone"
         android:layout_width="@dimen/_50mdp"
         android:layout_height="@dimen/_30mdp"
-        android:layout_marginEnd="@dimen/_20mdp"
         android:layout_marginTop="@dimen/_10mdp"
+        android:layout_marginEnd="@dimen/_20mdp"
         app:layout_constraintBottom_toTopOf="@+id/line_horizontal_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settings_text_hh" />
@@ -149,9 +149,9 @@
         android:id="@+id/line_horizontal_3"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1mdp"
-        android:src="@drawable/ic_line_between_settings"
-        android:layout_marginTop="@dimen/_10mdp"
         android:layout_marginStart="@dimen/_35mdp"
+        android:layout_marginTop="@dimen/_10mdp"
+        android:src="@drawable/ic_line_between_settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settings_text_one_button_mode_explanation"
         attr:ignore="ContentDescription" />
@@ -173,9 +173,9 @@
         style="@style/roboto_regular_14"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_20mdp"
-        android:text="@string/ip_address_server_text"
-        android:layout_marginTop="@dimen/_20mdp"
         android:layout_marginStart="@dimen/_35mdp"
+        android:layout_marginTop="@dimen/_20mdp"
+        android:text="@string/ip_address_server_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/setting_network_text" />
 
@@ -190,17 +190,18 @@
         app:layout_constraintTop_toBottomOf="@id/ip_address_text" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/change_ip_address"
         android:layout_width="@dimen/_85mdp"
         android:layout_height="@dimen/_30mdp"
-        android:text="@string/change"
+        android:layout_marginTop="@dimen/_25mdp"
+        android:layout_marginEnd="@dimen/_20mdp"
+        android:background="@drawable/change_button"
         android:fontFamily="@font/roboto_medium"
+        android:text="@string/change"
         android:textAllCaps="false"
         android:textColor="@color/green_for_settings"
         android:textSize="@dimen/_12font_mdp"
-        android:layout_marginTop="@dimen/_25mdp"
-        android:layout_marginEnd="@dimen/_20mdp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/change_button"
         app:layout_constraintTop_toBottomOf="@+id/setting_network_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,6 +13,12 @@ class PreferencesManager private constructor(context: Context) {
         const val PREF_SWITCH_ONE_MODE = "PREF_SWITCH_ONE_MODE"
         const val PREF_FLAG = "PREF_FLAG"
         const val PREF_ON_BACK_PRESSED = "PREF_ON_BACK_PRESSED"
+        const val PREF_IP_1 = "PREF_IP_1"
+        const val PREF_IP_2 = "PREF_IP_2"
+        const val PREF_IP_3 = "PREF_IP_3"
+        const val PREF_IP_4 = "PREF_IP_4"
+        const val PREF_IP_5 = "PREF_IP_5"
+        const val PREF_GLUE_IP = "PREF_GLUE_IP"
 
         private var ourInstance: PreferencesManager? = null
         fun getInstance(context: Context): PreferencesManager {
@@ -35,6 +41,10 @@ class PreferencesManager private constructor(context: Context) {
         preferences.edit().putLong(key, value).apply()
     }
 
+    fun putString(key: String, value: String) {
+        preferences.edit().putString(key, value).apply()
+    }
+
     fun getInt(key: String, defValue: Int): Int {
         return preferences.getInt(key, defValue)
     }
@@ -45,6 +55,10 @@ class PreferencesManager private constructor(context: Context) {
 
     fun getLong(key: String, defValue: Long): Long {
         return preferences.getLong(key, defValue)
+    }
+
+    fun getString(key: String, defValue: String): String {
+        return preferences.getString(key, defValue).toString()
     }
 
 

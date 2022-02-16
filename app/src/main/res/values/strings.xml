@@ -64,6 +64,9 @@
     <string name="zero">0</string>
     <string name="server_no_connection">Соединение с сервером не установлено. \nПроверьте введенный IP-адрес и работу \nсервера.</string>
     <string name="change">Изменить</string>
+    <string name="_127">127</string>
+    <string name="_1">1</string>
+    <string name="_8080">8080</string>
 
 
 </resources>
