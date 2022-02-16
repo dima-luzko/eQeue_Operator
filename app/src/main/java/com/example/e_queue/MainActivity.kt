@@ -46,4 +46,6 @@ class MainActivity : AppCompatActivity() {
         }
         return super.dispatchTouchEvent(event)
     }
+
+    override fun onBackPressed() {}
 }

@@ -68,7 +68,7 @@ class RedirectClientFragment : Fragment() {
             buttonCancel.setOnClickListener {
                 PreferencesManager.getInstance(requireContext())
                     .putBoolean(PreferencesManager.PREF_ON_BACK_PRESSED, true)
-                requireActivity().onBackPressed()
+                parentFragmentManager.popBackStack()
             }
             buttonRedirection.setOnClickListener {
                 if (chooseServiceName.text == getString(R.string.service_name)) {

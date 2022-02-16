@@ -42,7 +42,7 @@ class SettingFragment : Fragment() {
         setEnableSwitch()
 
         binding.icBack.setOnClickListener {
-            requireActivity().onBackPressed()
+            parentFragmentManager.popBackStack()
         }
     }
 

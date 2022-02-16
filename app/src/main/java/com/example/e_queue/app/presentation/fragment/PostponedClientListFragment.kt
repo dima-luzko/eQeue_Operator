@@ -140,7 +140,7 @@ class PostponedClientListFragment : Fragment() {
         }
         with(binding) {
             buttonCancel.setOnClickListener {
-                requireActivity().onBackPressed()
+                parentFragmentManager.popBackStack()
             }
             buttonInviteClient.setOnClickListener {
                 if (!selectedResults) {
