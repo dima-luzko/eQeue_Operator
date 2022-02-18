@@ -17,6 +17,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.net.SocketTimeoutException
 
 class LoggedUserViewModel constructor(
     private val eQueueRepository: EQueueRepository,
@@ -44,26 +45,28 @@ class LoggedUserViewModel constructor(
 
     private suspend fun getServiceLength() {
         while (true) {
-            val length = eQueueRepository.getSelfServices(loggedUserModel.id)
-            if (length.selfServices.isNotEmpty()) {
-                var sum = 0
-                length.selfServices.forEach { value ->
-                    sum += value.line.count()
+            try {
+                val length = eQueueRepository.getSelfServices(loggedUserModel.id)
+                if (length.selfServices.isNotEmpty()) {
+                    var sum = 0
+                    length.selfServices.forEach { value ->
+                        sum += value.line.count()
+                    }
+                    Log.d(
+                        LOG_SERVICE_LENGTH,
+                        "Now length in service - $sum for user: ${loggedUserModel.name}"
+                    )
+                    _serviceLength.postValue(sum)
                 }
-                Log.d(
-                    LOG_SERVICE_LENGTH,
-                    "Now length in service - $sum for user: ${loggedUserModel.name}"
-                )
-                _serviceLength.postValue(sum)
-            }
+            } catch (exception: SocketTimeoutException) { }
             delay(5000)
         }
     }
 
     fun inviteNextCustomer() {
-            viewModelScope.launch(Dispatchers.IO) {
-                val nextCustomerInfo = eQueueRepository.inviteNextCustomer(loggedUserModel.id)
-                _inviteNextCustomerInfo.postValue(nextCustomerInfo)
+        viewModelScope.launch(Dispatchers.IO) {
+            val nextCustomerInfo = eQueueRepository.inviteNextCustomer(loggedUserModel.id)
+            _inviteNextCustomerInfo.postValue(nextCustomerInfo)
         }
     }
 
@@ -99,7 +102,7 @@ class LoggedUserViewModel constructor(
                     _nextCustomerInfo.postValue(customer)
                     Log.d(LOG_NEXT_CUSTOMER_INFO, "No next Customer!")
                 }
-            }
+            } catch (exception: SocketTimeoutException) { }
             delay(5000)
         }
     }

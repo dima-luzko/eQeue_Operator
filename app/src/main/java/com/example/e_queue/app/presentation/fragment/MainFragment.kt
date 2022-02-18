@@ -15,6 +15,7 @@ import com.example.e_queue.app.data.model.BodyForFinishWorkWithCustomer
 import com.example.e_queue.app.data.model.InvitePostponedClient
 import com.example.e_queue.app.data.model.LoggedUser
 import com.example.e_queue.app.data.model.OperationWithLoggedUser
+import com.example.e_queue.app.presentation.viewModel.CheckServerViewModel
 import com.example.e_queue.app.presentation.viewModel.LoggedUserViewModel
 import com.example.e_queue.databinding.FragmentMainBinding
 import com.example.e_queue.utils.Constants
@@ -26,6 +27,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 

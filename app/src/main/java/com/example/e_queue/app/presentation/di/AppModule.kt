@@ -33,6 +33,7 @@ val viewModelModules = module {
     viewModel { ResultsListViewModel(get()) }
     viewModel { SettingViewModel(get()) }
     viewModel { PostponedListViewModel(get()) }
+    viewModel { CheckServerViewModel(get()) }
 }
 
 val repositoryModules = module {

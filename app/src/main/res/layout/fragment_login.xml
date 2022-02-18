@@ -130,7 +130,54 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/input_password" />
 
-    <include layout="@layout/no_connection_to_server"
-        android:id="@+id/no_connection_view"/>
+<!--    <include layout="@layout/no_connection_to_server"-->
+<!--        android:id="@+id/no_connection_view" />-->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_no_connection"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60mdp"
+        android:layout_marginStart="@dimen/_5mdp"
+        android:layout_marginEnd="@dimen/_5mdp"
+        android:layout_marginBottom="@dimen/_5mdp"
+        app:cardBackgroundColor="@color/snackBar"
+        app:cardCornerRadius="@dimen/_10mdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottieAnimationView"
+                android:layout_width="@dimen/_25mdp"
+                android:layout_height="@dimen/_50mdp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:layout_marginStart="@dimen/_15mdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="loading_no_connection.json"
+                app:lottie_loop="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/server_no_connection"
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_11font_mdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/lottieAnimationView"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

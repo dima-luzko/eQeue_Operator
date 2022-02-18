@@ -60,4 +60,8 @@ class EQueueRepositoryImpl(private val dataSource: RemoteDataSource): EQueueRepo
         return dataSource.retrofit.invitePostponedCustomer(userId, customerId)
     }
 
+    override suspend fun checkHealth() {
+        dataSource.retrofit.checkHealth()
+    }
+
 }

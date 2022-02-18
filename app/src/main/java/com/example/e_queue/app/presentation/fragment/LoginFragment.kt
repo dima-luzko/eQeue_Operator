@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.e_queue.R
 import com.example.e_queue.app.data.model.LoggedUser
 import com.example.e_queue.app.data.model.SelectedUser
+import com.example.e_queue.app.presentation.viewModel.CheckServerViewModel
 import com.example.e_queue.app.presentation.viewModel.SelectedUserViewModel
 import com.example.e_queue.databinding.FragmentLoginBinding
 import com.example.e_queue.utils.Constants.Companion.LOGGED_USER_ARG
@@ -17,6 +19,9 @@ import com.example.e_queue.utils.Constants.Companion.SELECTED_USER_ARG
 import com.example.e_queue.utils.Constants.Companion.SELECTED_USER_REQUEST_KEY
 import com.example.e_queue.utils.changeBackgroundAndNavBarColor
 import com.example.e_queue.utils.snackBar
+import kotlinx.android.synthetic.main.fragment_login.*
+import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -26,6 +31,7 @@ class LoginFragment : Fragment() {
     private var changeEye = false
     private var bundle = Bundle()
     private val userNameViewModel by viewModel<SelectedUserViewModel>()
+    private val serverCheckViewModel by sharedViewModel<CheckServerViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +50,34 @@ class LoginFragment : Fragment() {
         setSelectedUserInViewModel()
         setSelectedUser()
         goToSettingScreen()
+
+        serverCheckViewModel.statusWorkServer.observe(viewLifecycleOwner){
+                with(binding) {
+                    if (!it) {
+                        inputLogin.alpha = 0.7F
+                        inputLogin.isClickable = false
+                        buttonMore.alpha = 0.7F
+                        inputPassword.alpha = 0.7F
+                        inputPassword.isEnabled = false
+                        signIn.alpha = 0.7F
+                        signIn.isClickable = false
+                        eyeIcon.alpha = 0.7F
+                        eyeIcon.isClickable = false
+                        cardNoConnection.isVisible = true
+                    } else {
+                        inputLogin.alpha = 1F
+                        inputLogin.isClickable = true
+                        buttonMore.alpha = 1F
+                        inputPassword.alpha = 1F
+                        inputPassword.isEnabled = true
+                        signIn.alpha = 1F
+                        signIn.isClickable = true
+                        eyeIcon.alpha = 1F
+                        eyeIcon.isClickable = true
+                        cardNoConnection.isVisible = false
+                    }
+                }
+            }
     }
 
     private fun setSelectedUser() {

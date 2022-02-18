@@ -125,7 +125,7 @@ class SettingFragment : Fragment() {
     private fun setSavedIPAddress() {
         settingViewModel.setIPAddress(
             PreferencesManager.getInstance(requireContext())
-                .getString(PreferencesManager.PREF_GLUE_IP, "")
+                .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
         )
         settingViewModel.ipAddress.observe(viewLifecycleOwner) {
             binding.ipAddress.text = it

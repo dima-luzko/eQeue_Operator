@@ -51,4 +51,8 @@ interface EQueueService {
         @Query("customer_id") customerId: Long
     ): InviteNextCustomerInfo
 
+    //common
+    @GET("common/health")
+    suspend fun checkHealth()
+
 }

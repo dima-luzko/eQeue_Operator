@@ -1,6 +1,7 @@
 package com.example.e_queue
 
 import android.app.Application
+import android.content.Context
 import com.example.e_queue.app.presentation.di.dataSourceModules
 import com.example.e_queue.app.presentation.di.repositoryModules
 import com.example.e_queue.app.presentation.di.viewModelModules
@@ -18,5 +19,9 @@ class MainApplication: Application() {
             androidContext(this@MainApplication)
             modules(listOf(dataSourceModules, viewModelModules, repositoryModules))
         }
+    }
+
+    fun getAppContext(): Context {
+        return this@MainApplication
     }
 }
