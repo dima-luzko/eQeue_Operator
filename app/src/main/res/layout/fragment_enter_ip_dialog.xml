@@ -28,7 +28,7 @@
                 android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_close" />
+                app:srcCompat="@drawable/icon_close" />
 
             <TextView
                 android:id="@+id/check_ip_text"
@@ -45,11 +45,12 @@
             <EditText
                 android:id="@+id/input_ip1"
                 android:layout_width="@dimen/_40mdp"
-                android:layout_height="@dimen/_30mdp"
+                android:layout_height="@dimen/_31mdp"
                 android:layout_marginStart="@dimen/_14mdp"
                 android:layout_marginTop="@dimen/_10mdp"
-                android:background="@drawable/vvod_ip"
+                android:background="@drawable/ic_vvod_ip"
                 android:ems="3"
+
                 android:hint="@string/_127"
                 android:inputType="number"
                 android:maxLength="3"
@@ -73,8 +74,8 @@
             <EditText
                 android:id="@+id/input_ip2"
                 android:layout_width="@dimen/_40mdp"
-                android:layout_height="@dimen/_30mdp"
-                android:background="@drawable/vvod_ip"
+                android:layout_height="@dimen/_31mdp"
+                android:background="@drawable/ic_vvod_ip"
                 android:ems="3"
                 android:hint="@string/zero"
                 android:inputType="number"
@@ -100,7 +101,7 @@
                 android:id="@+id/input_ip3"
                 android:layout_width="@dimen/_40mdp"
                 android:layout_height="@dimen/_30mdp"
-                android:background="@drawable/vvod_ip"
+                android:background="@drawable/ic_vvod_ip"
                 android:ems="3"
                 android:hint="@string/zero"
                 android:inputType="number"
@@ -125,8 +126,8 @@
             <EditText
                 android:id="@+id/input_ip4"
                 android:layout_width="@dimen/_40mdp"
-                android:layout_height="@dimen/_30mdp"
-                android:background="@drawable/vvod_ip"
+                android:layout_height="@dimen/_31mdp"
+                android:background="@drawable/ic_vvod_ip"
                 android:ems="3"
                 android:hint="@string/_1"
                 android:inputType="number"
@@ -142,18 +143,19 @@
                 android:id="@+id/colon"
                 style="@style/roboto_regular_25"
                 android:layout_width="@dimen/_8mdp"
-                android:layout_height="@dimen/_30mdp"
+                android:layout_height="wrap_content"
                 android:text="@string/colon"
+                android:layout_marginTop="@dimen/_6mdp"
                 android:textAlignment="center"
                 app:layout_constraintStart_toEndOf="@id/input_ip4"
-                app:layout_constraintTop_toTopOf="@id/input_ip1" />
+                app:layout_constraintTop_toBottomOf="@id/check_ip_text" />
 
             <EditText
                 android:id="@+id/input_ip5"
                 android:layout_width="@dimen/_50mdp"
-                android:layout_height="@dimen/_30mdp"
+                android:layout_height="@dimen/_31mdp"
                 android:layout_marginEnd="@dimen/_14mdp"
-                android:background="@drawable/vvod_ip"
+                android:background="@drawable/ic_vvod_ip"
                 android:ems="4"
                 android:hint="@string/_8080"
                 android:inputType="number"

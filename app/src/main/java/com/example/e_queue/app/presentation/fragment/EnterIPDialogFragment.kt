@@ -3,10 +3,14 @@ package com.example.e_queue.app.presentation.fragment
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.example.e_queue.R
@@ -38,6 +42,7 @@ class EnterIPDialogFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        checkChangeText()
         saveIP()
         setSavedIP()
         closeDialog()
@@ -74,6 +79,112 @@ class EnterIPDialogFragment : DialogFragment() {
         }
     }
 
+    private fun checkChangeText() {
+        with(binding) {
+            inputIp1.addTextChangedListener(object : TextWatcher {
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                    if (s.toString().toIntOrNull() ?: 0 > 254 || s.toString() == "0") {
+                        inputIp1.setText("")
+                        inputIp1.setBackgroundResource(R.drawable.ic_vvod_ip_error)
+                    } else {
+                        inputIp1.setBackgroundResource(R.drawable.ic_vvod_ip)
+                    }
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun afterTextChanged(s: Editable) {}
+            })
+            inputIp2.addTextChangedListener(object : TextWatcher {
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                    if (s.toString().toIntOrNull() ?: 0 > 254 || s.toString() == "00") {
+                        inputIp2.setText("")
+                        inputIp2.setBackgroundResource(R.drawable.ic_vvod_ip_error)
+                    } else {
+                        inputIp2.setBackgroundResource(R.drawable.ic_vvod_ip)
+                    }
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun afterTextChanged(s: Editable) {}
+            })
+            inputIp3.addTextChangedListener(object : TextWatcher {
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                    if (s.toString().toIntOrNull() ?: 0 > 254 || s.toString() == "00") {
+                        inputIp3.setText("")
+                        inputIp3.setBackgroundResource(R.drawable.ic_vvod_ip_error)
+                    } else {
+                        inputIp3.setBackgroundResource(R.drawable.ic_vvod_ip)
+                    }
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun afterTextChanged(s: Editable) {}
+            })
+            inputIp4.addTextChangedListener(object : TextWatcher {
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                    if (s.toString().toIntOrNull() ?: 0 > 254 || s.toString() == "00") {
+                        inputIp4.setText("")
+                        inputIp4.setBackgroundResource(R.drawable.ic_vvod_ip_error)
+                    } else {
+                        inputIp4.setBackgroundResource(R.drawable.ic_vvod_ip)
+                    }
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun afterTextChanged(s: Editable) {}
+            })
+            inputIp5.addTextChangedListener(object : TextWatcher {
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                    if (s.toString() == "00") {
+                        inputIp5.setText("")
+                        inputIp5.setBackgroundResource(R.drawable.ic_vvod_ip_error)
+                    } else {
+                        inputIp5.setBackgroundResource(R.drawable.ic_vvod_ip)
+                    }
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun afterTextChanged(s: Editable) {}
+            })
+        }
+
+    }
+
     private fun saveIP() {
         with(binding) {
             saveIpButton.setOnClickListener {
@@ -99,7 +210,10 @@ class EnterIPDialogFragment : DialogFragment() {
                 PreferencesManager.getInstance(requireContext())
                     .putString(PreferencesManager.PREF_GLUE_IP, glueIP)
                 bundle.putString(Constants.IP_ADDRESS_ARG, glueIP)
-                parentFragmentManager.setFragmentResult(Constants.IP_ADDRESS_REQUEST_KEY, bundle)
+                parentFragmentManager.setFragmentResult(
+                    Constants.IP_ADDRESS_REQUEST_KEY,
+                    bundle
+                )
                 dialog?.dismiss()
             }
         }
