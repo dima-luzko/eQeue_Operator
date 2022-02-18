@@ -1,13 +1,16 @@
 package com.example.e_queue.app.presentation.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.example.e_queue.MainActivity
 import com.example.e_queue.R
 import com.example.e_queue.app.data.model.LoggedUser
 import com.example.e_queue.app.data.model.SelectedUser
@@ -50,34 +53,36 @@ class LoginFragment : Fragment() {
         setSelectedUserInViewModel()
         setSelectedUser()
         goToSettingScreen()
+    }
 
+    private fun setErrorCardView(){
         serverCheckViewModel.statusWorkServer.observe(viewLifecycleOwner){
-                with(binding) {
-                    if (!it) {
-                        inputLogin.alpha = 0.7F
-                        inputLogin.isClickable = false
-                        buttonMore.alpha = 0.7F
-                        inputPassword.alpha = 0.7F
-                        inputPassword.isEnabled = false
-                        signIn.alpha = 0.7F
-                        signIn.isClickable = false
-                        eyeIcon.alpha = 0.7F
-                        eyeIcon.isClickable = false
-                        cardNoConnection.isVisible = true
-                    } else {
-                        inputLogin.alpha = 1F
-                        inputLogin.isClickable = true
-                        buttonMore.alpha = 1F
-                        inputPassword.alpha = 1F
-                        inputPassword.isEnabled = true
-                        signIn.alpha = 1F
-                        signIn.isClickable = true
-                        eyeIcon.alpha = 1F
-                        eyeIcon.isClickable = true
-                        cardNoConnection.isVisible = false
-                    }
+            with(binding) {
+                if (!it) {
+                    inputLogin.alpha = 0.7F
+                    inputLogin.isClickable = false
+                    buttonMore.alpha = 0.7F
+                    inputPassword.alpha = 0.7F
+                    inputPassword.isEnabled = false
+                    signIn.alpha = 0.7F
+                    signIn.isClickable = false
+                    eyeIcon.alpha = 0.7F
+                    eyeIcon.isClickable = false
+                    cardNoConnection.isVisible = true
+                } else {
+                    inputLogin.alpha = 1F
+                    inputLogin.isClickable = true
+                    buttonMore.alpha = 1F
+                    inputPassword.alpha = 1F
+                    inputPassword.isEnabled = true
+                    signIn.alpha = 1F
+                    signIn.isClickable = true
+                    eyeIcon.alpha = 1F
+                    eyeIcon.isClickable = true
+                    cardNoConnection.isVisible = false
                 }
             }
+        }
     }
 
     private fun setSelectedUser() {
@@ -88,9 +93,8 @@ class LoginFragment : Fragment() {
 
     private fun goToSettingScreen(){
         binding.setting.setOnClickListener {
-            val transaction = parentFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, SettingFragment()).addToBackStack(null)
-            transaction.commit()
+            val intent = Intent(requireContext(), SettingFragment::class.java)
+            startActivity(intent)
         }
     }
 
@@ -194,4 +198,8 @@ class LoginFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        setErrorCardView()
+    }
 }

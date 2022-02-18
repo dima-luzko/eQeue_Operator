@@ -3,6 +3,7 @@ package com.example.e_queue
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
@@ -34,14 +35,6 @@ class MainActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, LoginFragment())
         transaction.commit()
-        serverCheckViewModel.checkServerState()
-        serverCheckViewModel.statusWorkServer.observe(this) {
-            if (!it) {
-                val transaction2 = supportFragmentManager.beginTransaction()
-                transaction2.replace(R.id.fragment_container, LoginFragment())
-                transaction2.commit()
-            }
-        }
     }
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
@@ -59,6 +52,27 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.dispatchTouchEvent(event)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        serverCheckViewModel.statusWorkServer.observe(this) {
+            if (!it) {
+//                val transaction2 = supportFragmentManager.beginTransaction()
+//                transaction2.replace(R.id.fragment_container, LoginFragment())
+//                transaction2.commit()
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        serverCheckViewModel.startCheckServerState()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        serverCheckViewModel.stopCheckServerState()
     }
 
     override fun onBackPressed() {}
