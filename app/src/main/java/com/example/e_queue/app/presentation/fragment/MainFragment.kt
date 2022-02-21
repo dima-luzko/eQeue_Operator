@@ -83,13 +83,22 @@ class MainFragment : Fragment() {
     }
 
     private fun unLoggedUser() {
-        binding.toolbar.exit.setOnClickListener {
-            if (statusClient == 0) {
-                val transaction = parentFragmentManager.beginTransaction()
-                transaction.replace(R.id.fragment_container, LoginFragment())
-                transaction.commit()
+        with(binding.toolbar.exit) {
+            setOnClickListener {
+                if (statusClient == 0 || PreferencesManager.getInstance(requireContext())
+                        .getBoolean(
+                            PreferencesManager.PREF_SWITCH_ONE_MODE,
+                            false
+                        ) && statusClient == 1
+                ) {
+                    val transaction = parentFragmentManager.beginTransaction()
+                    transaction.replace(R.id.fragment_container, LoginFragment())
+                    transaction.commit()
+                }
             }
+
         }
+
     }
 
     private fun setServiceLength() {

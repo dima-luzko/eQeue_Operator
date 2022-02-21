@@ -3,22 +3,16 @@ package com.example.e_queue
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
-import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import com.example.e_queue.app.presentation.fragment.LoginFragment
-import com.example.e_queue.app.presentation.fragment.SettingFragment
 import com.example.e_queue.app.presentation.viewModel.CheckServerViewModel
 import com.example.e_queue.databinding.ActivityMainBinding
-import com.example.e_queue.databinding.FragmentLoginBinding
 import com.example.e_queue.utils.PreferencesManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -58,9 +52,9 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         serverCheckViewModel.statusWorkServer.observe(this) {
             if (!it) {
-//                val transaction2 = supportFragmentManager.beginTransaction()
-//                transaction2.replace(R.id.fragment_container, LoginFragment())
-//                transaction2.commit()
+                val transaction2 = supportFragmentManager.beginTransaction()
+                transaction2.replace(R.id.fragment_container, LoginFragment())
+                transaction2.commit()
             }
         }
     }

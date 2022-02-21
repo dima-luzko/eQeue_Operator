@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.e_queue.MainApplication
 import com.example.e_queue.app.data.model.BodyForFinishWorkWithCustomer
 import com.example.e_queue.app.data.model.InviteNextCustomerInfo
 import com.example.e_queue.app.data.model.LoggedUser
@@ -12,6 +13,7 @@ import com.example.e_queue.app.data.model.NextCustomerInfo
 import com.example.e_queue.app.domain.repository.EQueueRepository
 import com.example.e_queue.utils.Constants.Companion.LOG_NEXT_CUSTOMER_INFO
 import com.example.e_queue.utils.Constants.Companion.LOG_SERVICE_LENGTH
+import com.example.e_queue.utils.PreferencesManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -46,7 +48,13 @@ class LoggedUserViewModel constructor(
     private suspend fun getServiceLength() {
         while (true) {
             try {
-                val length = eQueueRepository.getSelfServices(loggedUserModel.id)
+                val length = eQueueRepository.getSelfServices(
+                    url = "http://${
+                        PreferencesManager.getInstance(MainApplication().getAppContext())
+                            .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
+                    }/api/operator/getSelfServices",
+                    userId = loggedUserModel.id
+                )
                 if (length.selfServices.isNotEmpty()) {
                     var sum = 0
                     length.selfServices.forEach { value ->
@@ -58,14 +66,21 @@ class LoggedUserViewModel constructor(
                     )
                     _serviceLength.postValue(sum)
                 }
-            } catch (exception: SocketTimeoutException) { }
+            } catch (exception: SocketTimeoutException) {
+            }
             delay(5000)
         }
     }
 
     fun inviteNextCustomer() {
         viewModelScope.launch(Dispatchers.IO) {
-            val nextCustomerInfo = eQueueRepository.inviteNextCustomer(loggedUserModel.id)
+            val nextCustomerInfo = eQueueRepository.inviteNextCustomer(
+                url = "http://${
+                    PreferencesManager.getInstance(MainApplication().getAppContext())
+                        .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
+                }/api/operator/inviteNextCustomer",
+                userId = loggedUserModel.id
+            )
             _inviteNextCustomerInfo.postValue(nextCustomerInfo)
         }
     }
@@ -73,21 +88,39 @@ class LoggedUserViewModel constructor(
     fun killNextCustomer() {
         viewModelScope.launch(Dispatchers.IO) {
             runCatching {
-                eQueueRepository.killNextCustomer(loggedUserModel.id)
+                eQueueRepository.killNextCustomer(
+                    url = "http://${
+                        PreferencesManager.getInstance(MainApplication().getAppContext())
+                            .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
+                    }/api/operator/killNextCustomer",
+                    userId = loggedUserModel.id
+                )
             }
         }
     }
 
     fun getStartCustomer() {
         viewModelScope.launch(Dispatchers.IO) {
-            eQueueRepository.getStartCustomer(loggedUserModel.id)
+            eQueueRepository.getStartCustomer(
+                url = "http://${
+                    PreferencesManager.getInstance(MainApplication().getAppContext())
+                        .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
+                }/api/operator/getStartCustomer",
+                userId = loggedUserModel.id
+            )
         }
     }
 
     private suspend fun getNextCustomerInfo() {
         while (true) {
             try {
-                val customer = eQueueRepository.getNextCustomerInfo(loggedUserModel.id)
+                val customer = eQueueRepository.getNextCustomerInfo(
+                    url = "http://${
+                        PreferencesManager.getInstance(MainApplication().getAppContext())
+                            .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
+                    }/api/operator/getNextCustomerInfo",
+                    userId = loggedUserModel.id
+                )
                 _nextCustomerInfo.postValue(customer)
                 Log.d(
                     LOG_NEXT_CUSTOMER_INFO,
@@ -102,14 +135,21 @@ class LoggedUserViewModel constructor(
                     _nextCustomerInfo.postValue(customer)
                     Log.d(LOG_NEXT_CUSTOMER_INFO, "No next Customer!")
                 }
-            } catch (exception: SocketTimeoutException) { }
+            } catch (exception: SocketTimeoutException) {
+            }
             delay(5000)
         }
     }
 
     fun finishWorkWithCustomer(body: BodyForFinishWorkWithCustomer) {
         viewModelScope.launch(Dispatchers.IO) {
-            eQueueRepository.finishWorkWithCustomer(body)
+            eQueueRepository.finishWorkWithCustomer(
+                url = "http://${
+                    PreferencesManager.getInstance(MainApplication().getAppContext())
+                        .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
+                }/api/operator/getFinishCustomer",
+                result = body
+            )
         }
     }
 

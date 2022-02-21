@@ -4,8 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.e_queue.MainApplication
 import com.example.e_queue.app.data.model.User
 import com.example.e_queue.app.domain.repository.EQueueRepository
+import com.example.e_queue.utils.PreferencesManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -16,9 +18,15 @@ class UserListViewModel constructor(private val eQueueRepository: EQueueReposito
     private var userList: List<User> = listOf()
 
     fun getUserList() {
-        viewModelScope.launch(Dispatchers.IO){
-            userList = eQueueRepository.getUsers()
-            _user.postValue(userList)
+        viewModelScope.launch(Dispatchers.IO) {
+            runCatching {
+                userList = eQueueRepository.getUsers("http://${
+                    PreferencesManager.getInstance(MainApplication().getAppContext())
+                        .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
+                }/api/operator/getUsers")
+            }.onSuccess {
+                _user.postValue(userList)
+            }.onFailure {}
         }
     }
 

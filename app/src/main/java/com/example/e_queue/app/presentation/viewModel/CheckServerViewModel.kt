@@ -1,6 +1,5 @@
 package com.example.e_queue.app.presentation.viewModel
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -26,7 +25,12 @@ class CheckServerViewModel constructor(private val eQueueRepository: EQueueRepos
     private suspend fun checkServerState() {
         while (true) {
             runCatching {
-                eQueueRepository.checkHealth()
+                eQueueRepository.checkHealth(
+                    url = "http://${
+                        PreferencesManager.getInstance(MainApplication().getAppContext())
+                            .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
+                    }/api/common/health"
+                )
             }.onSuccess {
                 _statusWorkServer.postValue(true)
                 Log.d(

@@ -17,7 +17,7 @@
             android:name=".app.presentation.SplashScreen"
             android:exported="true"/>
         <activity
-            android:name=".app.presentation.fragment.SettingFragment"
+            android:name=".app.presentation.fragment.SettingActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

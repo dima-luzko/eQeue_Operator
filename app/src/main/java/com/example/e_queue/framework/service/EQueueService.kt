@@ -1,58 +1,67 @@
 package com.example.e_queue.framework.service
 
 import com.example.e_queue.app.data.model.*
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface EQueueService {
 
-    //Users
-    @GET("operator/getUsers")
-    suspend fun getUsers(): List<User>
 
-    @GET("operator/getNextCustomerInfo")
-    suspend fun getNextCustomerInfo(@Query("user_id") userId: Int): NextCustomerInfo
+    // user
+    @GET
+    suspend fun getUsers(@Url url: String): List<User>
 
-    @GET("operator/inviteNextCustomer")
-    suspend fun inviteNextCustomer(@Query("user_id") userId: Int): InviteNextCustomerInfo
+    @GET
+    suspend fun getNextCustomerInfo(
+        @Url url: String,
+        @Query("user_id") userId: Int
+    ): NextCustomerInfo
 
-    @GET("operator/killNextCustomer")
-    suspend fun killNextCustomer(@Query("user_id") userId: Int)
+    @GET
+    suspend fun inviteNextCustomer(
+        @Url url: String,
+        @Query("user_id") userId: Int
+    ): InviteNextCustomerInfo
 
-    @GET("operator/getStartCustomer")
-    suspend fun getStartCustomer(@Query("user_id") userId: Int)
+    @GET
+    suspend fun killNextCustomer(@Url url: String, @Query("user_id") userId: Int)
 
-    @GET("operator/getSelfServices")
-    suspend fun getSelfServices(@Query("user_id") userId: Int): ServicesLength
+    @GET
+    suspend fun getStartCustomer(@Url url: String, @Query("user_id") userId: Int)
 
-    @GET("terminal/getServices")
-    suspend fun getServices(): ServicesList
+    @GET
+    suspend fun getSelfServices(@Url url: String, @Query("user_id") userId: Int): ServicesLength
 
-    @POST("operator/redirectCustomer")
-    suspend fun redirectCustomer(@Body customer: BodyForRedirectCustomer)
+    @GET
+    suspend fun getServices(@Url url: String): ServicesList
 
-    @GET("operator/getResultsList")
-    suspend fun getResultsList(): ResultList
+    @POST
+    suspend fun redirectCustomer(@Url url: String, @Body customer: BodyForRedirectCustomer)
 
-    @POST("operator/getFinishCustomer")
-    suspend fun finishWorkWithCustomer(@Body result: BodyForFinishWorkWithCustomer)
+    @GET
+    suspend fun getResultsList(@Url url: String): ResultList
 
-    @POST("operator/customerToPostpone")
-    suspend fun customerToPostpone(@Body customer: BodyForPostponedCustomer)
+    @POST
+    suspend fun finishWorkWithCustomer(
+        @Url url: String,
+        @Body result: BodyForFinishWorkWithCustomer
+    )
 
-    @GET("operator/getPostponedPoolInfo")
-    suspend fun getPostponedPoolInfo(): List<InviteNextCustomerInfo>
+    @POST
+    suspend fun customerToPostpone(@Url url: String, @Body customer: BodyForPostponedCustomer)
 
-    @GET("operator/invitePostponeCustomer")
+    @GET
+    suspend fun getPostponedPoolInfo(@Url url: String): List<InviteNextCustomerInfo>
+
+    @GET
     suspend fun invitePostponedCustomer(
+        @Url url: String,
         @Query("user_id") userId: Int,
         @Query("customer_id") customerId: Long
     ): InviteNextCustomerInfo
 
-    //common
-    @GET("common/health")
-    suspend fun checkHealth()
+    // common
+    @GET
+    suspend fun checkHealth(@Url url: String)
+
 
 }

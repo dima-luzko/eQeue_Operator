@@ -3,14 +3,12 @@ package com.example.e_queue.app.presentation.fragment
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.example.e_queue.MainActivity
 import com.example.e_queue.R
 import com.example.e_queue.app.data.model.LoggedUser
 import com.example.e_queue.app.data.model.SelectedUser
@@ -22,8 +20,6 @@ import com.example.e_queue.utils.Constants.Companion.SELECTED_USER_ARG
 import com.example.e_queue.utils.Constants.Companion.SELECTED_USER_REQUEST_KEY
 import com.example.e_queue.utils.changeBackgroundAndNavBarColor
 import com.example.e_queue.utils.snackBar
-import kotlinx.android.synthetic.main.fragment_login.*
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -93,7 +89,7 @@ class LoginFragment : Fragment() {
 
     private fun goToSettingScreen(){
         binding.setting.setOnClickListener {
-            val intent = Intent(requireContext(), SettingFragment::class.java)
+            val intent = Intent(requireContext(), SettingActivity::class.java)
             startActivity(intent)
         }
     }
