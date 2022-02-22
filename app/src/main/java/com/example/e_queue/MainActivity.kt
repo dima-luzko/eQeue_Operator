@@ -24,8 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        PreferencesManager.getInstance(this)
-            .putBoolean(PreferencesManager.PREF_ON_BACK_PRESSED, false)
+        changeSharedPrefs()
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, LoginFragment())
         transaction.commit()
@@ -46,6 +45,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.dispatchTouchEvent(event)
+    }
+
+    private fun changeSharedPrefs(){
+        PreferencesManager.getInstance(this)
+            .putBoolean(PreferencesManager.PREF_FLAG, false)
+        PreferencesManager.getInstance(this)
+            .putBoolean(PreferencesManager.PREF_REDIRECT_CUSTOMER, false)
+        PreferencesManager.getInstance(this)
+            .putBoolean(PreferencesManager.PREF_POSTPONED_CUSTOMER, false)
+        PreferencesManager.getInstance(this)
+            .putBoolean(PreferencesManager.PREF_ON_BACK_PRESSED, false)
     }
 
     override fun onResume() {

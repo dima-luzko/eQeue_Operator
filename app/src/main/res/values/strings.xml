@@ -62,6 +62,7 @@
     <string name="comments">Комментарий…</string>
     <string name="service_name">Название услуги</string>
     <string name="zero">0</string>
+    <string name="five">5</string>
     <string name="server_no_connection">Соединение с сервером не установлено. \nПроверьте введенный IP-адрес и работу \nсервера.</string>
     <string name="change">Изменить</string>
     <string name="_254">254</string>

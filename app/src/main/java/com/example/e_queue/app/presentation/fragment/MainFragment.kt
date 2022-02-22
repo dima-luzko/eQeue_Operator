@@ -240,6 +240,10 @@ class MainFragment : Fragment() {
                 changeStatusClient()
             }
             buttonCallNextClient.setOnClickListener {
+                PreferencesManager.getInstance(requireContext())
+                    .putBoolean(PreferencesManager.PREF_REDIRECT_CUSTOMER, false)
+                PreferencesManager.getInstance(requireContext())
+                    .putBoolean(PreferencesManager.PREF_POSTPONED_CUSTOMER, false)
                 statusClient = 1
                 inviteNextCustomer()
                 with(binding.someButton) {
@@ -250,7 +254,6 @@ class MainFragment : Fragment() {
                     buttonNoClient.isVisible = true
                 }
                 changeStatusClient()
-                Log.d("uuuu", "call invite")
             }
             buttonListPostponedClients.setOnClickListener {
                 loggedUserViewModel.loggedUser.observe(viewLifecycleOwner) { loggedUser ->
@@ -264,11 +267,15 @@ class MainFragment : Fragment() {
                 }
                 PreferencesManager.getInstance(requireContext())
                     .putBoolean(PreferencesManager.PREF_FLAG, false)
+                PreferencesManager.getInstance(requireContext())
+                    .putBoolean(PreferencesManager.PREF_REDIRECT_CUSTOMER, false)
             }
             buttonStartWork.setOnClickListener {
                 statusClient = 2
                 PreferencesManager.getInstance(requireContext())
                     .putBoolean(PreferencesManager.PREF_ON_BACK_PRESSED, false)
+                PreferencesManager.getInstance(requireContext())
+                    .putBoolean(PreferencesManager.PREF_FLAG, false)
                 with(binding.someButton) {
                     buttonStartWork.isVisible = false
                     buttonCallNextClientAgain.isVisible = false
@@ -347,6 +354,8 @@ class MainFragment : Fragment() {
             }
 
             buttonRedirect.setOnClickListener {
+                PreferencesManager.getInstance(requireContext())
+                    .putBoolean(PreferencesManager.PREF_REDIRECT_CUSTOMER, false)
                 loggedUserViewModel.loggedUser.observe(viewLifecycleOwner) { loggedUser ->
                     replaceFragment(
                         fragment = RedirectClientFragment(),
@@ -359,6 +368,8 @@ class MainFragment : Fragment() {
             }
 
             buttonPostpone.setOnClickListener {
+                PreferencesManager.getInstance(requireContext())
+                    .putBoolean(PreferencesManager.PREF_POSTPONED_CUSTOMER, false)
                 loggedUserViewModel.loggedUser.observe(viewLifecycleOwner) { loggedUser ->
                     replaceFragment(
                         fragment = PostponedClientFragment(),
@@ -468,6 +479,9 @@ class MainFragment : Fragment() {
                     buttonStartWork.isVisible = true
                     buttonCallNextClientAgain.isVisible = true
                     buttonNoClient.isVisible = true
+                    buttonPostpone.isVisible = false
+                    buttonRedirect.isVisible = false
+                    buttonFinishWork.isVisible = false
                 }
             }
             statusClient = 1
@@ -480,6 +494,14 @@ class MainFragment : Fragment() {
                 .getBoolean(PreferencesManager.PREF_ON_BACK_PRESSED, false)
         ) {
             with(binding.someButton) {
+                if (!PreferencesManager.getInstance(requireContext())
+                        .getBoolean(PreferencesManager.PREF_POSTPONED_CUSTOMER, false)
+                    || !PreferencesManager.getInstance(requireContext())
+                        .getBoolean(PreferencesManager.PREF_REDIRECT_CUSTOMER, false)){
+                    buttonStartWork.isVisible = false
+                    buttonCallNextClientAgain.isVisible = false
+                    buttonNoClient.isVisible = false
+                }
                 buttonPostpone.isVisible = PreferencesManager.getInstance(requireContext())
                     .getBoolean(PreferencesManager.PREF_SWITCH_POSTPONED, false)
                 buttonRedirect.isVisible = PreferencesManager.getInstance(requireContext())
@@ -489,12 +511,38 @@ class MainFragment : Fragment() {
         }
     }
 
+    private fun checkPostponedCustomer() {
+        if (PreferencesManager.getInstance(requireContext())
+                .getBoolean(PreferencesManager.PREF_POSTPONED_CUSTOMER, false)
+            || PreferencesManager.getInstance(requireContext())
+                .getBoolean(PreferencesManager.PREF_REDIRECT_CUSTOMER, false)) {
+            statusClient = 0
+            changeStatusClient()
+            with(binding) {
+                with(someButton) {
+                    buttonStartWork.isVisible = false
+                    buttonCallNextClientAgain.isVisible = false
+                    buttonNoClient.isVisible = false
+                    buttonCallNextClient.isVisible = true
+                    buttonListPostponedClients.isVisible = true
+                    buttonPostpone.isVisible = false
+                    buttonRedirect.isVisible = false
+                    buttonFinishWork.isVisible = false
+                }
+                include.currentClientNumber.text = ""
+                include.currentClientService.text = ""
+            }
+        }
+    }
+
+
     override fun onResume() {
         super.onResume()
         checkBackPressed()
         setInviteCustomerInfo()
         setInvitePostponedCustomerInfo()
         changeStatusClient()
+        checkPostponedCustomer()
     }
 
     override fun onStart() {

@@ -155,12 +155,13 @@ class PostponedClientListFragment : Fragment() {
     private fun invitePostponedCustomers() {
         PreferencesManager.getInstance(requireContext())
             .putBoolean(PreferencesManager.PREF_FLAG, true)
+        PreferencesManager.getInstance(requireContext())
+            .putBoolean(PreferencesManager.PREF_POSTPONED_CUSTOMER, false)
         operationOperationWithLoggedUserViewModel.operationWithLoggedUser.observe(viewLifecycleOwner) { loggedUser ->
             postponedListViewModel.selectedClientId.observe(viewLifecycleOwner) { selectedClientId ->
                 postponedListViewModel.invitePostponedCustomer(loggedUser.userId, selectedClientId)
             }
             postponedListViewModel.invitePostponedCustomer.observe(viewLifecycleOwner) { postponedClient ->
-
                 replaceFragment(
                     MainFragment(),
                     loggedUser.userId,

@@ -74,6 +74,8 @@ class RedirectClientFragment : Fragment() {
                 if (chooseServiceName.text == getString(R.string.service_name)) {
                     snackBar(requireView(), requireContext(), R.string.choose_service_snack_bar)
                 } else {
+                    PreferencesManager.getInstance(requireContext())
+                        .putBoolean(PreferencesManager.PREF_REDIRECT_CUSTOMER, true)
                     redirectCustomer()
                 }
             }

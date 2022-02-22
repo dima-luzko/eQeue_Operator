@@ -118,7 +118,7 @@
         android:layout_marginStart="@dimen/_4mdp"
         android:layout_marginTop="@dimen/_1mdp"
         android:textAlignment="center"
-        android:text="@string/zero"
+        android:text="@string/five"
         app:layout_constraintBottom_toBottomOf="@id/time"
         app:layout_constraintStart_toEndOf="@id/to_postpone_a"
         app:layout_constraintTop_toTopOf="@id/time" />

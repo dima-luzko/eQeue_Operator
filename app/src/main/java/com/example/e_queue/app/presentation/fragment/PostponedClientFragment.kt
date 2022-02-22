@@ -21,11 +21,11 @@ import org.koin.core.parameter.parametersOf
 class PostponedClientFragment : Fragment() {
 
     private lateinit var binding: FragmentPostponedClientBinding
-    private val operationOperationWithLoggedUserViewModel: OperationWithLoggedUserViewModel by viewModel {
+    private val operationWithLoggedUserViewModel: OperationWithLoggedUserViewModel by viewModel {
         parametersOf(arguments?.getParcelable<OperationWithLoggedUser>(Constants.OPERATION_WITH_LOGGED_USER_ARG))
     }
     private val bundle = Bundle()
-    private var timePostponedClient = 0
+    private var timePostponedClient = 5
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,8 +50,8 @@ class PostponedClientFragment : Fragment() {
     }
 
     private fun setCustomerParams() {
-        operationOperationWithLoggedUserViewModel.setParams()
-        operationOperationWithLoggedUserViewModel.operationWithLoggedUser.observe(viewLifecycleOwner) { loggedUser ->
+        operationWithLoggedUserViewModel.setParams()
+        operationWithLoggedUserViewModel.operationWithLoggedUser.observe(viewLifecycleOwner) { loggedUser ->
             with(binding) {
                 operatorName.text = loggedUser.userName
                 workspaceNumber.text = loggedUser.point
@@ -61,14 +61,14 @@ class PostponedClientFragment : Fragment() {
     }
 
     private fun postponedCustomer() {
-        operationOperationWithLoggedUserViewModel.operationWithLoggedUser.observe(viewLifecycleOwner) { loggedUser ->
+        operationWithLoggedUserViewModel.operationWithLoggedUser.observe(viewLifecycleOwner) { loggedUser ->
             val body = BodyForPostponedCustomer(
                 userId = loggedUser.userId,
                 comments = binding.inputPostponingComment.text.toString(),
                 isOnlyMine = binding.checkboxOnlyForMe.isChecked,
                 postponedPeriod = timePostponedClient
             )
-            operationOperationWithLoggedUserViewModel.customerToPostpone(body)
+            operationWithLoggedUserViewModel.customerToPostpone(body)
             replaceFragment(
                 MainFragment(),
                 loggedUser.userId,
@@ -86,6 +86,8 @@ class PostponedClientFragment : Fragment() {
                 parentFragmentManager.popBackStack()
             }
             buttonPostponing.setOnClickListener {
+                PreferencesManager.getInstance(requireContext())
+                    .putBoolean(PreferencesManager.PREF_POSTPONED_CUSTOMER, true)
                 postponedCustomer()
             }
             plus.setOnClickListener {
@@ -107,7 +109,7 @@ class PostponedClientFragment : Fragment() {
     }
 
     private fun changeTimeMinus() {
-        if (timePostponedClient > 0) {
+        if (timePostponedClient > 5) {
             timePostponedClient -= 5
         } else {
             timePostponedClient
