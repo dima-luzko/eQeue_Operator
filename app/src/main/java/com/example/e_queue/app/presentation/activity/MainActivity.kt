@@ -1,4 +1,4 @@
-package com.example.e_queue
+package com.example.e_queue.app.presentation.activity
 
 import android.content.Context
 import android.graphics.Rect
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.example.e_queue.R
 import com.example.e_queue.app.presentation.fragment.LoginFragment
 import com.example.e_queue.app.presentation.viewModel.CheckServerViewModel
 import com.example.e_queue.databinding.ActivityMainBinding
@@ -47,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         return super.dispatchTouchEvent(event)
     }
 
-    private fun changeSharedPrefs(){
+    private fun changeSharedPrefs() {
         PreferencesManager.getInstance(this)
             .putBoolean(PreferencesManager.PREF_FLAG, false)
         PreferencesManager.getInstance(this)

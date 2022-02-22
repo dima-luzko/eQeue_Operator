@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="@dimen/_150mdp">
+    android:layout_height="@dimen/_170mdp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_no_connection"
         android:layout_width="@dimen/_270mdp"
-        android:layout_height="@dimen/_150mdp"
+        android:layout_height="@dimen/_170mdp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/_8mdp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,7 +50,6 @@
                 android:layout_marginTop="@dimen/_10mdp"
                 android:background="@drawable/ic_vvod_ip"
                 android:ems="3"
-
                 android:hint="@string/_127"
                 android:inputType="number"
                 android:maxLength="3"
@@ -168,6 +167,20 @@
                 app:layout_constraintTop_toTopOf="@id/input_ip4"
                 tools:ignore="Autofill" />
 
+            <TextView
+                android:id="@+id/error_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/please_enter_all"
+                android:textColor="#C0577A"
+                style="@style/roboto_regular_14"
+                android:layout_marginTop="@dimen/_10mdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_ip3"
+                />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/save_ip_button"
                 style="@style/roboto_regular_12_green_buttons"
@@ -179,7 +192,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/input_ip3" />
+                app:layout_constraintTop_toBottomOf="@id/error_text" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

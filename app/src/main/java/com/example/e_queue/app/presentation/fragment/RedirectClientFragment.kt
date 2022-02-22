@@ -1,11 +1,9 @@
 package com.example.e_queue.app.presentation.fragment
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.e_queue.R
@@ -13,6 +11,7 @@ import com.example.e_queue.app.data.model.BodyForRedirectCustomer
 import com.example.e_queue.app.data.model.LoggedUser
 import com.example.e_queue.app.data.model.OperationWithLoggedUser
 import com.example.e_queue.app.data.model.SelectedServices
+import com.example.e_queue.app.presentation.fragment.dialog.ChooseServicesDialogFragment
 import com.example.e_queue.app.presentation.viewModel.OperationWithLoggedUserViewModel
 import com.example.e_queue.app.presentation.viewModel.SelectedServicesViewModel
 import com.example.e_queue.databinding.FragmentRedirectClientBinding
@@ -20,7 +19,6 @@ import com.example.e_queue.utils.Constants
 import com.example.e_queue.utils.PreferencesManager
 import com.example.e_queue.utils.changeBackgroundAndNavBarColor
 import com.example.e_queue.utils.snackBar
-import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 

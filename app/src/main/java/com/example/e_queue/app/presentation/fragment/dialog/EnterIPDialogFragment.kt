@@ -1,4 +1,4 @@
-package com.example.e_queue.app.presentation.fragment
+package com.example.e_queue.app.presentation.fragment.dialog
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,8 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.example.e_queue.R
@@ -74,8 +72,11 @@ class EnterIPDialogFragment : DialogFragment() {
     }
 
     private fun closeDialog() {
-        binding.close.setOnClickListener {
-            dismiss()
+        with(binding) {
+            close.setOnClickListener {
+                errorText.visibility = View.GONE
+                dismiss()
+            }
         }
     }
 
@@ -99,7 +100,8 @@ class EnterIPDialogFragment : DialogFragment() {
                 ) {
                 }
 
-                override fun afterTextChanged(s: Editable) {}
+                override fun afterTextChanged(s: Editable) {
+                }
             })
             inputIp2.addTextChangedListener(object : TextWatcher {
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
@@ -188,33 +190,38 @@ class EnterIPDialogFragment : DialogFragment() {
     private fun saveIP() {
         with(binding) {
             saveIpButton.setOnClickListener {
-                val ip1 = input_ip1.text.toString()
-                val ip2 = input_ip2.text.toString()
-                val ip3 = input_ip3.text.toString()
-                val ip4 = input_ip4.text.toString()
-                val ip5 = input_ip5.text.toString()
-                val glueIP =
-                    ip1 + getString(R.string.dot) + ip2 + getString(R.string.dot) + ip3 + getString(
-                        R.string.dot
-                    ) + ip4 + getString(R.string.colon) + ip5
-                PreferencesManager.getInstance(requireContext())
-                    .putString(PreferencesManager.PREF_IP_1, ip1)
-                PreferencesManager.getInstance(requireContext())
-                    .putString(PreferencesManager.PREF_IP_2, ip2)
-                PreferencesManager.getInstance(requireContext())
-                    .putString(PreferencesManager.PREF_IP_3, ip3)
-                PreferencesManager.getInstance(requireContext())
-                    .putString(PreferencesManager.PREF_IP_4, ip4)
-                PreferencesManager.getInstance(requireContext())
-                    .putString(PreferencesManager.PREF_IP_5, ip5)
-                PreferencesManager.getInstance(requireContext())
-                    .putString(PreferencesManager.PREF_GLUE_IP, glueIP)
-                bundle.putString(Constants.IP_ADDRESS_ARG, glueIP)
-                parentFragmentManager.setFragmentResult(
-                    Constants.IP_ADDRESS_REQUEST_KEY,
-                    bundle
-                )
-                dialog?.dismiss()
+                if (inputIp1.text.isEmpty() || inputIp2.text.isEmpty() || inputIp3.text.isEmpty() || inputIp4.text.isEmpty() || inputIp5.text.isEmpty()) {
+                    errorText.visibility = View.VISIBLE
+                } else {
+                    errorText.visibility = View.GONE
+                    val ip1 = input_ip1.text.toString()
+                    val ip2 = input_ip2.text.toString()
+                    val ip3 = input_ip3.text.toString()
+                    val ip4 = input_ip4.text.toString()
+                    val ip5 = input_ip5.text.toString()
+                    val glueIP =
+                        ip1 + getString(R.string.dot) + ip2 + getString(R.string.dot) + ip3 + getString(
+                            R.string.dot
+                        ) + ip4 + getString(R.string.colon) + ip5
+                    PreferencesManager.getInstance(requireContext())
+                        .putString(PreferencesManager.PREF_IP_1, ip1)
+                    PreferencesManager.getInstance(requireContext())
+                        .putString(PreferencesManager.PREF_IP_2, ip2)
+                    PreferencesManager.getInstance(requireContext())
+                        .putString(PreferencesManager.PREF_IP_3, ip3)
+                    PreferencesManager.getInstance(requireContext())
+                        .putString(PreferencesManager.PREF_IP_4, ip4)
+                    PreferencesManager.getInstance(requireContext())
+                        .putString(PreferencesManager.PREF_IP_5, ip5)
+                    PreferencesManager.getInstance(requireContext())
+                        .putString(PreferencesManager.PREF_GLUE_IP, glueIP)
+                    bundle.putString(Constants.IP_ADDRESS_ARG, glueIP)
+                    parentFragmentManager.setFragmentResult(
+                        Constants.IP_ADDRESS_REQUEST_KEY,
+                        bundle
+                    )
+                    dialog?.dismiss()
+                }
             }
         }
     }

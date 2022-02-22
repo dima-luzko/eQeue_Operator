@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment
 import com.example.e_queue.R
 import com.example.e_queue.app.data.model.LoggedUser
 import com.example.e_queue.app.data.model.SelectedUser
+import com.example.e_queue.app.presentation.activity.SettingActivity
+import com.example.e_queue.app.presentation.fragment.dialog.ChooseUserDialogFragment
 import com.example.e_queue.app.presentation.viewModel.CheckServerViewModel
 import com.example.e_queue.app.presentation.viewModel.SelectedUserViewModel
 import com.example.e_queue.databinding.FragmentLoginBinding

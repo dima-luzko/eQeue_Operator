@@ -1,4 +1,4 @@
-package com.example.e_queue.app.presentation.fragment
+package com.example.e_queue.app.presentation.fragment.dialog
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable

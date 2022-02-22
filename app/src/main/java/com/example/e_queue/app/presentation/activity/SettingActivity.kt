@@ -1,11 +1,11 @@
-package com.example.e_queue.app.presentation.fragment
+package com.example.e_queue.app.presentation.activity
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.example.e_queue.MainActivity
 import com.example.e_queue.R
+import com.example.e_queue.app.presentation.fragment.dialog.EnterIPDialogFragment
 import com.example.e_queue.app.presentation.viewModel.SettingViewModel
 import com.example.e_queue.databinding.FragmentSettingsBinding
 import com.example.e_queue.utils.Constants

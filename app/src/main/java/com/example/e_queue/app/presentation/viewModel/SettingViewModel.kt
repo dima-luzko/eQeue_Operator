@@ -2,7 +2,6 @@ package com.example.e_queue.app.presentation.viewModel
 
 import android.content.Context
 import androidx.lifecycle.*
-import com.example.e_queue.app.data.model.SelectedUser
 import com.example.e_queue.utils.PreferencesManager
 
 class SettingViewModel(context: Context) : ViewModel() {
@@ -33,7 +32,6 @@ class SettingViewModel(context: Context) : ViewModel() {
     fun changeStateSwitchOneButtonMode(switchState: Boolean) {
         _switchOneButtonMode.postValue(switchState)
     }
-
 
     class UiState(
         val first: Boolean,
