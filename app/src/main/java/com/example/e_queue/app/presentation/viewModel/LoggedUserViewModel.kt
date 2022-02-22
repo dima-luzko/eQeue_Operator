@@ -26,6 +26,8 @@ class LoggedUserViewModel constructor(
     val loggedUserModel: LoggedUser
 ) : ViewModel() {
 
+    private var previousLengthTotal = 0
+
     private var jobForServiceLength: Job? = null
     private var jobForNextCustomerInfo: Job? = null
 
@@ -40,6 +42,9 @@ class LoggedUserViewModel constructor(
 
     private val _inviteNextCustomerInfo = MutableLiveData<InviteNextCustomerInfo>()
     val inviteNextCustomerInfo: LiveData<InviteNextCustomerInfo> = _inviteNextCustomerInfo
+
+    private val _isPlay = MutableLiveData<Boolean>()
+    val isPlay: LiveData<Boolean> = _isPlay
 
     fun setUserParams() {
         _loggedUser.postValue(loggedUserModel)
@@ -56,15 +61,21 @@ class LoggedUserViewModel constructor(
                     userId = loggedUserModel.id
                 )
                 if (length.selfServices.isNotEmpty()) {
-                    var sum = 0
+                    var count = 0
                     length.selfServices.forEach { value ->
-                        sum += value.line.count()
+                        count += value.line.count()
                     }
                     Log.d(
                         LOG_SERVICE_LENGTH,
-                        "Now length in service - $sum for user: ${loggedUserModel.name}"
+                        "Now length in service - $count for user: ${loggedUserModel.name}"
                     )
-                    _serviceLength.postValue(sum)
+                    _serviceLength.postValue(count)
+                    if (previousLengthTotal == 0 && count > 0) {
+                        previousLengthTotal = count
+                        _isPlay.postValue(true)
+                    } else if (count == 0) {
+                        previousLengthTotal = count
+                    }
                 }
             } catch (exception: SocketTimeoutException) {
             }

@@ -123,4 +123,6 @@ class SettingActivity : AppCompatActivity() {
             binding.ipAddress.text = it
         }
     }
+
+    override fun onBackPressed() {}
 }

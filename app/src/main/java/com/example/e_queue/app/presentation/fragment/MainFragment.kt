@@ -1,6 +1,7 @@
 package com.example.e_queue.app.presentation.fragment
 
 import android.annotation.SuppressLint
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,7 +16,6 @@ import com.example.e_queue.app.data.model.BodyForFinishWorkWithCustomer
 import com.example.e_queue.app.data.model.InvitePostponedClient
 import com.example.e_queue.app.data.model.LoggedUser
 import com.example.e_queue.app.data.model.OperationWithLoggedUser
-import com.example.e_queue.app.presentation.viewModel.CheckServerViewModel
 import com.example.e_queue.app.presentation.viewModel.LoggedUserViewModel
 import com.example.e_queue.databinding.FragmentMainBinding
 import com.example.e_queue.utils.Constants
@@ -27,7 +27,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -40,6 +39,7 @@ class MainFragment : Fragment() {
     }
     private val bundle = Bundle()
     private var statusClient = 0
+    private var mMediaPlayer: MediaPlayer? = null
 
     companion object {
         fun newInstance(loggedUserModel: LoggedUser) = MainFragment().apply {
@@ -70,6 +70,7 @@ class MainFragment : Fragment() {
         setNextCustomer()
         handleClicks()
         unLoggedUser()
+        playSound()
     }
 
     private fun setToolbarText() {
@@ -98,7 +99,13 @@ class MainFragment : Fragment() {
             }
 
         }
+    }
 
+    private fun playSound() {
+        loggedUserViewModel.isPlay.observe(viewLifecycleOwner) {
+            mMediaPlayer = MediaPlayer.create(requireContext(), R.raw.sound_for_invite_customer)
+            mMediaPlayer!!.start()
+        }
     }
 
     private fun setServiceLength() {
@@ -497,7 +504,8 @@ class MainFragment : Fragment() {
                 if (!PreferencesManager.getInstance(requireContext())
                         .getBoolean(PreferencesManager.PREF_POSTPONED_CUSTOMER, false)
                     || !PreferencesManager.getInstance(requireContext())
-                        .getBoolean(PreferencesManager.PREF_REDIRECT_CUSTOMER, false)){
+                        .getBoolean(PreferencesManager.PREF_REDIRECT_CUSTOMER, false)
+                ) {
                     buttonStartWork.isVisible = false
                     buttonCallNextClientAgain.isVisible = false
                     buttonNoClient.isVisible = false
@@ -515,7 +523,8 @@ class MainFragment : Fragment() {
         if (PreferencesManager.getInstance(requireContext())
                 .getBoolean(PreferencesManager.PREF_POSTPONED_CUSTOMER, false)
             || PreferencesManager.getInstance(requireContext())
-                .getBoolean(PreferencesManager.PREF_REDIRECT_CUSTOMER, false)) {
+                .getBoolean(PreferencesManager.PREF_REDIRECT_CUSTOMER, false)
+        ) {
             statusClient = 0
             changeStatusClient()
             with(binding) {
@@ -558,6 +567,10 @@ class MainFragment : Fragment() {
         with(loggedUserViewModel) {
             stopGetServiceLength()
             stopGetNextCustomerInfo()
+        }
+        if (mMediaPlayer != null) {
+            mMediaPlayer!!.release()
+            mMediaPlayer = null
         }
     }
 
