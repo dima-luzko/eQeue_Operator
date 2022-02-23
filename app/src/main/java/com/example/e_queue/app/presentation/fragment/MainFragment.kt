@@ -108,16 +108,16 @@ class MainFragment : Fragment() {
             if ( PreferencesManager.getInstance(requireContext())
                     .getBoolean(PreferencesManager.PREF_DONT_PLAY_SOUND, false)
             ) {
+                with(binding){
+                    include.currentClientNumber.text = ""
+                    include.currentClientService.text = ""
+                }
                 if (mMediaPlayer != null) {
                     mMediaPlayer!!.release()
                     mMediaPlayer = null
                 }
                 PreferencesManager.getInstance(requireContext())
                     .putBoolean(PreferencesManager.PREF_DONT_PLAY_SOUND, false)
-                with(binding){
-                    include.currentClientNumber.text = ""
-                    include.currentClientService.text = ""
-                }
 
             }
         }
