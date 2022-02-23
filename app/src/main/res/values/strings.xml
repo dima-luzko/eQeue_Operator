@@ -58,7 +58,7 @@
     <string name="choose_client_snack_bar">Необходимо выбрать клиента.</string>
     <string name="choose_service_snack_bar">Необходимо выбрать услугу.</string>
     <string name="enter_password_snack_bar">Для входа необходимо ввести пароль.</string>
-    <string name="wrong_password_snack_bar">Введен не верный пароль.</string>
+    <string name="wrong_password_snack_bar">Введен неверный пароль.</string>
     <string name="comments">Комментарий…</string>
     <string name="service_name">Название услуги</string>
     <string name="zero">0</string>
