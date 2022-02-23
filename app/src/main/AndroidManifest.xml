@@ -16,7 +16,7 @@
         <activity
             android:name=".app.presentation.activity.SplashScreenActivity"
             android:exported="true"
-            android:screenOrientation="fullSensor">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -25,11 +25,11 @@
         <activity
             android:name=".app.presentation.activity.SettingActivity"
             android:exported="true"
-            android:screenOrientation="fullSensor"/>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".app.presentation.activity.MainActivity"
             android:exported="true"
-            android:screenOrientation="fullSensor"/>
+            android:screenOrientation="portrait"/>
 
     </application>
 

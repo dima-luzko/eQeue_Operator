@@ -34,7 +34,7 @@
     <ImageView
         android:id="@+id/horizont_img"
         android:layout_width="@dimen/_100mdp"
-        android:layout_height="@dimen/_14mdp"
+        android:layout_height="@dimen/_12mdp"
         android:layout_marginBottom="@dimen/_20mdp"
         android:scaleType="fitXY"
         android:src="@drawable/horizont"
