@@ -14,7 +14,7 @@
         android:theme="@style/Theme.E_queue"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".app.presentation.SplashScreenActivity"
+            android:name=".app.presentation.activity.SplashScreenActivity"
             android:exported="true"
             android:screenOrientation="fullSensor">
             <intent-filter>

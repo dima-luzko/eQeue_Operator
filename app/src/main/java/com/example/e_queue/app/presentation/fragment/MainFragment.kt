@@ -105,6 +105,21 @@ class MainFragment : Fragment() {
         loggedUserViewModel.isPlay.observe(viewLifecycleOwner) {
             mMediaPlayer = MediaPlayer.create(requireContext(), R.raw.sound_for_invite_customer)
             mMediaPlayer!!.start()
+            if ( PreferencesManager.getInstance(requireContext())
+                    .getBoolean(PreferencesManager.PREF_DONT_PLAY_SOUND, false)
+            ) {
+                if (mMediaPlayer != null) {
+                    mMediaPlayer!!.release()
+                    mMediaPlayer = null
+                }
+                PreferencesManager.getInstance(requireContext())
+                    .putBoolean(PreferencesManager.PREF_DONT_PLAY_SOUND, false)
+                with(binding){
+                    include.currentClientNumber.text = ""
+                    include.currentClientService.text = ""
+                }
+
+            }
         }
     }
 
@@ -281,8 +296,6 @@ class MainFragment : Fragment() {
                 statusClient = 2
                 PreferencesManager.getInstance(requireContext())
                     .putBoolean(PreferencesManager.PREF_ON_BACK_PRESSED, false)
-                PreferencesManager.getInstance(requireContext())
-                    .putBoolean(PreferencesManager.PREF_FLAG, false)
                 with(binding.someButton) {
                     buttonStartWork.isVisible = false
                     buttonCallNextClientAgain.isVisible = false

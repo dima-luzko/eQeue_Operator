@@ -83,6 +83,8 @@ class PostponedClientFragment : Fragment() {
             buttonCancel.setOnClickListener {
                 PreferencesManager.getInstance(requireContext())
                     .putBoolean(PreferencesManager.PREF_ON_BACK_PRESSED, true)
+                PreferencesManager.getInstance(requireContext())
+                    .putBoolean(PreferencesManager.PREF_DONT_PLAY_SOUND, true)
                 parentFragmentManager.popBackStack()
             }
             buttonPostponing.setOnClickListener {

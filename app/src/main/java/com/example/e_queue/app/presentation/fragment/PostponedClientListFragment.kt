@@ -140,6 +140,8 @@ class PostponedClientListFragment : Fragment() {
         }
         with(binding) {
             buttonCancel.setOnClickListener {
+                PreferencesManager.getInstance(requireContext())
+                    .putBoolean(PreferencesManager.PREF_DONT_PLAY_SOUND, true)
                 parentFragmentManager.popBackStack()
             }
             buttonInviteClient.setOnClickListener {

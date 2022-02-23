@@ -169,8 +169,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_redirection"
-        android:layout_width="@dimen/_200mdp"
-        android:layout_height="@dimen/_28mdp"
+        android:layout_width="@dimen/_240mdp"
+        android:layout_height="@dimen/_56mdp"
         android:layout_marginBottom="@dimen/_10mdp"
         android:background="@drawable/green_button"
         android:fontFamily="@font/roboto_regular"
@@ -185,8 +185,8 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_cancel"
         style="@style/roboto_regular_14"
-        android:layout_width="@dimen/_200mdp"
-        android:layout_height="@dimen/_28mdp"
+        android:layout_width="@dimen/_240mdp"
+        android:layout_height="@dimen/_56mdp"
         android:layout_marginBottom="@dimen/_20mdp"
         android:background="@drawable/button_login"
         android:text="@string/cancel"

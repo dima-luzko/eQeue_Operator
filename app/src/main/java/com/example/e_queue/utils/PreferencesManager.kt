@@ -12,6 +12,7 @@ class PreferencesManager private constructor(context: Context) {
         const val PREF_SWITCH_REDIRECT = "PREF_SWITCH_REDIRECT"
         const val PREF_SWITCH_ONE_MODE = "PREF_SWITCH_ONE_MODE"
         const val PREF_FLAG = "PREF_FLAG"
+        const val PREF_DONT_PLAY_SOUND = "PREF_DONT_PLAY_SOUND"
         const val PREF_POSTPONED_CUSTOMER = "PREF_POSTPONED_CUSTOMER"
         const val PREF_REDIRECT_CUSTOMER = "PREF_REDIRECT_CUSTOMER"
         const val PREF_ON_BACK_PRESSED = "PREF_ON_BACK_PRESSED"
