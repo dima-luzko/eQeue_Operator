@@ -19,13 +19,15 @@ class ServicesListViewModel constructor(private val eQueueRepository: EQueueRepo
 
     fun getServicesList() {
         viewModelScope.launch(Dispatchers.IO) {
-            val userList = eQueueRepository.getServices(
-                url = "http://${
-                    PreferencesManager.getInstance(MainApplication().getAppContext())
-                        .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
-                }/api/terminal/getServices"
-            )
-            _services.postValue(userList)
+            runCatching {
+                val userList = eQueueRepository.getServices(
+                    url = "http://${
+                        PreferencesManager.getInstance(MainApplication().getAppContext())
+                            .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
+                    }/api/terminal/getServices"
+                )
+                _services.postValue(userList)
+            }.onFailure {  }
         }
     }
 

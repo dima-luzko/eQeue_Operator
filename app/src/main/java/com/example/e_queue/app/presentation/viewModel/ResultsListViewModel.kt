@@ -22,13 +22,15 @@ class ResultsListViewModel constructor(private val eQueueRepository: EQueueRepos
 
     fun getResultsList() {
         viewModelScope.launch(Dispatchers.IO) {
-            val resultsList = eQueueRepository.getResultsList(
-                url = "http://${
-                    PreferencesManager.getInstance(MainApplication().getAppContext())
-                        .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
-                }/api/operator/getResultsList"
-            )
-            _results.postValue(resultsList)
+            runCatching {
+                val resultsList = eQueueRepository.getResultsList(
+                    url = "http://${
+                        PreferencesManager.getInstance(MainApplication().getAppContext())
+                            .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
+                    }/api/operator/getResultsList"
+                )
+                _results.postValue(resultsList)
+            }.onFailure {  }
         }
     }
 

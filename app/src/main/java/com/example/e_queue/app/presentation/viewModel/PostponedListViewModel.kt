@@ -28,13 +28,15 @@ class PostponedListViewModel constructor(private val eQueueRepository: EQueueRep
 
     fun getPostponedClientList() {
         viewModelScope.launch(Dispatchers.IO) {
-            val postponedClientList = eQueueRepository.getPostponedPoolInfo(
-                url = "http://${
-                    PreferencesManager.getInstance(MainApplication().getAppContext())
-                        .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
-                }/api/operator/getPostponedPoolInfo"
-            )
-            _results.postValue(postponedClientList)
+            runCatching {
+                val postponedClientList = eQueueRepository.getPostponedPoolInfo(
+                    url = "http://${
+                        PreferencesManager.getInstance(MainApplication().getAppContext())
+                            .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
+                    }/api/operator/getPostponedPoolInfo"
+                )
+                _results.postValue(postponedClientList)
+            }.onFailure {  }
         }
     }
 
@@ -44,27 +46,31 @@ class PostponedListViewModel constructor(private val eQueueRepository: EQueueRep
 
     fun setPostponedLength() {
         viewModelScope.launch(Dispatchers.IO) {
-            val length = eQueueRepository.getPostponedPoolInfo(
-                url = "http://${
-                    PreferencesManager.getInstance(MainApplication().getAppContext())
-                        .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
-                }/api/operator/getPostponedPoolInfo"
-            )
-            _postponedClientLength.postValue(length.size.toString())
+            runCatching {
+                val length = eQueueRepository.getPostponedPoolInfo(
+                    url = "http://${
+                        PreferencesManager.getInstance(MainApplication().getAppContext())
+                            .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
+                    }/api/operator/getPostponedPoolInfo"
+                )
+                _postponedClientLength.postValue(length.size.toString())
+            }.onFailure {  }
         }
     }
 
     fun invitePostponedCustomer(userId: Int, customerId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
-            val res = eQueueRepository.invitePostponedCustomer(
-                url = "http://${
-                    PreferencesManager.getInstance(MainApplication().getAppContext())
-                        .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
-                }/api/operator/invitePostponeCustomer",
-                userId = userId,
-                customerId = customerId
-            )
-            _invitePostponedCustomer.postValue(res)
+            runCatching {
+                val res = eQueueRepository.invitePostponedCustomer(
+                    url = "http://${
+                        PreferencesManager.getInstance(MainApplication().getAppContext())
+                            .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
+                    }/api/operator/invitePostponeCustomer",
+                    userId = userId,
+                    customerId = customerId
+                )
+                _invitePostponedCustomer.postValue(res)
+            }.onFailure {  }
         }
     }
 

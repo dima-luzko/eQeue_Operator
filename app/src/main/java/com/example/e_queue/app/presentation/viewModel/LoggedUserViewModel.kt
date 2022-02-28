@@ -85,14 +85,16 @@ class LoggedUserViewModel constructor(
 
     fun inviteNextCustomer() {
         viewModelScope.launch(Dispatchers.IO) {
-            val nextCustomerInfo = eQueueRepository.inviteNextCustomer(
-                url = "http://${
-                    PreferencesManager.getInstance(MainApplication().getAppContext())
-                        .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
-                }/api/operator/inviteNextCustomer",
-                userId = loggedUserModel.id
-            )
-            _inviteNextCustomerInfo.postValue(nextCustomerInfo)
+            runCatching {
+                val nextCustomerInfo = eQueueRepository.inviteNextCustomer(
+                    url = "http://${
+                        PreferencesManager.getInstance(MainApplication().getAppContext())
+                            .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
+                    }/api/operator/inviteNextCustomer",
+                    userId = loggedUserModel.id
+                )
+                _inviteNextCustomerInfo.postValue(nextCustomerInfo)
+            }.onFailure { }
         }
     }
 
@@ -112,13 +114,15 @@ class LoggedUserViewModel constructor(
 
     fun getStartCustomer() {
         viewModelScope.launch(Dispatchers.IO) {
-            eQueueRepository.getStartCustomer(
-                url = "http://${
-                    PreferencesManager.getInstance(MainApplication().getAppContext())
-                        .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
-                }/api/operator/getStartCustomer",
-                userId = loggedUserModel.id
-            )
+            runCatching {
+                eQueueRepository.getStartCustomer(
+                    url = "http://${
+                        PreferencesManager.getInstance(MainApplication().getAppContext())
+                            .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
+                    }/api/operator/getStartCustomer",
+                    userId = loggedUserModel.id
+                )
+            }.onFailure {  }
         }
     }
 
@@ -154,13 +158,15 @@ class LoggedUserViewModel constructor(
 
     fun finishWorkWithCustomer(body: BodyForFinishWorkWithCustomer) {
         viewModelScope.launch(Dispatchers.IO) {
-            eQueueRepository.finishWorkWithCustomer(
-                url = "http://${
-                    PreferencesManager.getInstance(MainApplication().getAppContext())
-                        .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
-                }/api/operator/getFinishCustomer",
-                result = body
-            )
+            runCatching {
+                eQueueRepository.finishWorkWithCustomer(
+                    url = "http://${
+                        PreferencesManager.getInstance(MainApplication().getAppContext())
+                            .getString(PreferencesManager.PREF_GLUE_IP, "127.0.0.1:8080")
+                    }/api/operator/getFinishCustomer",
+                    result = body
+                )
+            }.onFailure {  }
         }
     }
 
